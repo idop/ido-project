@@ -29,7 +29,7 @@ char Equation::RandomSign()
 }
 
 //this function will get the sign populated for the eqation and return the eqation part we will hide from the player
-char Equation::PartToHide(char sign)
+char Equation::RandomPartToHide(const char & sign)
 {
 	if (sign == '+' || sign == '*')
 	{
@@ -48,7 +48,7 @@ char Equation::PartToHide(char sign)
 }
 
 //C'tor we will use for the eqation. this C'tor gets the current level and creates a random equation for the game
-Equation::Equation(unsigned int  gameLevel) :sign(RandomSign())
+Equation::Equation(const unsigned int & gameLevel) :sign(RandomSign())
 {
 	switch (sign)
 	{
@@ -56,27 +56,46 @@ Equation::Equation(unsigned int  gameLevel) :sign(RandomSign())
 		leftNumber = rand() % (gameLevel + 10) + 1;
 		rightNumber = rand() % (gameLevel + 10) + 1;
 		solution = leftNumber + rightNumber;
-		partToHide = PartToHide('+');
+		partToHide = RandomPartToHide('+');
 		break;
 	case '-':
 		rightNumber = rand() % (gameLevel + 10) + 1;
 		solution = rand() % (gameLevel + 10) + 1;
 		leftNumber = solution + rightNumber;
-		partToHide = PartToHide('-');
+		partToHide = RandomPartToHide('-');
 		break;
 	case '*':
 		leftNumber = rand() % (gameLevel + 10) + 1;
 		rightNumber = rand() % (gameLevel + 10) + 1;
 		solution = leftNumber * rightNumber;
-		partToHide = PartToHide('*');
+		partToHide = RandomPartToHide('*');
 		break;
 	case '/':
 		rightNumber = rand() % (gameLevel + 10) + 1;
 		solution = rand() % (gameLevel + 10) + 1;
 		leftNumber = solution * rightNumber;
-		partToHide = PartToHide('/');
+		partToHide = RandomPartToHide('/');
 		break;
 	default:  // we should nbot get here
 		break;
 	}
 }
+
+void Equation::Draw()
+{
+	switch (partToHide)
+	{
+	case 'l':
+		cout << "??"<< sign << rightNumber << '=' << solution;
+		break;
+	case 'r':
+		cout << leftNumber << sign << "??" << '=' << solution;
+		break;
+	case 's':
+		cout << leftNumber << sign << rightNumber << '=' << "??";
+		break;
+	default:  // we should not get here
+		break;
+	}
+}
+	

@@ -27,13 +27,14 @@ class Equation
 	//this function will return a random sign for the equation
 	char RandomSign();
 	//this function will get the sign populated for the eqation and return the eqation part we will hide from the player
-	char PartToHide(char sign);
+	char RandomPartToHide(const char & sign);
 
 public:
-	Equation(unsigned int  gameLevel);
+	Equation(const unsigned int & gameLevel);
 	
-	 void draw(){cout << leftNumber << sign << rightNumber << '=' << solution;}
+	 void Draw(); 
 	 bool isSolution(const unsigned int & num) { return (num == solution) ? true : false; }
+
 };
 
 #endif
