@@ -17,7 +17,7 @@
 // ----           --------                -----------------
 // In the file itself, add above each change/addition a remark saying: "NEW CODE EX1, author=<name>, date=<YYYY-MM-DD>"
 // and close it at the end with a remark saying "END of NEW CODE EX1" 
-//
+//2015-03-25	 Ido Perry				 change main menu text color to Lightgreen
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -25,12 +25,15 @@
 #include "GameManager.h"
 #include "ISpecificGame.h"
 #include "io_utils.h"
+#include "Color.h" //added color.h for menus color change
 
 using namespace std;
 
 char GameManager::mainMenu()const
 {
 	// TODO: you may want to improve the menu appearance
+	//NEW CODE EX1, author=Ido Perry date=2015-03-25
+	setTextColor(LIGHTGREEN);
 	cout << "1. instructions" << endl;
 	cout << "2. play game" << endl;
 	cout << "3. start from a specific level" << endl;

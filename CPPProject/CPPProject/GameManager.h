@@ -27,8 +27,6 @@
 #include "ISpecificGame.h"
 #include <string>
 #include <list>
-
-
 using namespace std;
 
 class GameManager

@@ -28,22 +28,15 @@
 
 
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 #include "GameManager.h"
 #include "io_utils.h"
-
+#include "MathGame.h"
 using namespace std;
 
 // this is for example only!
 // delete this class and implement your own properly!
-class TheMathGame: public ISpecificGame
-{
-public:
-	virtual bool isLevelDone()const{return false;}
-	virtual bool hasNextLevel()const{return true;}
-	virtual void startLevel(){}
-	virtual void doIteration(const list<char>& keyHits){}
-	virtual void doSubIteration(){}
-};
 
 
 //==========================
@@ -58,3 +51,15 @@ int main(){
 //==========================
 // E n d   o f   M  A  I  N
 //==========================
+
+/*
+#include "Equation.h"
+int main(){
+	srand((unsigned int)time(NULL));
+	Equation e1(1);
+	e1.draw();
+	Equation e2(1);
+	e2.draw();
+	return 0;
+}
+*/
