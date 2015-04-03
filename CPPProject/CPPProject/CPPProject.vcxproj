@@ -83,13 +83,17 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="io_utils.h" />
     <ClInclude Include="ISpecificGame.h" />
-    <ClInclude Include="MathGame.h" />
+    <ClInclude Include="TheMathGame.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Point.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Equation.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="io_utils.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="TheMathGame.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

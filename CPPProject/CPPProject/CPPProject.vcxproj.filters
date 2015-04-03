@@ -36,7 +36,13 @@
     <ClInclude Include="Equation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MathGame.h">
+    <ClInclude Include="Point.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TheMathGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -51,6 +57,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Equation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TheMathGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

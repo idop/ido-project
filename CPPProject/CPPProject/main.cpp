@@ -32,17 +32,18 @@
 #include <time.h>
 #include "GameManager.h"
 #include "io_utils.h"
-#include "MathGame.h"
+#include "TheMathGame.h"
 using namespace std;
 
 // this is for example only!
 // delete this class and implement your own properly!
 
-
+///*
 //==========================
 //  M  A  I  N
 //==========================
 int main(){
+	srand((unsigned int)time(NULL));
 	clear_screen();
 	hideCursor();
 	GameManager(TheMathGame(), 200, 2).run();
@@ -51,15 +52,23 @@ int main(){
 //==========================
 // E n d   o f   M  A  I  N
 //==========================
-
+//*/
 /*
 #include "Equation.h"
+#include "Point.h"
+#include "Direction.h"
 int main(){
 	srand((unsigned int)time(NULL));
-	Equation e1(1);
-	e1.draw();
-	Equation e2(1);
-	e2.draw();
+	clear_screen();
+	hideCursor();
+	Direction::value d,e;
+
+	d = Direction::RIGHT;
+	e = d;
+	if (e == Direction::LEFT)
+		cout << "OK" << endl;
+	else
+		cout << "fucking stupid" << endl;
 	return 0;
 }
 */

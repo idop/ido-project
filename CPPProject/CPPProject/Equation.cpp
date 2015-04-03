@@ -1,6 +1,6 @@
 #include "Equation.h"
 #include <stdlib.h>
-
+#include "io_utils.h"
 // this function will return a random sign for the equation
 char Equation::RandomSign()
 {
@@ -47,9 +47,11 @@ char Equation::RandomPartToHide(const char & sign)
 	}
 }
 
-//C'tor we will use for the eqation. this C'tor gets the current level and creates a random equation for the game
-Equation::Equation(const unsigned int & gameLevel) :sign(RandomSign())
+//this function will generte a new random equation according to the game definitions
+void Equation::Init(const unsigned int & gameLevel) 
 {
+	sign = RandomSign();
+
 	switch (sign)
 	{
 	case '+':
@@ -76,13 +78,16 @@ Equation::Equation(const unsigned int & gameLevel) :sign(RandomSign())
 		leftNumber = solution * rightNumber;
 		partToHide = RandomPartToHide('/');
 		break;
-	default:  // we should nbot get here
+	default:  // we should not get here
 		break;
 	}
 }
 
-void Equation::Draw()
+
+// this funciton will draw the equation in the relevant position and with the relvant hidden part
+void Equation::Draw()const
 {
+	gotoxy(position.getX(), position.getY());
 	switch (partToHide)
 	{
 	case 'l':

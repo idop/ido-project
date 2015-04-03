@@ -13,16 +13,23 @@
 #define __EQUATION_H
 
 #include <iostream>
+#include "Point.h"
 using namespace std;
+
+
+//const points for the equations
+
+const Point P1_EQUATION_POSITION(0, 1);
+const Point P2_EQUATION_POSITION(70, 1);
 
 class Equation
 {
 	char sign;
+	char  partToHide; // partTohide will sotr the part that the eqations will hide : 'l' - left , 'r' - right, 's' - solution
 	unsigned int  leftNumber;
 	unsigned int  rightNumber;
 	unsigned int  solution;
-	// partTohide will sotr the part that the eqations will hide : 'l' - left , 'r' - right, 's' - solution
-	char  partToHide;
+	Point position;
 	
 	//this function will return a random sign for the equation
 	char RandomSign();
@@ -30,11 +37,10 @@ class Equation
 	char RandomPartToHide(const char & sign);
 
 public:
-	Equation(const unsigned int & gameLevel);
-	
-	 void Draw(); 
-	 bool isSolution(const unsigned int & num) { return (num == solution) ? true : false; }
-
+	Equation(const Point & p) :position(p){};
+	void Init(const unsigned int & gameLevel);
+	 void Draw()const; 
+	 bool IsSolution(const unsigned int & num) { return (num == solution) ? true : false; }
 };
 
 #endif

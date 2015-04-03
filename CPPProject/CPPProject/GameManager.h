@@ -15,8 +15,8 @@
 // ------------------------
 // DATE           Authors                 Change / Addition
 // ----           --------                -----------------
-// In the file itself, add above each change/addition a remark saying: "NEW CODE EX1, author=<name>, date=<YYYY-MM-DD>"
-// and close it at the end with a remark saying "END of NEW CODE EX1" 
+//2015-04-03      Ido Perry               fixed bug in sub manu string validOptions
+// 
 //
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -73,7 +73,7 @@ public:
 	{
 	public:
 		static bool isValidOption(char option) {
-			string validOptions = "1389";
+			string validOptions = "12345"; // NEW CODE EX1, Ido Perry, 2015-04-03
 			return (validOptions.find(option) != string::npos);
 		}
 		enum
