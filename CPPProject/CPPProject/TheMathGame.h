@@ -1,8 +1,6 @@
 #ifndef _THE_METH_GAME_H_
 #define _THE_METH_GAME_H_
 
-
-#include <list>
 #include "ISpecificGame.h"
 #include "Equation.h"
 #include "Point.h"

@@ -3,7 +3,7 @@
 
 bool TheMathGame::isLevelDone()const
 {
-	return (player1.getCurrentPosition().getX() == player2.getCurrentPosition().getX());
+	return (player1.GetPosition().getX() == player2.GetPosition().getX());
 }
 ;
 

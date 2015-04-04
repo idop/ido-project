@@ -10,14 +10,14 @@ using namespace std;
 void Player::SetToStart(const Point & p, const Direction::value & d)
 {
 	numberOfLives = 3;
-	playerPosition = p;
+	position = p;
 	direction = d;
 }
 
 //this functions draws the player
 void Player::Draw()const
 {
-	gotoxy(playerPosition.getX(), playerPosition.getY());
+	gotoxy(position.getX(), position.getY());
 	cout << playerChar;
 }
 
@@ -28,28 +28,28 @@ void Player::Move()
 	switch (direction)
 	{
 	case Direction::LEFT:
-		if (playerPosition.getX() == 0) // check if the player is going to move outside of the screen limit
-			playerPosition.setX(79);
+		if (position.getX() == 0) // check if the player is going to move outside of the screen limit
+			position.setX(79);
 		else
-			playerPosition.setX(playerPosition.getX() - 1);
+			position.setX(position.getX() - 1);
 		break;
 	case Direction::RIGHT:
-		if (playerPosition.getX() == 79) // check if the player is going to move outside of the screen limit
-			playerPosition.setX(0);
+		if (position.getX() == 79) // check if the player is going to move outside of the screen limit
+			position.setX(0);
 		else
-			playerPosition.setX(playerPosition.getX() + 1);
+			position.setX(position.getX() + 1);
 		break;
 	case Direction::UP:
-		if (playerPosition.getY() == 3) // check if the player is going to move outside of the screen limit
-			playerPosition.setY(23);
+		if (position.getY() == 3) // check if the player is going to move outside of the screen limit
+			position.setY(23);
 		else
-			playerPosition.setY(playerPosition.getY() - 1);
+			position.setY(position.getY() - 1);
 		break;
 	case Direction::DOWN:
-		if (playerPosition.getY() == 23) // check if the player is going to move outside of the screen limit
-			playerPosition.setY(3);
+		if (position.getY() == 23) // check if the player is going to move outside of the screen limit
+			position.setY(3);
 		else
-			playerPosition.setY(playerPosition.getY() + 1);
+			position.setY(position.getY() + 1);
 		break;
 	default:// we should not get here
 		break;
@@ -60,6 +60,6 @@ void Player::Move()
 //this function removes to  player from the screen
 void Player::Clear()const
 {
-	gotoxy(playerPosition.getX(), playerPosition.getY());
+	gotoxy(position.getX(), position.getY());
 	cout << ' ';
 }

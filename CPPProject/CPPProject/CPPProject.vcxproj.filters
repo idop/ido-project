@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="io_utils.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -43,6 +40,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TheMathGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="io_utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
