@@ -16,7 +16,7 @@
 
 
 
-
+unsigned int NumDigits(unsigned int num);//global function to get the number of digits of a number
 
 class SolutionPosabilty :public ScreenObject
 {
@@ -29,6 +29,6 @@ public:
 	virtual void Clear()const ;
 	virtual Point GetPosition()const { return position; }
 	virtual unsigned int GetData()const { return data;}
-	friend unsigned int NumDigits(unsigned int num);//global function to get the number of digits of a number
+	virtual unsigned int GetLength()const{ return NumDigits(data); }
 };
 #endif

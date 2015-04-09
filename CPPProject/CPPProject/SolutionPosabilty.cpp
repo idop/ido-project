@@ -21,7 +21,8 @@ void SolutionPosabilty::Draw()const
 
 void SolutionPosabilty::Clear()const
 {
+	int size = NumDigits(data);
 	gotoxy(GetPosition().getX(), GetPosition().getY());
-	for (unsigned int i = 0; i < NumDigits(data); ++i)
+	for (unsigned int i = 0; i < size; ++i)
 		cout << ' ';
 }

@@ -51,6 +51,7 @@ public:
 	virtual void Clear()const;
 	virtual Point GetPosition()const{ return position; }
 	virtual unsigned int GetData()const { return score; } // we dont really need this here
+	virtual unsigned int GetLength()const{ return 1; }
 };
 
 

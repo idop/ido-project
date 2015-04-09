@@ -22,6 +22,7 @@ public:
 	virtual void Clear()const = 0;
 	virtual Point GetPosition()const = 0;
 	virtual unsigned int GetData()const = 0;
+	virtual unsigned int GetLength()const = 0;
 };
 
 #endif
