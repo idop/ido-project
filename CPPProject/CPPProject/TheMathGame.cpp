@@ -3,7 +3,14 @@
 
 bool TheMathGame::isLevelDone()const
 {
-	return (player1.GetPosition().getX() == player2.GetPosition().getX());
+	if (player1.GetPosition().getX() == player2.GetPosition().getX())
+	{
+		currentScreen->CleanScreen(); // free memory of all dyemic objects
+		delete currentScreen; // free the memory for the screen object
+		return true;
+	}
+	else
+		return false;
 }
 ;
 
@@ -29,10 +36,15 @@ void TheMathGame::startLevel()
 	cout << "Lives: " << player1.getNumberOfLives();
 	gotoxy(70, 2);
 	cout << "Lives: " << player2.getNumberOfLives();
+
+	currentScreen = new Screen;
+	currentScreen->SetPositionForScreenObject(&player1);
+	currentScreen->SetPositionForScreenObject(&player2);
 }
 
 void TheMathGame::doIteration(const list<char>& keyHits)
 {
+	currentScreen->CreateNewSolutionPosability(currentLevel);
 	player1.Clear();
 	player1.Move();
 	player1.Draw();
@@ -43,6 +55,5 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 
 void TheMathGame::doSubIteration()
 {
-
 
 }

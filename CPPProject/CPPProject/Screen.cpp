@@ -34,8 +34,11 @@ void Screen::CleanScreen() //// when level is done
 				{
 					currLength = screen[i][j]->GetLength();
 					delete screen[i][j]; // delete the current object
-					for (j = j; j < currLength && j < SCREEN_HIGHT; ++j) // we want to set all the pointers to the object to null
-						screen[i][j] = NULL;
+					for (int k = j; k < currLength && k < SCREEN_HIGHT; ++k) // we want to set all the pointers to the object to null
+					{
+						screen[i][k] = NULL;
+						j += 1;
+					}
 				}
 				
 			}
@@ -95,7 +98,7 @@ void Screen::CreateNewSolutionPosability(const unsigned int & currentLevel)
 		xPositionOk = yPositionOk = true; // we assume that we will find a good position and change it to false if dont
 
 		x = rand() % (81 - length);
-		y = rand() % (24);
+		y = rand() % (21) +3;
 
 		for (int j = -1; j < length + 1 && xPositionOk && yPositionOk; ++j) // check all the x positions from 1 before the current position to +1 of the current position
 		{
