@@ -34,10 +34,9 @@ void Screen::CleanScreen() //// when level is done
 				{
 					currLength = screen[i][j]->GetLength();
 					delete screen[i][j]; // delete the current object
-					for (int k = j; k < currLength && k < SCREEN_HIGHT; ++k) // we want to set all the pointers to the object to null
+					for (int k = 0; k < currLength && k < SCREEN_HIGHT; ++k) // we want to set all the pointers to the object to null
 					{
-						screen[i][k] = NULL;
-						j += 1;
+						screen[i+k][j] = NULL;
 					}
 				}
 				

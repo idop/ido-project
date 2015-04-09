@@ -35,22 +35,25 @@ class Player : public ScreenObject
 	const string keyboardKeys;
 	int numberOfLives;
 	int score;
+	bool playerSolved;
 	Point position;
 	Direction::value direction;
 public:
-	Player(const char & ch, const string & str) :playerChar(ch), keyboardKeys(str),score(0) {}; // constract the play with the defult attributes (player char , keyboard commands and starting score
+	Player(const char & ch, const string & str) :playerChar(ch), keyboardKeys(str),score(0),playerSolved(false) {}; // constract the play with the defult attributes (player char , keyboard commands and starting score
 	void SetToStart(const Point & p, const Direction::value & d); // retrun the player to deuflt start level settings
 	void SetDirection(const Direction::value & d){ direction = d; };
 	void SetNumberOfLives(const int & num){ numberOfLives = num; };
 	int getNumberOfLives()const { return numberOfLives; };
 	int getScore()const { return score; };
+	void FoundTheSolution(){ playerSolved = true; }
+	bool IsSolutionFound()const{ return playerSolved; }
 	Direction::value getdirection()const { return direction; };
 	void Move();
 	virtual char Type()const{ return 'p'; }
 	virtual void Draw()const;
 	virtual void Clear()const;
 	virtual Point GetPosition()const{ return position; }
-	virtual unsigned int GetData()const { return score; } // we dont really need this here
+	virtual unsigned int GetData()const { return score; } //used to get the score . not really needed
 	virtual unsigned int GetLength()const{ return 1; }
 };
 

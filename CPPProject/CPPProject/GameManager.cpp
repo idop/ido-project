@@ -18,6 +18,7 @@
 // In the file itself, add above each change/addition a remark saying: "NEW CODE EX1, author=<name>, date=<YYYY-MM-DD>"
 // and close it at the end with a remark saying "END of NEW CODE EX1" 
 //2015-03-25	 Ido Perry				 change main menu text color to Lightgreen
+//2015-04-09	 Ido Perry				 removed the end level notification from this object and moved it to the TheMathGame object
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -155,8 +156,7 @@ char GameManager::doLevelIterations()
 
 	// check why we are here
 	if(actualGame.isLevelDone()) {
-		clear_screen();
-		cout << endl << "WELL DONE" << endl;
+	  //NEW CODE EX1, author=Ido Perry date=2015-04-09 removed the end level notification from this object and moved it to the TheMathGame object
 		action = GameManager::LevelOptions::NEXT_LEVEL;
 	}
 	else if(escapePressed) {

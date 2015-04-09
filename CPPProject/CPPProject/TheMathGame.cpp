@@ -1,23 +1,13 @@
 #include "TheMathGame.h"
 #include "io_utils.h"
 
-bool TheMathGame::isLevelDone()const
-{
-	if (player1.GetPosition().getX() == player2.GetPosition().getX())
-	{
-		currentScreen->CleanScreen(); // free memory of all dyemic objects
-		delete currentScreen; // free the memory for the screen object
-		return true;
-	}
-	else
-		return false;
-}
-;
 
 void TheMathGame::startLevel()
 {
 	clear_screen();
 	++currentLevel;
+	levelDone = false;
+	currentTurn = 0;
 	equation1.Init(currentLevel);
 	equation1.Draw();
 	equation2.Init(currentLevel);
@@ -42,8 +32,9 @@ void TheMathGame::startLevel()
 	currentScreen->SetPositionForScreenObject(&player2);
 }
 
-void TheMathGame::doIteration(const list<char>& keyHits)
+void TheMathGame::doIteration(const list<char>& keyHits)  
 {
+	//TODO handle colisions and player movement
 	currentScreen->CreateNewSolutionPosability(currentLevel);
 	player1.Clear();
 	player1.Move();
@@ -51,9 +42,35 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 	player2.Clear();
 	player2.Move();
 	player2.Draw();
+	EndTurn();
 }
 
 void TheMathGame::doSubIteration()
 {
 
+}
+
+void TheMathGame::EndTurn()
+{
+	++currentTurn;
+	if (player1.IsSolutionFound() || player2.IsSolutionFound())
+	{
+		currentScreen->CleanScreen(); // free memory of all dyemic objects
+		delete currentScreen; // free the memory for the screen object
+		levelDone = true;
+		clear_screen();
+		gotoxy(35, 12);
+		cout << "Well Done";
+		Sleep(1500); // new code to remove
+	}
+	else if (currentTurn >= MAX_TURNS_PER_LEVEL)
+	{
+		currentScreen->CleanScreen(); // free memory of all dyemic objects
+		delete currentScreen; // free the memory for the screen object
+		levelDone = true;
+		clear_screen();
+		gotoxy(20, 12);
+		cout << "Too bad, better luck in the next level";
+		Sleep(1500); // new code to remove
+	}
 }
