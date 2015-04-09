@@ -63,7 +63,7 @@ void Equation::Init(const unsigned int & gameLevel)
 	case '-':
 		rightNumber = rand() % (gameLevel + 10) + 1;
 		solution = rand() % (gameLevel + 10) + 1;
-		leftNumber = solution + rightNumber;
+		leftNumber = solution - rightNumber;
 		partToHide = RandomPartToHide('-');
 		break;
 	case '*':
