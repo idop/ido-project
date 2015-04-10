@@ -1,10 +1,10 @@
-  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Screen.cpp
 // -------------
 // This class  will store all the dynemic objects in the screen
 // the calss will also check for collisions , rederaw the dyemic part of the screen after continuing the game form the sub manu , etc..
 //
-// Author: Ido Perry
+// Author: Ido Perry and Alex Odesser
 // First version: 2015-04-04
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
