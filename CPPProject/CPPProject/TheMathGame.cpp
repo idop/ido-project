@@ -1,3 +1,15 @@
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// TheMathGame.cpp
+// -------------
+// This class  will manage the game, all iterations and start / end / restart of levels
+// it will also manage the movment of the players around the screen
+//
+// Author: Ido Perry and Alex Odesser
+// First version: 2015-04-04
+//
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 #include "TheMathGame.h"
 #include "io_utils.h"
 
