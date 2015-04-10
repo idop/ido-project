@@ -46,7 +46,8 @@ public:
 	int getNumberOfLives()const { return numberOfLives; };
 	int getScore()const { return score; }
 	string GetKeyboardKeys()const{ return keyboardKeys; }
-	void FoundTheSolution(){ playerSolved = true; }
+	void FoundTheSolution(){ playerSolved = true; ++score; }
+	void WrongSolution(){ numberOfLives--; }
 	bool IsSolutionFound()const{ return playerSolved; }
 	Direction::value getdirection()const { return direction; };
 	void Move();

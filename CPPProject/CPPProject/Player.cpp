@@ -12,6 +12,7 @@ void Player::SetToStart(const Point & p, const Direction::value & d)
 	numberOfLives = 3;
 	position = p;
 	direction = d;
+	playerSolved = false;
 }
 
 //this functions draws the player
@@ -63,3 +64,4 @@ void Player::Clear()const
 	gotoxy(position.getX(), position.getY());
 	cout << ' ';
 }
+

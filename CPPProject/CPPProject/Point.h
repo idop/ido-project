@@ -16,6 +16,7 @@ class Point
 	int x, y;
 public:
 	Point(){}
+	Point(const Point & p):x(p.getX()),y(p.getY()){};
 	Point(int x1, int y1) :x(x1), y(y1){}
 	int getX()const{ return x;}
 	int getY()const{ return y;}

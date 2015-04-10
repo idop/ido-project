@@ -36,16 +36,18 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 {
 	char keyHit;
 	bool player1KbHit, player2KbHit;
+	Point toMove;
+	ScreenObject * obj =NULL;
 	player1KbHit = player2KbHit = false;
 
 	if (currentTurn % 2 == 0)
 		currentScreen->CreateNewSolutionPosability(currentLevel);
-	//TODO handle colisions and player movement
+	//TODO Beautify
 	// get keystrokes from keyhist list untill the end of the list or until both players got a valid keystroke
 	for (list < char >::const_iterator itr = keyHits.cbegin(); itr != keyHits.cend() && (!player1KbHit || !player2KbHit); ++itr)  
 	{
 		keyHit = *itr;
-		if (!player1KbHit && player1.GetKeyboardKeys().find(keyHit))
+		if (!player1KbHit && player1.GetKeyboardKeys().find(keyHit) != string::npos)
 		{
 			switch (keyHit)
 			{
@@ -69,7 +71,7 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 				break;
 			}
 		}
-		if (!player2KbHit && player2.GetKeyboardKeys().find(keyHit))
+		if (!player2KbHit && player2.GetKeyboardKeys().find(keyHit) != string::npos)
 		{
 			switch (keyHit)
 			{
@@ -94,12 +96,243 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 			}
 		}
 	}
-	player1.Clear();
-	player1.Move();
-	player1.Draw();
-	player2.Clear();
-	player2.Move();
-	player2.Draw();
+	//TODO Colllsion, beautify and handle player death
+
+	//collision managment for player1
+	toMove = player1.GetPosition();
+	switch (player1.getdirection())
+	{
+	case Direction::LEFT:
+		obj = currentScreen->GetScreenObject(toMove.getX() - 1, toMove.getY());
+		if (obj == NULL) // check the new place to move  is free
+		{
+			currentScreen->ClearScreenObject(&player1);
+			player1.Move();
+			player1.Draw();
+			currentScreen->SetPositionForScreenObject(&player1);
+		}
+		else if (obj->Type() == 'n') // check if we are going to eat a solution number
+		{
+			if (equation1.IsSolution(obj->GetData()))
+				player1.FoundTheSolution();
+			else
+			{
+				player1.WrongSolution();
+				gotoxy(0, 2);
+				cout << "Lives: " << player1.getNumberOfLives();
+			}
+			currentScreen->ClearScreenObject(obj);
+			obj = NULL;
+			currentScreen->ClearScreenObject(&player1);
+			player1.Move();
+			player1.Draw();
+			currentScreen->SetPositionForScreenObject(&player1);
+
+		}//else the bject we are colliding with is the other player there for we will not move
+			break;
+	case Direction::UP:
+		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY()-1);
+		if (obj == NULL) // check the new place to move  is free
+		{
+			currentScreen->ClearScreenObject(&player1);
+			player1.Move();
+			player1.Draw();
+			currentScreen->SetPositionForScreenObject(&player1);
+		}
+		else if (obj->Type() == 'n') // check if we are going to eat a solution number
+		{
+			if (equation1.IsSolution(obj->GetData()))
+				player1.FoundTheSolution();
+			else
+			{
+				player1.WrongSolution();
+				gotoxy(0, 2);
+				cout << "Lives: " << player1.getNumberOfLives();
+			}
+			currentScreen->ClearScreenObject(obj);
+			obj = NULL;
+			currentScreen->ClearScreenObject(&player1);
+			player1.Move();
+			player1.Draw();
+			currentScreen->SetPositionForScreenObject(&player1);
+		}//else the bject we are colliding with is the other player there for we will not move
+			break;
+	case Direction::RIGHT:
+		obj = currentScreen->GetScreenObject(toMove.getX() + 1, toMove.getY());
+		if (obj == NULL) // check the new place to move  is free
+		{
+			currentScreen->ClearScreenObject(&player1);
+			player1.Move();
+			player1.Draw();
+			currentScreen->SetPositionForScreenObject(&player1);
+		}
+		else if (obj->Type() == 'n') // check if we are going to eat a solution number
+		{
+			if (equation1.IsSolution(obj->GetData()))
+				player1.FoundTheSolution();
+			else
+			{
+				player1.WrongSolution();
+				gotoxy(0, 2);
+				cout << "Lives: " << player1.getNumberOfLives();
+			}
+			currentScreen->ClearScreenObject(obj);
+			obj = NULL;
+			currentScreen->ClearScreenObject(&player1);
+			player1.Move();
+			player1.Draw();
+			currentScreen->SetPositionForScreenObject(&player1);
+		}//else the bject we are colliding with is the other player there for we will not move
+			break;
+	case Direction::DOWN:
+		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY()+1);
+		if (obj == NULL) // check the new place to move  is free
+		{
+			currentScreen->ClearScreenObject(&player1);
+			player1.Move();
+			player1.Draw();
+			currentScreen->SetPositionForScreenObject(&player1);
+		}
+		else if (obj->Type() == 'n') // check if we are going to eat a solution number
+		{
+			if (equation1.IsSolution(obj->GetData()))
+				player1.FoundTheSolution();
+			else
+			{
+				player1.WrongSolution();
+	gotoxy(70, 2);
+	cout << "Lives: " << player2.getNumberOfLives();
+			}
+			currentScreen->ClearScreenObject(obj);
+			obj = NULL;
+			currentScreen->ClearScreenObject(&player1);
+			player1.Move();
+			player1.Draw();
+			currentScreen->SetPositionForScreenObject(&player1);
+		}//else the bject we are colliding with is the other player there for we will not move
+			break;
+		default: // we should not get here
+			break;
+	}
+
+//PLAYER 2 COLLISION
+
+	toMove = player2.GetPosition();
+	switch (player2.getdirection())
+	{
+	case Direction::LEFT:
+		obj = currentScreen->GetScreenObject(toMove.getX() - 1, toMove.getY());
+		if (obj == NULL) // check the new place to move  is free
+		{
+			currentScreen->ClearScreenObject(&player2);
+			player2.Move();
+			player2.Draw();
+			currentScreen->SetPositionForScreenObject(&player2);
+		}
+		else if (obj->Type() == 'n') // check if we are going to eat a solution number
+		{
+			if (equation1.IsSolution(obj->GetData()))
+				player2.FoundTheSolution();
+			else
+			{
+				player2.WrongSolution();
+				gotoxy(70, 2);
+				cout << "Lives: " << player2.getNumberOfLives();
+			}
+			currentScreen->ClearScreenObject(obj);
+			obj = NULL;
+			currentScreen->ClearScreenObject(&player2);
+			player2.Move();
+			player2.Draw();
+			currentScreen->SetPositionForScreenObject(&player2);
+		}//else the bject we are colliding with is the other player there for we will not move
+		break;
+	case Direction::UP:
+		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY() - 1);
+		if (obj == NULL) // check the new place to move  is free
+		{
+			currentScreen->ClearScreenObject(&player2);
+			player2.Move();
+			player2.Draw();
+			currentScreen->SetPositionForScreenObject(&player2);
+		}
+		else if (obj->Type() == 'n') // check if we are going to eat a solution number
+		{
+			if (equation1.IsSolution(obj->GetData()))
+				player2.FoundTheSolution();
+			else
+			{
+				player2.WrongSolution();
+				gotoxy(70, 2);
+				cout << "Lives: " << player2.getNumberOfLives();
+			}
+			currentScreen->ClearScreenObject(obj);
+			obj = NULL;
+			currentScreen->ClearScreenObject(&player2);
+			player2.Move();
+			player2.Draw();
+			currentScreen->SetPositionForScreenObject(&player2);
+		}//else the bject we are colliding with is the other player there for we will not move
+		break;
+	case Direction::RIGHT:
+		obj = currentScreen->GetScreenObject(toMove.getX() + 1, toMove.getY());
+		if (obj == NULL) // check the new place to move  is free
+		{
+			currentScreen->ClearScreenObject(&player2);
+			player2.Move();
+			player2.Draw();
+			currentScreen->SetPositionForScreenObject(&player2);
+		}
+		else if (obj->Type() == 'n') // check if we are going to eat a solution number
+		{
+			if (equation1.IsSolution(obj->GetData()))
+				player2.FoundTheSolution();
+			else
+			{
+				player2.WrongSolution();
+				gotoxy(70, 2);
+				cout << "Lives: " << player2.getNumberOfLives();
+			}
+			currentScreen->ClearScreenObject(obj);
+			obj = NULL;
+			currentScreen->ClearScreenObject(&player2);
+			player2.Move();
+			player2.Draw();
+			currentScreen->SetPositionForScreenObject(&player2);
+		}//else the bject we are colliding with is the other player there for we will not move
+		break;
+	case Direction::DOWN:
+		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY() + 1);
+		if (obj == NULL) // check the new place to move  is free
+		{
+			currentScreen->ClearScreenObject(&player2);
+			player2.Move();
+			player2.Draw();
+			currentScreen->SetPositionForScreenObject(&player2);
+		}
+		else if (obj->Type() == 'n') // check if we are going to eat a solution number
+		{
+			if (equation1.IsSolution(obj->GetData()))
+				player2.FoundTheSolution();
+			else
+			{
+				player2.WrongSolution();
+				gotoxy(70, 2);
+				cout << "Lives: " << player2.getNumberOfLives();
+			}
+			currentScreen->ClearScreenObject(obj);
+			obj = NULL;
+			currentScreen->ClearScreenObject(&player2);
+			player2.Move();
+			player2.Draw();
+			currentScreen->SetPositionForScreenObject(&player2);
+		}//else the bject we are colliding with is the other player there for we will not move
+		break;
+	default: // we should not get here
+		break;
+	}
+
+
 	EndTurn();
 }
 
