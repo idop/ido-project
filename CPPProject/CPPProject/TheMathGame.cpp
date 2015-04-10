@@ -212,15 +212,11 @@ void TheMathGame::CheckSolution(Equation eq, const ScreenObject * obj, Player & 
 	//gets the equation of the player, and the object the player gathered
 	//and changes the player data if the solution was correct 
 	//or did he used one of his lives.
-	//reprtints the scores
 
 	if (eq.IsSolution(obj->GetData()))
 		p.FoundTheSolution();
 	else
-	{
 		p.WrongSolution();
-		PrintScores();
-	}
 }
 
 Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, const Player & p)
