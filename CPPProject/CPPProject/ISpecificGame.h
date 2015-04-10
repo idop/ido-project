@@ -21,8 +21,9 @@
 // ----           --------                -----------------
 // In the file itself, add above each change/addition a remark saying: "NEW CODE EX1, author=<name>, date=<YYYY-MM-DD>"
 // and close it at the end with a remark saying "END of NEW CODE EX1" 
-//2015-04-10	 Ido Perry	And Alex Odessr			 changed ISoecificGame function start level to send the current level to the game
+//2015-04-10	 Ido Perry	And Alex Odessr			 changed ISpecificGame function start level to send the current level to the game
 //2015-04-10	 Ido Perry	And Alex Odessr			 added const for max level
+//2015-04-10	 Ido Perry	And Alex Odessr			 added resumeLevel Function
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -46,9 +47,13 @@ public:
 	// abstract method must be implemented by non-abstract inherited class
 	virtual bool isLevelDone()const=0;
 	virtual bool hasNextLevel()const=0;
-	//NEW CODE EX1!! 2015-04-10	 Ido Perry And Alex Odessr  changed ISoecificGame function start level to send the current level to the game
+	//NEW CODE EX1!! 2015-04-10	 Ido Perry And Alex Odessr  changed ISpecificGame function start level to send the current level to the game
 	virtual void startLevel(unsigned int level)=0; 
 	//END of NEW CODE EX1
+	//NEW CODE EX1!! 2015-04-10	 Ido Perry And Alex Odessr  added  function  to resume the game (after sub menu action continue)
+	virtual void ResumeLevel() = 0;
+	//END of NEW CODE EX1
+	
 	// get a list with keyHits and returns a list with the keys that were used
 	virtual void doIteration(const list<char>& keyHits)=0;
 	virtual void doSubIteration()=0;

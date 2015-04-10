@@ -160,6 +160,9 @@ char GameManager::playNextLevel()
 			actualGame.startLevel(currentLevel);
 			break;
 		case GameManager::LevelOptions::BACK_TO_MAIN_MENU:
+			clear_screen();
+			keepRunning = false;
+			break;
 		case GameManager::LevelOptions::EXIT_APPLICATION:
 			// get out from the loop
 			clear_screen();
