@@ -5,7 +5,7 @@
 char Equation::RandomSign()
 {
 
-	char res;
+	char res = NULL;
 	int randomValue = rand() % 4;
 
 	switch (randomValue)
