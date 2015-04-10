@@ -19,17 +19,18 @@ class TheMathGame : public ISpecificGame
 	unsigned int maxLevel;
 	unsigned int currentTurn;
 	bool levelDone;
+	void PrintScores();
+	void EndTurn(); 
+	void keyStrokeManager(const list<char>& keyHits);
+	void PlayerMovment(const Point & toMove, Player & p, Equation & eq);
+	void clearAndMove(Player & p, const Point & toMove, ScreenObject * obj);
+	void CheckSolution(Equation eq, const ScreenObject * obj, Player & p);
+	Point GetPointToMove(const Player & p);
 	Equation equation1, equation2;
 	Player player1, player2;
 	Screen * currentScreen;
-	void PrintScores();
-	void EndTurn(); 
-	Point GetPointToMove(const Player & p);
 	Direction::value MapKeyToDirection(const char & keyHit, const Player & p);
-	void TheMathGame::keyStrokeManager(const list<char>& keyHits);
-	void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq);
-	void TheMathGame::clearAndMove(Player & p, const Point & toMove, ScreenObject * obj);
-	void TheMathGame::CheckSolution(Equation eq, const ScreenObject * obj, Player & p);
+
 public:
 
 	TheMathGame() : currentLevel(0), maxLevel(MAX_LEVEL), currentTurn(0), levelDone(false), equation1(P1_EQUATION_POSITION), equation2(P2_EQUATION_POSITION),

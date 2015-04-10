@@ -119,5 +119,6 @@ bool Equation::IsSolution(const unsigned int & num)
 		break;
 	default:  // we should not get here
 		break;
+
 	}
 }
