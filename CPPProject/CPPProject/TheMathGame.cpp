@@ -79,6 +79,8 @@ void TheMathGame::EndTurn()
 		cout << "Too bad, better luck in the next level";
 		Sleep(1500); 
 	}
+
+	PrintScores();
 }
 
 void TheMathGame::doSubIteration()
@@ -92,14 +94,17 @@ void TheMathGame::PrintScores(){
 
 	gotoxy(0, 0);
 	cout << "Score: " << player1.getScore();
-	gotoxy(35, 0);
-	cout << "Level " << currentLevel;
 	gotoxy(70, 0);
 	cout << "Score: " << player2.getScore();
 	gotoxy(0, 2);
 	cout << "Lives: " << player1.getNumberOfLives();
 	gotoxy(70, 2);
 	cout << "Lives: " << player2.getNumberOfLives();
+	gotoxy(35, 0);
+	cout << "Level " << currentLevel;
+	gotoxy(35, 1);
+	cout << "Current Turn " << currentTurn;
+
 }
 
 void TheMathGame::keyStrokeManager(const list<char> & keyHits){
