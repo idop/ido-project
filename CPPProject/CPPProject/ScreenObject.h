@@ -4,7 +4,7 @@
 // This is a base class for screen object 
 // all the dynamic objects that are displeyed on the screen will inheret form this class (Players, SulotionOptions , etc..)
 //
-// Author: Ido Perry
+// Author: Ido Perry and Alex Odesser
 // First version: 2015-04-04
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

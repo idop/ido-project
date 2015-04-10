@@ -17,7 +17,7 @@
 // ----           --------                -----------------
 // In the file itself, add above each change/addition a remark saying: "NEW CODE EX1, author=<name>, date=<YYYY-MM-DD>"
 // and close it at the end with a remark saying "END of NEW CODE EX1" 
-//2015-03-25	 Ido Perry				 change main menu text color to Lightgreen
+//2015-03-25	 Ido Perry	And Alex Odesser			 change main menu text color to Lightgreen
 //2015-04-10	 Ido Perry	And Alex Odesser			 removed the end level notification from this object and moved it to the TheMathGame object
 //2015-04-10	 Ido Perry	And Alex Odesser			 changed ISoecificGame function start level to send the current level to the game
 //2015-04-10     Ido Perry  And Alex Odesser             handle all main manu option
@@ -151,8 +151,8 @@ char GameManager::playNextLevel()
 			// check action based on game ended (action==BACK_TO_MAIN_MENU) or input from user on ESC menu
 		switch (action) {
 		case GameManager::LevelOptions::CONTINUE:
-			// keepRunning is true, so we only need to set thing right and then - keepRunning!
-			//--------------------------------------------------------------------------------
+			// keepRunning is true, so we only need resume the level
+			actualGame.ResumeLevel();
 			break;
 		case GameManager::LevelOptions::REPLAY_LEVEL:
 			// keepRunning is true, so we only need to set thing right and then - keepRunning!

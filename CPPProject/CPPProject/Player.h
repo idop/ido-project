@@ -4,7 +4,7 @@
 // This class creates and handles the players of the game
 // This class will  create the player , draw the player , move the player , etc..
 //
-// Author: Ido Perry
+// Author: Ido Perry and Alex Odesser
 // First version: 2015-04-03
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

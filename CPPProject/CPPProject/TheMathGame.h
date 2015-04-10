@@ -1,3 +1,14 @@
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// TheMathGame.h
+// -------------
+// This class  will store all the objects related to the game
+// will manage the movment and displaying of objects on screen
+// manages the keystroke and the follow of game play
+//
+// Author: Ido Perry and Alex Odesser
+// First version: 2015-04-04
+//
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #ifndef _THE_METH_GAME_H_
 #define _THE_METH_GAME_H_
 
@@ -24,6 +35,7 @@ class TheMathGame : public ISpecificGame
 	void PlayerMovment(const Point & toMove, Player & p, Equation & eq);
 	void clearAndMove(Player & p, const Point & toMove, ScreenObject * obj);
 	void CheckSolution(Equation eq, const ScreenObject * obj, Player & p);
+	void DrawEquations()const;
 	Point GetPointToMove(const Player & p);
 	Equation equation1, equation2;
 	Player player1, player2;
@@ -40,6 +52,7 @@ public:
 	virtual void doIteration(const list<char>& keyHits);
 	virtual void doSubIteration();
 	unsigned int GetCurrentTurn()const{ return currentTurn; }
+	virtual void ResumeLevel() ;
 
 };
 

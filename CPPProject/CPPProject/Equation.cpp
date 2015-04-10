@@ -1,3 +1,15 @@
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Equation.cpp
+// -------------
+// This class  will manage equation generator
+// randomize the sign and numbers, and decides on the missing number
+//
+// Author: Ido Perry and Alex Odesser
+// First version: 2015-04-04
+//
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 #include "Equation.h"
 #include <stdlib.h>
 #include "io_utils.h"

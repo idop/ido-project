@@ -3,7 +3,7 @@
 // -------------
 // simple class to store screen points
 //
-// Author: Ido Perry
+// Author: Ido Perry and Alex Odesser
 // First version: 2015-03-29
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

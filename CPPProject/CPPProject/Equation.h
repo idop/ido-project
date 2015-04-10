@@ -4,7 +4,7 @@
 // This class creates the equtions the players will have to solve.
 // This class will form the quation  , draw it to the screen , validate the validety of the player solution ettempts, etc.
 //
-// Author: Ido Perry
+// Author: Ido Perry and Alex Odesser
 // First version: 2015-03-29
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
