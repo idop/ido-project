@@ -34,8 +34,66 @@ void TheMathGame::startLevel()
 
 void TheMathGame::doIteration(const list<char>& keyHits)  
 {
+	char keyHit;
+	bool player1KbHit, player2KbHit;
+	player1KbHit = player2KbHit = false;
+
+	if (currentTurn % 2 == 0)
+		currentScreen->CreateNewSolutionPosability(currentLevel);
 	//TODO handle colisions and player movement
-	currentScreen->CreateNewSolutionPosability(currentLevel);
+	// get keystrokes from keyhist list untill the end of the list or until both players got a valid keystroke
+	for (list < char >::const_iterator itr = keyHits.cbegin(); itr != keyHits.cend() && (!player1KbHit || !player2KbHit); ++itr)  
+	{
+		keyHit = *itr;
+		if (!player1KbHit && player1.GetKeyboardKeys().find(keyHit))
+		{
+			switch (keyHit)
+			{
+			case 'a':
+				player1.SetDirection(Direction::LEFT);
+				player1KbHit = true;
+				break;
+			case 'w':
+				player1.SetDirection(Direction::UP);
+				player1KbHit = true;
+				break;
+			case 'd':
+				player1.SetDirection(Direction::RIGHT);
+				player1KbHit = true;
+				break;
+			case 'x':
+				player1.SetDirection(Direction::DOWN);
+				player1KbHit = true;
+				break;
+			default: // we should not get here
+				break;
+			}
+		}
+		if (!player2KbHit && player2.GetKeyboardKeys().find(keyHit))
+		{
+			switch (keyHit)
+			{
+			case 'j':
+				player2.SetDirection(Direction::LEFT);
+				player2KbHit = true;
+				break;
+			case 'i':
+				player2.SetDirection(Direction::UP);
+				player2KbHit = true;
+				break;
+			case 'l':
+				player2.SetDirection(Direction::RIGHT);
+				player2KbHit = true;
+				break;
+			case 'm':
+				player2.SetDirection(Direction::DOWN);
+				player2KbHit = true;
+				break;
+			default: // we should not get here
+				break;
+			}
+		}
+	}
 	player1.Clear();
 	player1.Move();
 	player1.Draw();
@@ -61,7 +119,7 @@ void TheMathGame::EndTurn()
 		clear_screen();
 		gotoxy(35, 12);
 		cout << "Well Done";
-		Sleep(1500); // new code to remove
+		Sleep(1500); 
 	}
 	else if (currentTurn >= MAX_TURNS_PER_LEVEL)
 	{
@@ -71,6 +129,6 @@ void TheMathGame::EndTurn()
 		clear_screen();
 		gotoxy(20, 12);
 		cout << "Too bad, better luck in the next level";
-		Sleep(1500); // new code to remove
+		Sleep(1500); 
 	}
 }
