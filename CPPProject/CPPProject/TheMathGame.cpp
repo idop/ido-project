@@ -16,16 +16,8 @@ void TheMathGame::startLevel()
 	player1.Draw();
 	player2.SetToStart(P2_DEFULT_POSITION, P2_DEFULT_DIRECTION);
 	player2.Draw();
-	gotoxy(0, 0);
-	cout << "Score: " << player1.getScore();
-	gotoxy(35, 0);
-	cout << "Level " << currentLevel;
-	gotoxy(70, 0);
-	cout << "Score: " << player2.getScore();
-	gotoxy(0, 2);
-	cout << "Lives: " << player1.getNumberOfLives();
-	gotoxy(70, 2);
-	cout << "Lives: " << player2.getNumberOfLives();
+
+	PrintScores();
 
 	currentScreen = new Screen;
 	currentScreen->SetPositionForScreenObject(&player1);
@@ -37,7 +29,7 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 	char keyHit;
 	bool player1KbHit, player2KbHit;
 	Point toMove;
-	ScreenObject * obj =NULL;
+	ScreenObject * obj = NULL;
 	player1KbHit = player2KbHit = false;
 
 	if (currentTurn % 2 == 0)
@@ -49,51 +41,13 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 		keyHit = *itr;
 		if (!player1KbHit && player1.GetKeyboardKeys().find(keyHit) != string::npos)
 		{
-			switch (keyHit)
-			{
-			case 'a':
-				player1.SetDirection(Direction::LEFT);
-				player1KbHit = true;
-				break;
-			case 'w':
-				player1.SetDirection(Direction::UP);
-				player1KbHit = true;
-				break;
-			case 'd':
-				player1.SetDirection(Direction::RIGHT);
-				player1KbHit = true;
-				break;
-			case 'x':
-				player1.SetDirection(Direction::DOWN);
-				player1KbHit = true;
-				break;
-			default: // we should not get here
-				break;
-			}
+			player1KbHit = true; 
+			player1.SetDirection(MapKeyToDirection(keyHit, player1));
 		}
 		if (!player2KbHit && player2.GetKeyboardKeys().find(keyHit) != string::npos)
 		{
-			switch (keyHit)
-			{
-			case 'j':
-				player2.SetDirection(Direction::LEFT);
-				player2KbHit = true;
-				break;
-			case 'i':
-				player2.SetDirection(Direction::UP);
-				player2KbHit = true;
-				break;
-			case 'l':
-				player2.SetDirection(Direction::RIGHT);
-				player2KbHit = true;
-				break;
-			case 'm':
-				player2.SetDirection(Direction::DOWN);
-				player2KbHit = true;
-				break;
-			default: // we should not get here
-				break;
-			}
+			player2KbHit = true;
+			player2.SetDirection(MapKeyToDirection(keyHit, player2));
 		}
 	}
 	//TODO Colllsion, beautify and handle player death
@@ -341,11 +295,6 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 	EndTurn();
 }
 
-void TheMathGame::doSubIteration()
-{
-
-}
-
 //this function will end each turn
 void TheMathGame::EndTurn()
 {
@@ -407,6 +356,62 @@ Point TheMathGame::GetPointToMove(const Player & p)
 			return Point(p.GetPosition().getX(), p.GetPosition().getY() + 1);
 		break;
 	default:// we should not get here
+		break;
+	}
+}
+
+void TheMathGame::doSubIteration()
+{
+
+}
+
+void TheMathGame::PrintScores(){
+	gotoxy(0, 0);
+	cout << "Score: " << player1.getScore();
+	gotoxy(35, 0);
+	cout << "Level " << currentLevel;
+	gotoxy(70, 0);
+	cout << "Score: " << player2.getScore();
+	gotoxy(0, 2);
+	cout << "Lives: " << player1.getNumberOfLives();
+	gotoxy(70, 2);
+	cout << "Lives: " << player2.getNumberOfLives();
+}
+
+Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, const Player & p)
+{
+	switch (p.getPlayerChar()){
+
+	case '@':
+		switch (keyHit)
+		{
+		case 'a':
+			return Direction::LEFT;
+		case 'w':
+			return Direction::UP;
+		case 'd':
+			return Direction::RIGHT;
+		case 'x':
+			return Direction::DOWN;
+		default: // we should not get here
+			break;
+		}
+		break;
+
+	case '#':
+		switch (keyHit)
+		{
+		case 'j':
+			return Direction::LEFT;
+		case 'i':
+			return Direction::UP;
+		case 'l':
+			return Direction::RIGHT;
+		case 'm':
+			return Direction::DOWN;
+		default: // we should not get here
+			break;
+		}
 		break;
 	}
 }
