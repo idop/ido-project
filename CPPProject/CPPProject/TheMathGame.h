@@ -22,9 +22,10 @@ class TheMathGame : public ISpecificGame
 	Equation equation1, equation2;
 	Player player1, player2;
 	Screen * currentScreen;
-	
+	void PrintScores();
 	void EndTurn(); 
 	Point GetPointToMove(const Player & p);
+	Direction::value MapKeyToDirection(const char & keyHit, const Player & p);
 public:
 
 	TheMathGame() : currentLevel(0), maxLevel(MAX_LEVEL), currentTurn(0), levelDone(false), equation1(P1_EQUATION_POSITION), equation2(P2_EQUATION_POSITION),
@@ -35,6 +36,7 @@ public:
 	virtual void doIteration(const list<char>& keyHits);
 	virtual void doSubIteration();
 	unsigned int GetCurrentTurn()const{ return currentTurn; }
+
 };
 
 #endif
