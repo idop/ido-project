@@ -18,7 +18,7 @@ class ScreenObject
 
 public:
 	virtual char Type()const = 0; // we will have 2 types for the first EX 'p' for player and  n - number for possible solution
-	virtual void Draw()const = 0;
+	virtual void Draw()const = 0; 
 	virtual void Clear()const = 0;
 	virtual Point GetPosition()const = 0;
 	virtual unsigned int GetData()const = 0;

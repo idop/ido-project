@@ -32,7 +32,6 @@ public:
 	virtual void startLevel();
 	virtual void doIteration(const list<char>& keyHits);
 	virtual void doSubIteration();
-	
 	unsigned int GetCurrentTurn()const{ return currentTurn; }
 };
 

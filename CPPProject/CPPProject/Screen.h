@@ -28,10 +28,10 @@ public:
 	Screen();
 	ScreenObject * GetScreenObject(const int & x, const int & y)const{ return screen[x][y]; }
 	void CleanScreen(); // when level is done
-	void DrawScrean()const;
-	void SetPositionForScreenObject(ScreenObject *object);
-	void ClearScreenObject(ScreenObject *object);
-	void CreateNewSolutionPosability(const unsigned int & currentLevel);
+	void DrawScrean()const; //contains the last screen "print"
+	void SetPositionForScreenObject(ScreenObject *object); //put in a specific place an object
+	void ClearScreenObject(ScreenObject *object); //remove a specific object from screen
+	void CreateNewSolutionPosability(const unsigned int & currentLevel); //create random solution posability
 };
 
 #endif

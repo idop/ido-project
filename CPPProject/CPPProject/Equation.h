@@ -39,8 +39,8 @@ class Equation
 public:
 	Equation(const Point & p) :position(p){}; // constrator for equation with the defult position
 	void Init(const unsigned int & gameLevel); // genrates a random equation for the game
-	 void Draw()const; 
-	 bool IsSolution(const unsigned int & num) { return (num == solution); }
+	void Draw()const; 
+	bool IsSolution(const unsigned int & num) { return (num == solution); }
 };
 
 #endif
