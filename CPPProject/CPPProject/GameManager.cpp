@@ -151,8 +151,8 @@ char GameManager::playNextLevel()
 			// check action based on game ended (action==BACK_TO_MAIN_MENU) or input from user on ESC menu
 		switch (action) {
 		case GameManager::LevelOptions::CONTINUE:
-			// keepRunning is true, so we only need to set thing right and then - keepRunning!
-			//--------------------------------------------------------------------------------
+			// keepRunning is true, so we only need resume the level
+			actualGame.ResumeLevel();
 			break;
 		case GameManager::LevelOptions::REPLAY_LEVEL:
 			// keepRunning is true, so we only need to set thing right and then - keepRunning!

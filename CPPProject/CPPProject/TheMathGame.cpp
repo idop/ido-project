@@ -26,9 +26,8 @@ void TheMathGame::startLevel(unsigned int level)
 	currentLevel = level;
 	currentTurn = 0;
 	equation1.Init(currentLevel);
-	equation1.Draw();
 	equation2.Init(currentLevel);
-	equation2.Draw();
+	DrawEquations();
 	player1.SetToStart(P1_DEFULT_POSITION , P1_DEFULT_DIRECTION);
 	player1.Draw();
 	player2.SetToStart(P2_DEFULT_POSITION, P2_DEFULT_DIRECTION);
@@ -39,6 +38,15 @@ void TheMathGame::startLevel(unsigned int level)
 	currentScreen = new Screen;
 	currentScreen->SetPositionForScreenObject(&player1);
 	currentScreen->SetPositionForScreenObject(&player2);
+}
+
+//this function will resume the level after sub mani option continue
+void TheMathGame::ResumeLevel()
+{
+	clear_screen();
+	PrintScores();
+	DrawEquations();
+	currentScreen->DrawScrean();
 }
 
 void TheMathGame::doIteration(const list<char>& keyHits)  
@@ -305,4 +313,11 @@ Point TheMathGame::GetPointToMove(const Player & p)
 	default:// we should not get here
 		break;
 	}
+}
+
+
+void TheMathGame::DrawEquations()const
+{
+	equation1.Draw();
+	equation2.Draw();
 }

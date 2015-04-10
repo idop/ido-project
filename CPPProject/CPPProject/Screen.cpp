@@ -9,7 +9,7 @@
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #include "Screen.h"
-#include "SolutionPosabilty.h"
+#include "SolutionPossibility.h"
 #include "io_utils.h"
 #include <iostream>
 using namespace std;

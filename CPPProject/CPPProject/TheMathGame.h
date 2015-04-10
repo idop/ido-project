@@ -24,6 +24,7 @@ class TheMathGame : public ISpecificGame
 	void PlayerMovment(const Point & toMove, Player & p, Equation & eq);
 	void clearAndMove(Player & p, const Point & toMove, ScreenObject * obj);
 	void CheckSolution(Equation eq, const ScreenObject * obj, Player & p);
+	void DrawEquations()const;
 	Point GetPointToMove(const Player & p);
 	Equation equation1, equation2;
 	Player player1, player2;
@@ -40,6 +41,7 @@ public:
 	virtual void doIteration(const list<char>& keyHits);
 	virtual void doSubIteration();
 	unsigned int GetCurrentTurn()const{ return currentTurn; }
+	virtual void ResumeLevel() ;
 
 };
 
