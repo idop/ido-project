@@ -44,7 +44,8 @@ public:
 	void SetDirection(const Direction::value & d){ direction = d; };
 	void SetNumberOfLives(const int & num){ numberOfLives = num; };
 	int getNumberOfLives()const { return numberOfLives; };
-	int getScore()const { return score; };
+	int getScore()const { return score; }
+	string GetKeyboardKeys()const{ return keyboardKeys; }
 	void FoundTheSolution(){ playerSolved = true; }
 	bool IsSolutionFound()const{ return playerSolved; }
 	Direction::value getdirection()const { return direction; };
