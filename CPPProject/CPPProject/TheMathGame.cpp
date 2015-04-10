@@ -99,15 +99,17 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 	//TODO Colllsion, beautify and handle player death
 
 	//collision managment for player1
-	toMove = player1.GetPosition();
+	if (player1.getNumberOfLives() != 0)
+	{ 
+	toMove = GetPointToMove(player1);
 	switch (player1.getdirection())
 	{
 	case Direction::LEFT:
-		obj = currentScreen->GetScreenObject(toMove.getX() - 1, toMove.getY());
+		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
 		if (obj == NULL) // check the new place to move  is free
 		{
 			currentScreen->ClearScreenObject(&player1);
-			player1.Move();
+			player1.Move(toMove);
 			player1.Draw();
 			currentScreen->SetPositionForScreenObject(&player1);
 		}
@@ -124,18 +126,18 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 			currentScreen->ClearScreenObject(obj);
 			obj = NULL;
 			currentScreen->ClearScreenObject(&player1);
-			player1.Move();
+			player1.Move(toMove);
 			player1.Draw();
 			currentScreen->SetPositionForScreenObject(&player1);
 
 		}//else the bject we are colliding with is the other player there for we will not move
 			break;
 	case Direction::UP:
-		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY()-1);
+		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
 		if (obj == NULL) // check the new place to move  is free
 		{
 			currentScreen->ClearScreenObject(&player1);
-			player1.Move();
+			player1.Move(toMove);
 			player1.Draw();
 			currentScreen->SetPositionForScreenObject(&player1);
 		}
@@ -152,17 +154,17 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 			currentScreen->ClearScreenObject(obj);
 			obj = NULL;
 			currentScreen->ClearScreenObject(&player1);
-			player1.Move();
+			player1.Move(toMove);
 			player1.Draw();
 			currentScreen->SetPositionForScreenObject(&player1);
 		}//else the bject we are colliding with is the other player there for we will not move
 			break;
 	case Direction::RIGHT:
-		obj = currentScreen->GetScreenObject(toMove.getX() + 1, toMove.getY());
+		obj = currentScreen->GetScreenObject(toMove.getX() , toMove.getY());
 		if (obj == NULL) // check the new place to move  is free
 		{
 			currentScreen->ClearScreenObject(&player1);
-			player1.Move();
+			player1.Move(toMove);
 			player1.Draw();
 			currentScreen->SetPositionForScreenObject(&player1);
 		}
@@ -179,17 +181,17 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 			currentScreen->ClearScreenObject(obj);
 			obj = NULL;
 			currentScreen->ClearScreenObject(&player1);
-			player1.Move();
+			player1.Move(toMove);
 			player1.Draw();
 			currentScreen->SetPositionForScreenObject(&player1);
 		}//else the bject we are colliding with is the other player there for we will not move
 			break;
 	case Direction::DOWN:
-		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY()+1);
+		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
 		if (obj == NULL) // check the new place to move  is free
 		{
 			currentScreen->ClearScreenObject(&player1);
-			player1.Move();
+			player1.Move(toMove);
 			player1.Draw();
 			currentScreen->SetPositionForScreenObject(&player1);
 		}
@@ -206,7 +208,7 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 			currentScreen->ClearScreenObject(obj);
 			obj = NULL;
 			currentScreen->ClearScreenObject(&player1);
-			player1.Move();
+			player1.Move(toMove);
 			player1.Draw();
 			currentScreen->SetPositionForScreenObject(&player1);
 		}//else the bject we are colliding with is the other player there for we will not move
@@ -214,18 +216,21 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 		default: // we should not get here
 			break;
 	}
-
+	}
 //PLAYER 2 COLLISION
-
-	toMove = player2.GetPosition();
+	if (player2.getNumberOfLives() != 0)
+	{
+	toMove = GetPointToMove(player2);
 	switch (player2.getdirection())
 	{
 	case Direction::LEFT:
-		obj = currentScreen->GetScreenObject(toMove.getX() - 1, toMove.getY());
+		
+		
+		obj = currentScreen->GetScreenObject(toMove.getX() , toMove.getY());
 		if (obj == NULL) // check the new place to move  is free
 		{
 			currentScreen->ClearScreenObject(&player2);
-			player2.Move();
+			player2.Move(toMove);
 			player2.Draw();
 			currentScreen->SetPositionForScreenObject(&player2);
 		}
@@ -242,17 +247,17 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 			currentScreen->ClearScreenObject(obj);
 			obj = NULL;
 			currentScreen->ClearScreenObject(&player2);
-			player2.Move();
+			player2.Move(toMove);
 			player2.Draw();
 			currentScreen->SetPositionForScreenObject(&player2);
 		}//else the bject we are colliding with is the other player there for we will not move
 		break;
 	case Direction::UP:
-		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY() - 1);
+		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
 		if (obj == NULL) // check the new place to move  is free
 		{
 			currentScreen->ClearScreenObject(&player2);
-			player2.Move();
+			player2.Move(toMove);
 			player2.Draw();
 			currentScreen->SetPositionForScreenObject(&player2);
 		}
@@ -269,17 +274,17 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 			currentScreen->ClearScreenObject(obj);
 			obj = NULL;
 			currentScreen->ClearScreenObject(&player2);
-			player2.Move();
+			player2.Move(toMove);
 			player2.Draw();
 			currentScreen->SetPositionForScreenObject(&player2);
 		}//else the bject we are colliding with is the other player there for we will not move
 		break;
 	case Direction::RIGHT:
-		obj = currentScreen->GetScreenObject(toMove.getX() + 1, toMove.getY());
+		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
 		if (obj == NULL) // check the new place to move  is free
 		{
 			currentScreen->ClearScreenObject(&player2);
-			player2.Move();
+			player2.Move(toMove);
 			player2.Draw();
 			currentScreen->SetPositionForScreenObject(&player2);
 		}
@@ -296,17 +301,17 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 			currentScreen->ClearScreenObject(obj);
 			obj = NULL;
 			currentScreen->ClearScreenObject(&player2);
-			player2.Move();
+			player2.Move(toMove);
 			player2.Draw();
 			currentScreen->SetPositionForScreenObject(&player2);
 		}//else the bject we are colliding with is the other player there for we will not move
 		break;
 	case Direction::DOWN:
-		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY() + 1);
+		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
 		if (obj == NULL) // check the new place to move  is free
 		{
 			currentScreen->ClearScreenObject(&player2);
-			player2.Move();
+			player2.Move(toMove);
 			player2.Draw();
 			currentScreen->SetPositionForScreenObject(&player2);
 		}
@@ -323,7 +328,7 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 			currentScreen->ClearScreenObject(obj);
 			obj = NULL;
 			currentScreen->ClearScreenObject(&player2);
-			player2.Move();
+			player2.Move(toMove);
 			player2.Draw();
 			currentScreen->SetPositionForScreenObject(&player2);
 		}//else the bject we are colliding with is the other player there for we will not move
@@ -332,7 +337,7 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 		break;
 	}
 
-
+ }
 	EndTurn();
 }
 
@@ -341,10 +346,18 @@ void TheMathGame::doSubIteration()
 
 }
 
+//this function will end each turn
 void TheMathGame::EndTurn()
 {
 	++currentTurn;
-	if (player1.IsSolutionFound() || player2.IsSolutionFound())
+	if (player1.getNumberOfLives() == 0) // if player1 lost all  of his lives  remove him from the screen
+		currentScreen->ClearScreenObject(&player1);
+	
+	if (player2.getNumberOfLives() == 0) // if player2 lost all  of his lives  remove him from the screen
+		currentScreen->ClearScreenObject(&player2);
+
+	
+	if (player1.IsSolutionFound() || player2.IsSolutionFound()) // one of the players solved the equations
 	{
 		currentScreen->CleanScreen(); // free memory of all dyemic objects
 		delete currentScreen; // free the memory for the screen object
@@ -354,7 +367,7 @@ void TheMathGame::EndTurn()
 		cout << "Well Done";
 		Sleep(1500); 
 	}
-	else if (currentTurn >= MAX_TURNS_PER_LEVEL)
+	else if (currentTurn >= MAX_TURNS_PER_LEVEL) // current screen reached its max turns limit
 	{
 		currentScreen->CleanScreen(); // free memory of all dyemic objects
 		delete currentScreen; // free the memory for the screen object
@@ -363,5 +376,38 @@ void TheMathGame::EndTurn()
 		gotoxy(20, 12);
 		cout << "Too bad, better luck in the next level";
 		Sleep(1500); 
+	}
+}
+
+Point GetPointToMove(const Player & p)
+{
+	switch (p.getdirection())
+	{
+	case Direction::LEFT:
+		if (p.GetPosition.getX() == 0) // check if the player is going to move outside of the screen limit
+			return Point(79, p.GetPosition.getY());
+		else
+			return Point(p.GetPosition.getX() - 1, p.GetPosition.getY());
+		break;
+	case Direction::RIGHT:
+		if (p.GetPosition.getX() == 79) // check if the player is going to move outside of the screen limit
+			return Point(0, p.GetPosition.getY());
+		else
+			return Point(p.GetPosition.getX() + 1, p.GetPosition.getY());
+		break;
+	case Direction::UP:
+		if (p.GetPosition.getY() == 3) // check if the player is going to move outside of the screen limit
+			return Point(p.GetPosition.getX(), 23);
+		else
+			return Point(p.GetPosition.getX(), p.GetPosition.getY()-1);
+		break;
+	case Direction::DOWN:
+		if (p.GetPosition.getY() == 23) // check if the player is going to move outside of the screen limit
+			return Point(p.GetPosition.getX(), 3);
+		else
+			return Point(p.GetPosition.getX(), p.GetPosition.getY() + 1);
+		break;
+	default:// we should not get here
+		break;
 	}
 }

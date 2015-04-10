@@ -65,7 +65,7 @@ void Screen::DrawScrean()const
 void Screen::SetPositionForScreenObject(ScreenObject *object)
 {
 
-	for (int i = 0; i < object->GetLength(); ++i)
+	for (unsigned int i = 0; i < object->GetLength(); ++i)
 	{
 		screen[object->GetPosition().getX() + i][object->GetPosition().getY()] = object;
 	}
@@ -74,7 +74,7 @@ void Screen::SetPositionForScreenObject(ScreenObject *object)
 // this funciton will remove an object from the screen
 void Screen::ClearScreenObject(ScreenObject *object)
 {
-	for (int i = 0; i < object->GetLength(); ++i)
+	for (unsigned int i = 0; i < object->GetLength(); ++i)
 	{
 		screen[object->GetPosition().getX() + i][object->GetPosition().getY()] = NULL;
 	}

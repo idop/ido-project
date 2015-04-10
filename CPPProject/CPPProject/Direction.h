@@ -16,7 +16,7 @@
 // ----           --------                -----------------
 // In the file itself, add above each change/addition a remark saying: "NEW CODE EX1, author=<name>, date=<YYYY-MM-DD>"
 // and close it at the end with a remark saying "END of NEW CODE EX1" 
-//
+//2015-04-10     Ido Perry And Alex Odesser   removed Stay  from enum options
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -31,8 +31,7 @@ public:
 		UP,
 		RIGHT,
 		DOWN,
-		LEFT,
-		STAY
+		LEFT // NEW CODE EX1 2015-04-10     Ido Perry And Alex Odesser   removed Stay  from enum options
 	};
 };
 

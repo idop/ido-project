@@ -50,7 +50,7 @@ public:
 	void WrongSolution(){ numberOfLives--; }
 	bool IsSolutionFound()const{ return playerSolved; }
 	Direction::value getdirection()const { return direction; };
-	void Move();
+	void Move(const Point & p){ position = p; }
 	virtual char Type()const{ return 'p'; }
 	virtual void Draw()const;
 	virtual void Clear()const;

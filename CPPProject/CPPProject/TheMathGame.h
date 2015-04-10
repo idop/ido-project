@@ -24,6 +24,7 @@ class TheMathGame : public ISpecificGame
 	Screen * currentScreen;
 	
 	void EndTurn(); 
+	Point GetPointToMove(const Player & p);
 public:
 	TheMathGame() : currentLevel(0), maxLevel(MAX_LEVEL), currentTurn(0), levelDone(false), equation1(P1_EQUATION_POSITION), equation2(P2_EQUATION_POSITION),
 		player1(P1_DEFULT_CHAR, P1_KEYBOARD_KEYS), player2(P2_DEFULT_CHAR, P2_KEYBOARD_KEYS){currentScreen=NULL;};
