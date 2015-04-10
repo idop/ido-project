@@ -5,7 +5,7 @@
 char Equation::RandomSign()
 {
 
-	char res;
+	char res = NULL;
 	int randomValue = rand() % 4;
 
 	switch (randomValue)
@@ -119,5 +119,6 @@ bool Equation::IsSolution(const unsigned int & num)
 		break;
 	default:  // we should not get here
 		break;
+
 	}
 }

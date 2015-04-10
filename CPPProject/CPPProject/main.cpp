@@ -35,10 +35,6 @@
 #include "TheMathGame.h"
 using namespace std;
 
-// this is for example only!
-// delete this class and implement your own properly!
-
-///*
 //==========================
 //  M  A  I  N
 //==========================
@@ -52,23 +48,3 @@ int main(){
 //==========================
 // E n d   o f   M  A  I  N
 //==========================
-//*/
-/*
-#include "Equation.h"
-#include "Point.h"
-#include "Direction.h"
-int main(){
-	srand((unsigned int)time(NULL));
-	clear_screen();
-	hideCursor();
-	Direction::value d,e;
-
-	d = Direction::RIGHT;
-	e = d;
-	if (e == Direction::LEFT)
-		cout << "OK" << endl;
-	else
-		cout << "fucking stupid" << endl;
-	return 0;
-}
-*/

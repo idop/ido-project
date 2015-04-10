@@ -27,6 +27,7 @@ const Point P1_DEFULT_POSITION(10, 9);
 const Point P2_DEFULT_POSITION(70, 9);
 const Direction::value P1_DEFULT_DIRECTION = Direction::RIGHT;
 const Direction::value P2_DEFULT_DIRECTION = Direction::LEFT;
+const int NUM_OF_LIVES = 3;
 
 
 class Player : public ScreenObject

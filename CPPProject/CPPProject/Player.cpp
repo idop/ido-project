@@ -9,7 +9,7 @@ using namespace std;
 //when starting a new level or restarting the current level
 void Player::SetToStart(const Point & p, const Direction::value & d)
 {
-	numberOfLives = 3;
+	numberOfLives = NUM_OF_LIVES;
 	position = p;
 	direction = d;
 	playerSolved = false;
@@ -21,8 +21,6 @@ void Player::Draw()const
 	gotoxy(position.getX(), position.getY());
 	cout << playerChar;
 }
-
-
 
 //this function removes to  player from the screen
 void Player::Clear()const
