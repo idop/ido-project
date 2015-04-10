@@ -104,3 +104,20 @@ void Equation::Draw()const
 	}
 }
 	
+bool Equation::IsSolution(const unsigned int & num)
+{
+	switch (partToHide)
+	{
+	case 'l':
+		return (num == leftNumber);
+		break;
+	case 'r':
+		return (num == rightNumber);
+		break;
+	case 's':
+		return (num == solution);
+		break;
+	default:  // we should not get here
+		break;
+	}
+}

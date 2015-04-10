@@ -355,7 +355,6 @@ void TheMathGame::EndTurn()
 	
 	if (player2.getNumberOfLives() == 0) // if player2 lost all  of his lives  remove him from the screen
 		currentScreen->ClearScreenObject(&player2);
-
 	
 	if (player1.IsSolutionFound() || player2.IsSolutionFound()) // one of the players solved the equations
 	{
@@ -367,7 +366,7 @@ void TheMathGame::EndTurn()
 		cout << "Well Done";
 		Sleep(1500); 
 	}
-	else if (currentTurn >= MAX_TURNS_PER_LEVEL) // current screen reached its max turns limit
+	else if (currentTurn >= MAX_TURNS_PER_LEVEL || (player2.getNumberOfLives() == 0 && player1.getNumberOfLives() == 0)) // current screen reached its max turns limit
 	{
 		currentScreen->CleanScreen(); // free memory of all dyemic objects
 		delete currentScreen; // free the memory for the screen object
@@ -379,33 +378,33 @@ void TheMathGame::EndTurn()
 	}
 }
 
-Point GetPointToMove(const Player & p)
+Point TheMathGame::GetPointToMove(const Player & p)
 {
 	switch (p.getdirection())
 	{
 	case Direction::LEFT:
-		if (p.GetPosition.getX() == 0) // check if the player is going to move outside of the screen limit
-			return Point(79, p.GetPosition.getY());
+		if (p.GetPosition().getX() == 0) // check if the player is going to move outside of the screen limit
+			return Point(79, p.GetPosition().getY());
 		else
-			return Point(p.GetPosition.getX() - 1, p.GetPosition.getY());
+			return Point(p.GetPosition().getX() - 1, p.GetPosition().getY());
 		break;
 	case Direction::RIGHT:
-		if (p.GetPosition.getX() == 79) // check if the player is going to move outside of the screen limit
-			return Point(0, p.GetPosition.getY());
+		if (p.GetPosition().getX() == 79) // check if the player is going to move outside of the screen limit
+			return Point(0, p.GetPosition().getY());
 		else
-			return Point(p.GetPosition.getX() + 1, p.GetPosition.getY());
+			return Point(p.GetPosition().getX() + 1, p.GetPosition().getY());
 		break;
 	case Direction::UP:
-		if (p.GetPosition.getY() == 3) // check if the player is going to move outside of the screen limit
-			return Point(p.GetPosition.getX(), 23);
+		if (p.GetPosition().getY() == 3) // check if the player is going to move outside of the screen limit
+			return Point(p.GetPosition().getX(), 23);
 		else
-			return Point(p.GetPosition.getX(), p.GetPosition.getY()-1);
+			return Point(p.GetPosition().getX(), p.GetPosition().getY()-1);
 		break;
 	case Direction::DOWN:
-		if (p.GetPosition.getY() == 23) // check if the player is going to move outside of the screen limit
-			return Point(p.GetPosition.getX(), 3);
+		if (p.GetPosition().getY() == 23) // check if the player is going to move outside of the screen limit
+			return Point(p.GetPosition().getX(), 3);
 		else
-			return Point(p.GetPosition.getX(), p.GetPosition.getY() + 1);
+			return Point(p.GetPosition().getX(), p.GetPosition().getY() + 1);
 		break;
 	default:// we should not get here
 		break;
