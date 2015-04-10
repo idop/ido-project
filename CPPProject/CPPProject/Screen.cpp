@@ -8,8 +8,9 @@
 // First version: 2015-04-04
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 #include "Screen.h"
-#include "SolutionPosabilty.h"
+#include "SolutionPossibility.h"
 #include "io_utils.h"
 #include <iostream>
 using namespace std;
@@ -22,7 +23,7 @@ Screen::Screen()
 }
 
 
-void Screen::CleanScreen() //// when level is done
+void Screen::CleanScreen() // when level is done
 {
 	int currLength;
 	for (int i = X_OFFSET; i < SCREEN_WIDTH; ++i)

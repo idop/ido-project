@@ -85,7 +85,7 @@
     <ClInclude Include="ISpecificGame.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="ScreenObject.h" />
-    <ClInclude Include="SolutionPosabilty.h" />
+    <ClInclude Include="SolutionPossibility.h" />
     <ClInclude Include="TheMathGame.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Point.h" />
@@ -97,7 +97,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Screen.cpp" />
-    <ClCompile Include="SolutionPosabilty.cpp" />
+    <ClCompile Include="SolutionPossibility.cpp" />
     <ClCompile Include="TheMathGame.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

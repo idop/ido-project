@@ -1,3 +1,14 @@
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Player.cpp
+// -------------
+// This class  will manage the player, as a screen object, initializing default parameters   
+// delete and draw on screen.
+//
+// Author: Ido Perry and Alex Odesser
+// First version: 2015-04-04
+//
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 #include "Player.h"
 #include "io_utils.h"
 #include <string>
