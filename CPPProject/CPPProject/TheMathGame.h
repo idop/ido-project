@@ -26,6 +26,10 @@ class TheMathGame : public ISpecificGame
 	void EndTurn(); 
 	Point GetPointToMove(const Player & p);
 	Direction::value MapKeyToDirection(const char & keyHit, const Player & p);
+	void TheMathGame::keyStrokeManager(const list<char>& keyHits);
+	void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq);
+	void TheMathGame::clearAndMove(Player & p, const Point & toMove, ScreenObject * obj);
+	void TheMathGame::CheckSolution(Equation eq, const ScreenObject * obj, Player & p);
 public:
 
 	TheMathGame() : currentLevel(0), maxLevel(MAX_LEVEL), currentTurn(0), levelDone(false), equation1(P1_EQUATION_POSITION), equation2(P2_EQUATION_POSITION),
