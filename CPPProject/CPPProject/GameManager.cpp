@@ -63,7 +63,9 @@ void GameManager::run()
 			break;
 		case GameManager::MainMenuOptions::PRESENT_INSTRUCTIONS:
 			PrintInsturctions();
-			while (!kbhit);
+			
+			while (!_kbhit()){}
+			clear_screen();
 			run();
 			break;
 		case GameManager::MainMenuOptions::PLAY_FROM_SELECTED_SCREEN:
