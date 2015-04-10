@@ -20,6 +20,7 @@
 //2015-03-25	 Ido Perry				 change main menu text color to Lightgreen
 //2015-04-10	 Ido Perry	And Alex Odessr			 removed the end level notification from this object and moved it to the TheMathGame object
 //2015-04-10	 Ido Perry	And Alex Odessr			 changed ISoecificGame function start level to send the current level to the game
+//2015-04-10	 Ido Perry	And Alex Odessr			 added print insturctions fucntion
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -61,6 +62,9 @@ void GameManager::run()
 			userWantsToPlay = playGame();
 			break;
 		case GameManager::MainMenuOptions::PRESENT_INSTRUCTIONS:
+			PrintInsturctions();
+			while (!kbhit);
+			run();
 			break;
 		case GameManager::MainMenuOptions::PLAY_FROM_SELECTED_SCREEN:
 			break;
@@ -213,3 +217,24 @@ bool GameManager::doInputIteration()
 	return shouldContinue;
 }
 
+//NEW CODE EX1 Ido Perry and Alex Odesser 2015-04-10  added function to print the insturctions page
+void GameManager::PrintInsturctions()
+{
+	clear_screen();
+	cout << "Welcome to the amazing math Game." << endl;
+	cout << "This is a two player consle game. with 20 levels" << endl;
+	cout << "Player 1: will start at the left of the screen and is represented by the char @." << endl;
+	cout << "Player 2: will start at the right of the screen and is represented by the char #." << endl;
+	cout << "on the start of the level an equation will be generted to each player." << endl;
+	cout << "Player 1 equation will be shown at the top left of the screen and player 2 equation will be shown at the top right of the screen." << endl;
+	cout << "Each equation will hide one of its numbers and the player will need to solve the equation in order to finish the level." << endl;
+	cout << "Possible solution to 1 of the equation will be placed randomly on the screen every other turn." << endl;
+	cout << "The players will be in constent movment. and they will move tile each turn." << endl;
+	cout << "player 1 movment controls  are : a - left, w - up, d - right , x - down " << endl;
+	cout << "player 2 movment controls  are : j - left, i - up, l - right , m - down " << endl;
+	cout << "Each Player starts the level with 3 lives." << endl;
+	cout << "the players will try to move to a solution. If a player got the right number his score will increase by 1 and the level will end." << endl;
+	cout << "However wrong solution will cause the player to lose a live and when the lives reach 0 the player will be thrown out of the currnet level." << endl;
+	cout << "Have Fun!!!!!!!!!" << endl << endl;
+	cout << "press any key to return to main manu" << endl;
+}
