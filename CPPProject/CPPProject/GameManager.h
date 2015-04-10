@@ -38,6 +38,8 @@ class GameManager
 	unsigned int iterationsPerClockCycle;
 	const static unsigned int KEYBOARD_HIT_LOOP = 10;  // const static can be initialized like this! :-)
 	const static char ESC = 27; // the ESC key
+
+	void PrintInsturctions(); //NEW CODE EX1 Ido Perry and Alex Odesser 2015-04-10  added function to print the insturctions page
 public:
 	GameManager(ISpecificGame& theSpecificGame, unsigned int clockCycleLengthInMillisec, unsigned int numIterationsPerClockCycle)
 		:actualGame(theSpecificGame), currentLevel(0), clockCycleInMillisec(clockCycleLengthInMillisec), iterationsPerClockCycle(numIterationsPerClockCycle) {}
