@@ -25,7 +25,7 @@ const Point P2_EQUATION_POSITION(70, 1);
 class Equation
 {
 	char sign;
-	char  partToHide; // partTohide will sotr the part that the eqations will hide : 'l' - left , 'r' - right, 's' - solution
+	char  partToHide; // partTohide will store the part that the eqations will hide : 'l' - left , 'r' - right, 's' - solution
 	unsigned int  leftNumber;
 	unsigned int  rightNumber;
 	unsigned int  solution;

@@ -35,7 +35,8 @@ void TheMathGame::startLevel()
 void TheMathGame::doIteration(const list<char>& keyHits)  
 {
 	//TODO handle colisions and player movement
-	currentScreen->CreateNewSolutionPosability(currentLevel);
+	if (currentTurn % 2 == 0)
+		currentScreen->CreateNewSolutionPosability(currentLevel);
 	player1.Clear();
 	player1.Move();
 	player1.Draw();
@@ -61,7 +62,7 @@ void TheMathGame::EndTurn()
 		clear_screen();
 		gotoxy(35, 12);
 		cout << "Well Done";
-		Sleep(1500); // new code to remove
+		Sleep(1500); 
 	}
 	else if (currentTurn >= MAX_TURNS_PER_LEVEL)
 	{
@@ -71,6 +72,6 @@ void TheMathGame::EndTurn()
 		clear_screen();
 		gotoxy(20, 12);
 		cout << "Too bad, better luck in the next level";
-		Sleep(1500); // new code to remove
+		Sleep(1500); 
 	}
 }

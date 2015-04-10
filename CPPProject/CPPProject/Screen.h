@@ -28,7 +28,7 @@ public:
 	Screen();
 	ScreenObject * GetScreenObject(const int & x, const int & y)const{ return screen[x][y]; }
 	void CleanScreen(); // when level is done
-	void DrawScrean()const;
+	void DrawScrean()const; 
 	void SetPositionForScreenObject(ScreenObject *object);
 	void ClearScreenObject(ScreenObject *object);
 	void CreateNewSolutionPosability(const unsigned int & currentLevel);
