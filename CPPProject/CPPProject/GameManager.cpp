@@ -61,6 +61,7 @@ void GameManager::run()
 			userWantsToPlay = playGame();
 			break;
 		case GameManager::MainMenuOptions::PRESENT_INSTRUCTIONS:
+			clear_screen();
 			break;
 		case GameManager::MainMenuOptions::PLAY_FROM_SELECTED_SCREEN:
 			break;

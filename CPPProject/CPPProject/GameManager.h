@@ -16,7 +16,7 @@
 // ------------------------
 // DATE           Authors                 Change / Addition
 // ----           --------                -----------------
-//2015-04-03      Ido Perry               fixed bug in sub manu string validOptions
+//2015-04-03      Ido Perry and Alex Odesser        fixed bug in sub manu string validOptions
 // 
 //
 //
@@ -74,7 +74,7 @@ public:
 	{
 	public:
 		static bool isValidOption(char option) {
-			string validOptions = "12345"; // NEW CODE EX1, Ido Perry, 2015-04-03
+			string validOptions = "12345"; // NEW CODE EX1,  2015-04-03, Ido Perry and Alex Odesser    fixed bug in sub manu string validOptions
 			return (validOptions.find(option) != string::npos);
 		}
 		enum
