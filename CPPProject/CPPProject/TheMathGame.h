@@ -31,7 +31,7 @@ public:
 		player1(P1_DEFULT_CHAR, P1_KEYBOARD_KEYS), player2(P2_DEFULT_CHAR, P2_KEYBOARD_KEYS){currentScreen=NULL;};
 	virtual bool isLevelDone()const{ return levelDone; } 
 	virtual bool hasNextLevel()const{ return (currentLevel < maxLevel); };
-	virtual void startLevel();
+	virtual void startLevel(unsigned int level);
 	virtual void doIteration(const list<char>& keyHits);
 	virtual void doSubIteration();
 	unsigned int GetCurrentTurn()const{ return currentTurn; }

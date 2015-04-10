@@ -18,7 +18,8 @@
 // In the file itself, add above each change/addition a remark saying: "NEW CODE EX1, author=<name>, date=<YYYY-MM-DD>"
 // and close it at the end with a remark saying "END of NEW CODE EX1" 
 //2015-03-25	 Ido Perry				 change main menu text color to Lightgreen
-//2015-04-09	 Ido Perry				 removed the end level notification from this object and moved it to the TheMathGame object
+//2015-04-10	 Ido Perry	And Alex Odessr			 removed the end level notification from this object and moved it to the TheMathGame object
+//2015-04-10	 Ido Perry	And Alex Odessr			 changed ISoecificGame function start level to send the current level to the game
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -59,6 +60,10 @@ void GameManager::run()
 			init();
 			userWantsToPlay = playGame();
 			break;
+		case GameManager::MainMenuOptions::PRESENT_INSTRUCTIONS:
+			break;
+		case GameManager::MainMenuOptions::PLAY_FROM_SELECTED_SCREEN:
+			break;
 		case GameManager::MainMenuOptions::EXIT_APPLICATION:
 			userWantsToPlay = false;
 			break;
@@ -91,7 +96,7 @@ bool GameManager::playGame()
 char GameManager::playNextLevel()
 {
 	++currentLevel;
-	actualGame.startLevel();
+	actualGame.startLevel(currentLevel);
 	
 	//------------------------------------------------------------------------------
 	// here we control the ESC menu
@@ -114,7 +119,7 @@ char GameManager::playNextLevel()
 		case GameManager::LevelOptions::REPLAY_LEVEL:
 			// keepRunning is true, so we only need to set thing right and then - keepRunning!
 			//--------------------------------------------------------------------------------
-			actualGame.startLevel();
+			actualGame.startLevel(currentLevel);
 			break;
 		case GameManager::LevelOptions::BACK_TO_MAIN_MENU:
 		case GameManager::LevelOptions::EXIT_APPLICATION:
@@ -156,7 +161,7 @@ char GameManager::doLevelIterations()
 
 	// check why we are here
 	if(actualGame.isLevelDone()) {
-	  //NEW CODE EX1, author=Ido Perry date=2015-04-09 removed the end level notification from this object and moved it to the TheMathGame object
+	  //NEW CODE EX1, author=Ido Perry and Alex Odesser date=2015-04-10 removed the end level notification from this object and moved it to the TheMathGame object
 		action = GameManager::LevelOptions::NEXT_LEVEL;
 	}
 	else if(escapePressed) {

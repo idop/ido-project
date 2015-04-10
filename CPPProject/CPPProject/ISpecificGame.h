@@ -21,7 +21,7 @@
 // ----           --------                -----------------
 // In the file itself, add above each change/addition a remark saying: "NEW CODE EX1, author=<name>, date=<YYYY-MM-DD>"
 // and close it at the end with a remark saying "END of NEW CODE EX1" 
-//
+//2015-04-10	 Ido Perry	And Alex Odessr			 changed ISoecificGame function start level to send the current level to the game
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -41,7 +41,7 @@ public:
 	// abstract method must be implemented by non-abstract inherited class
 	virtual bool isLevelDone()const=0;
 	virtual bool hasNextLevel()const=0;
-	virtual void startLevel()=0;
+	virtual void startLevel(unsigned int level)=0; //NEW CODE EX1!! 2015-04-10	 Ido Perry And Alex Odessr  changed ISoecificGame function start level to send the current level to the game
 
 	// get a list with keyHits and returns a list with the keys that were used
 	virtual void doIteration(const list<char>& keyHits)=0;

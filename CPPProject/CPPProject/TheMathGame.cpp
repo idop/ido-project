@@ -2,10 +2,10 @@
 #include "io_utils.h"
 
 
-void TheMathGame::startLevel()
+void TheMathGame::startLevel(unsigned int level)
 {
 	clear_screen();
-	++currentLevel;
+	currentLevel = level;
 	levelDone = false;
 	currentTurn = 0;
 	equation1.Init(currentLevel);
