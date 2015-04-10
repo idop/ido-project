@@ -104,7 +104,7 @@ void Screen::CreateNewSolutionPosability(const unsigned int & currentLevel)
 			if (screen[x + j][y] != NULL)
 				xPositionOk = false;
 			
-			if (j > -1 && j < length) // cehck the y axis without the corrners of the squrae we are checking
+			if (j > -1 && j < length) // check the y axis without the corrners of the squrae we are checking
 			{
 				if (screen[x + j][y + 1] != NULL || screen[x + j][y -1] != NULL)
 					yPositionOk = false;

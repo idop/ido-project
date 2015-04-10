@@ -22,6 +22,7 @@
 // In the file itself, add above each change/addition a remark saying: "NEW CODE EX1, author=<name>, date=<YYYY-MM-DD>"
 // and close it at the end with a remark saying "END of NEW CODE EX1" 
 //2015-04-10	 Ido Perry	And Alex Odessr			 changed ISoecificGame function start level to send the current level to the game
+//2015-04-10	 Ido Perry	And Alex Odessr			 added const for max level
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -32,6 +33,10 @@
 
 using namespace std;
 
+//NEW CODE EX1!! 2015-04-10	 Ido Perry And Alex Odessr added const for max level
+const unsigned int MAX_LEVEL = 20;
+//END of NEW CODE EX1
+
 // this is a base class for actual games
 // actual games will inherit from this class and implement the required methods
 class ISpecificGame
@@ -41,8 +46,9 @@ public:
 	// abstract method must be implemented by non-abstract inherited class
 	virtual bool isLevelDone()const=0;
 	virtual bool hasNextLevel()const=0;
-	virtual void startLevel(unsigned int level)=0; //NEW CODE EX1!! 2015-04-10	 Ido Perry And Alex Odessr  changed ISoecificGame function start level to send the current level to the game
-
+	//NEW CODE EX1!! 2015-04-10	 Ido Perry And Alex Odessr  changed ISoecificGame function start level to send the current level to the game
+	virtual void startLevel(unsigned int level)=0; 
+	//END of NEW CODE EX1
 	// get a list with keyHits and returns a list with the keys that were used
 	virtual void doIteration(const list<char>& keyHits)=0;
 	virtual void doSubIteration()=0;

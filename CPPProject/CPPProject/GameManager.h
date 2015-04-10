@@ -17,8 +17,8 @@
 // DATE           Authors                 Change / Addition
 // ----           --------                -----------------
 //2015-04-03      Ido Perry and Alex Odesser        fixed bug in sub manu string validOptions
-// 
-//
+//2015-04-10      Ido Perry and Alex Odesser        added another init function to start a game from a spesific level
+//2015-04-10      Ido Perry and Alex Odesser        added function to show make a sub menu
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -38,8 +38,10 @@ class GameManager
 	unsigned int iterationsPerClockCycle;
 	const static unsigned int KEYBOARD_HIT_LOOP = 10;  // const static can be initialized like this! :-)
 	const static char ESC = 27; // the ESC key
-
-	void PrintInsturctions(); //NEW CODE EX1 Ido Perry and Alex Odesser 2015-04-10  added function to print the insturctions page
+	
+	//NEW CODE EX1 Ido Perry and Alex Odesser 2015-04-10  added function to print the insturctions page
+	void PrintInsturctions(); 
+	//ENd OF NEW CODE
 public:
 	GameManager(ISpecificGame& theSpecificGame, unsigned int clockCycleLengthInMillisec, unsigned int numIterationsPerClockCycle)
 		:actualGame(theSpecificGame), currentLevel(0), clockCycleInMillisec(clockCycleLengthInMillisec), iterationsPerClockCycle(numIterationsPerClockCycle) {}
@@ -50,7 +52,16 @@ private:
 	{
 		currentLevel = 0;
 	}
+	//NEW CODE EX1 Ido Perry and Alex Odesser 2015-04-10  added another init function to start a game from a spesific level
+	void init(unsigned int level) 
+	{
+		currentLevel = level - 1;
+	}
+	//ENd OF NEW CODE
 	char mainMenu()const;
+	//NEW CODE EX1 Ido Perry and Alex Odesser 2015-04-10  added function to show make a sub menu
+	void subMenu()const;
+	//END OF NEW CODE
 	bool playGame();
 	char playNextLevel();
 	char doLevelIterations();
@@ -76,7 +87,9 @@ public:
 	{
 	public:
 		static bool isValidOption(char option) {
-			string validOptions = "12345"; // NEW CODE EX1,  2015-04-03, Ido Perry and Alex Odesser    fixed bug in sub manu string validOptions
+			// NEW CODE EX1,  2015-04-03, Ido Perry and Alex Odesser    fixed bug in sub manu string validOptions
+			string validOptions = "12345"; 
+			//END OF NEW CODE
 			return (validOptions.find(option) != string::npos);
 		}
 		enum

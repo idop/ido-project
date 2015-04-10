@@ -18,9 +18,14 @@
 // In the file itself, add above each change/addition a remark saying: "NEW CODE EX1, author=<name>, date=<YYYY-MM-DD>"
 // and close it at the end with a remark saying "END of NEW CODE EX1" 
 //2015-03-25	 Ido Perry				 change main menu text color to Lightgreen
-//2015-04-10	 Ido Perry	And Alex Odessr			 removed the end level notification from this object and moved it to the TheMathGame object
-//2015-04-10	 Ido Perry	And Alex Odessr			 changed ISoecificGame function start level to send the current level to the game
-//2015-04-10	 Ido Perry	And Alex Odessr			 added print insturctions fucntion
+//2015-04-10	 Ido Perry	And Alex Odesser			 removed the end level notification from this object and moved it to the TheMathGame object
+//2015-04-10	 Ido Perry	And Alex Odesser			 changed ISoecificGame function start level to send the current level to the game
+//2015-04-10     Ido Perry  And Alex Odesser             handle all main manu option
+//2015-04-10	 Ido Perry	And Alex Odesser			 added print insturctions fucntion
+//2015-04-10     Ido Perry  And Alex Odesser             clear screen after game ended
+//2015-04-10     Ido Perry  and Alex Odesser             added function to show make a sub menu
+//2015-04-10     Ido Perry  and Alex Odesser             print sub manu in esc press
+//2015-04-10     Ido Perry  and Alex Odesser             handle sub manu options
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -36,7 +41,7 @@ char GameManager::mainMenu()const
 {
 	// TODO: you may want to improve the menu appearance
 	//NEW CODE EX1, author=Ido Perry date=2015-03-25
-	setTextColor(LIGHTGREEN);
+	setTextColor(LIGHTGREEN); //END of NEW CODE EX1
 	cout << "1. instructions" << endl;
 	cout << "2. play game" << endl;
 	cout << "3. start from a specific level" << endl;
@@ -48,13 +53,26 @@ char GameManager::mainMenu()const
 	return selection;
 }
 
+//NEW CODE EX 12015-04-10      Ido Perry and Alex Odesser        added function to show make a sub menu
+void GameManager::subMenu()const
+{
+
+	clear_screen();
+	cout << "1. Exit game" << endl;
+	cout << "2. Return to main manu" << endl;
+	cout << "3. return to level" << endl;
+	cout << "4. restart level" << endl;
+	cout << "5. start level" << endl;
+}
+//END of NEW CODE EX1
+
 void GameManager::run()
 {
 	bool userWantsToPlay = true;
 	// we run as long as the user wants
 	while(userWantsToPlay) {
 		char menuSelection = mainMenu();
-		// TODO: handle here all the different menu options
+		//NEW CODE EX1 Ido Perry and Alex Odesser 2015-04-10  handle all main manu option
 		switch(menuSelection)
 		{
 		case GameManager::MainMenuOptions::PLAY_GAME:
@@ -62,20 +80,31 @@ void GameManager::run()
 			userWantsToPlay = playGame();
 			break;
 		case GameManager::MainMenuOptions::PRESENT_INSTRUCTIONS:
-			PrintInsturctions();
-			
+			PrintInsturctions();	
 			while (!_kbhit()){}
 			clear_screen();
-			run();
+			userWantsToPlay = true;
 			break;
 		case GameManager::MainMenuOptions::PLAY_FROM_SELECTED_SCREEN:
+			int num;
+			clear_screen();
+			cout << "Please enter a level number between 1 to " << MAX_LEVEL <<": ";
+			cin >> num;
+			while (num < 1 || num > MAX_LEVEL)
+				{
+					clear_screen(); 
+					cout << "Invalid level Please enter a level number between 1 to " << MAX_LEVEL << ": ";
+					cin >> num;
+				}
+			init(num);
+			userWantsToPlay = playGame(); //END of NEW CODE EX1
 			break;
 		case GameManager::MainMenuOptions::EXIT_APPLICATION:
 			userWantsToPlay = false;
 			break;
 		default: // normally we shouldn't get to here...
 			userWantsToPlay = false;
-		};
+		}
 	}
 }
 
@@ -95,6 +124,9 @@ bool GameManager::playGame()
 	//-------------------------------------------------------------
 	
 	// return true if the user wants to keep playing
+	//NEW CODE EX1 Ido Perry and Alex Odesser 2015-04-10  clear screen after game ended
+	clear_screen(); 
+	//END of NEW CODE EX1
 	return (action != GameManager::LevelOptions::EXIT_APPLICATION);
 }
 
@@ -115,9 +147,9 @@ char GameManager::playNextLevel()
 		// this is the actual call to play game iterations
 		action = doLevelIterations();
 		//=============================================================================================
-		
-		// check action based on game ended (action==BACK_TO_MAIN_MENU) or input from user on ESC menu
-		switch(action) {
+		//NEW CODE EX1 Ido Perry and Alex Odesser 2015-04-10  handle all sub manu options
+			// check action based on game ended (action==BACK_TO_MAIN_MENU) or input from user on ESC menu
+		switch (action) {
 		case GameManager::LevelOptions::CONTINUE:
 			// keepRunning is true, so we only need to set thing right and then - keepRunning!
 			//--------------------------------------------------------------------------------
@@ -138,6 +170,7 @@ char GameManager::playNextLevel()
 			keepRunning = false;
 			break;
 		}
+		//END OF NEW CODE EX 1
 		//---------------------------------------
 		// END of sub menu action switch
 		//---------------------------------------
@@ -169,16 +202,22 @@ char GameManager::doLevelIterations()
 	if(actualGame.isLevelDone()) {
 	  //NEW CODE EX1, author=Ido Perry and Alex Odesser date=2015-04-10 removed the end level notification from this object and moved it to the TheMathGame object
 		action = GameManager::LevelOptions::NEXT_LEVEL;
+	  //END of NEW CODE EX1
 	}
 	else if(escapePressed) {
+
 		action = 0;
-		// TODO: print here the sub menu options to the proper place in screen
+		//NEW CODE EX1 Ido Perry and Alex Odesser 2015-04-10  create the sub menu on esc Press
+		subMenu();
+ 
 		do {
 			action = _getch();
 		} while(!GameManager::LevelOptions::isValidOption(action));
+		clear_screen();
+		//END OF NEW CODE EX 1
 	}
 	// end of esc pressed
-	// TODO: clear the sub menu options from screen
+	
 	return action;
 }
 
@@ -240,3 +279,4 @@ void GameManager::PrintInsturctions()
 	cout << "Have Fun!!!!!!!!!" << endl << endl;
 	cout << "press any key to return to main manu" << endl;
 }
+//END of NEW CODE EX1

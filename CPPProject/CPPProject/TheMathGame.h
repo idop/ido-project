@@ -9,8 +9,7 @@
 #include "color.h"
 #include "Screen.h"
 
-const unsigned int MAX_LEVEL = 20;
-const unsigned int MAX_TURNS_PER_LEVEL = 300;
+const unsigned int MAX_TURNS_PER_LEVEL = 1500;
 
 
 class TheMathGame : public ISpecificGame
