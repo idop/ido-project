@@ -22,7 +22,6 @@
 // Below lines are an example, replace it with your own if you make any changes (one entry per relevant change!)
 // NOTE: the lines shall be added in the file that was changed only!
 //
-// 2014-12-15     Yovav Ben-Shimshon      implemented the menu
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

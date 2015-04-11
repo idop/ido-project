@@ -59,7 +59,7 @@ private:
 	}
 	//ENd OF NEW CODE
 	char mainMenu()const;
-	//NEW CODE EX1 Ido Perry and Alex Odesser 2015-04-10  added function to show make a sub menu
+	//NEW CODE EX1 Ido Perry and Alex Odesser 2015-04-10  added function to make a sub menu
 	void subMenu()const;
 	//END OF NEW CODE
 	bool playGame();

@@ -18,7 +18,7 @@
 #include "Direction.h"
 using namespace std;
 
-
+//const variables declration to store the players chars , players playing keys and dufult settings
 const char  P1_DEFULT_CHAR='@';
 const char  P2_DEFULT_CHAR='#';
 const string  P1_KEYBOARD_KEYS = "awdx";
@@ -42,23 +42,23 @@ class Player : public ScreenObject
 public:
 	Player(const char & ch, const string & str) :playerChar(ch), keyboardKeys(str),score(0),playerSolved(false) {}; // constract the play with the defult attributes (player char , keyboard commands and starting score
 	void SetToStart(const Point & p, const Direction::value & d); // retrun the player to deuflt start level settings
-	void SetDirection(const Direction::value & d){ direction = d; };
-	void SetNumberOfLives(const int & num){ numberOfLives = num; };
-	char getPlayerChar()const { return playerChar; }
-	int getNumberOfLives()const { return numberOfLives; };
-	int getScore()const { return score; }
-	string GetKeyboardKeys()const{ return keyboardKeys; }
-	void FoundTheSolution(){ playerSolved = true; ++score; }
-	void WrongSolution(){ numberOfLives--; }
-	bool IsSolutionFound()const{ return playerSolved; }
-	Direction::value getdirection()const { return direction; };
-	void Move(const Point & p){ position = p; }
-	virtual char Type()const{ return 'p'; }
-	virtual void Draw()const;
-	virtual void Clear()const;
-	virtual Point GetPosition()const{ return position; }
-	virtual unsigned int GetData()const { return score; } //used to get the score . not really needed
-	virtual unsigned int GetLength()const{ return 1; }
+	void SetDirection(const Direction::value & d){ direction = d; }; // set the direction of the player
+	void SetNumberOfLives(const int & num){ numberOfLives = num; };// set the number of lives of the player
+	char getPlayerChar()const { return playerChar; } // get the player symbol
+	int getNumberOfLives()const { return numberOfLives; }; // get the number of lives
+	int getScore()const { return score; } /// get the player current score
+	string GetKeyboardKeys()const{ return keyboardKeys; } // returns the player valid keyboards keys
+	void FoundTheSolution(){ playerSolved = true; ++score; } // set the player equation status to solved and add a point to the player
+	void WrongSolution(){ numberOfLives--; } // removes 1a live from the player 
+	bool IsSolutionFound()const{ return playerSolved; }  // checks if the player solved the his equation. used to end the level
+	Direction::value getdirection()const { return direction; }; // gets the player current directions
+	void Move(const Point & p){ position = p; } // moves the player to a new position p according to this direction
+	virtual char Type()const{ return 'p'; } // inherited  from the Screenobject class , returns the type of the screen object in this case p for player
+	virtual void Draw()const; //inherited  from the Screenobject class draws the player
+	virtual void Clear()const;//inherited  from the Screenobject class, removes the player char form the screen
+	virtual Point GetPosition()const{ return position; }//inherited  from the Screenobject class, returns the current position of the player
+	virtual unsigned int GetData()const { return score; } //inherited  from the Screenobject class but not really needed in this class
+	virtual unsigned int GetLength()const{ return 1; } // inherited  from the Screenobject class, returns the length of the player symobl
 };
 
 
