@@ -17,7 +17,6 @@
 // ----           --------                -----------------
 // In the file itself, add above each change/addition a remark saying: "NEW CODE EX1, author=<name>, date=<YYYY-MM-DD>"
 // and close it at the end with a remark saying "END of NEW CODE EX1" 
-//2015-03-25	 Ido Perry	And Alex Odesser			 change main menu text color to Lightgreen
 //2015-04-10	 Ido Perry	And Alex Odesser			 removed the end level notification from this object and moved it to the TheMathGame object
 //2015-04-10	 Ido Perry	And Alex Odesser			 changed ISoecificGame function start level to send the current level to the game
 //2015-04-10     Ido Perry  And Alex Odesser             handle all main manu option
@@ -40,8 +39,6 @@ using namespace std;
 char GameManager::mainMenu()const
 {
 	// TODO: you may want to improve the menu appearance
-	//NEW CODE EX1, author=Ido Perry date=2015-03-25
-	setTextColor(LIGHTGREEN); //END of NEW CODE EX1
 	cout << "1. instructions" << endl;
 	cout << "2. play game" << endl;
 	cout << "3. start from a specific level" << endl;
