@@ -315,7 +315,6 @@ Point TheMathGame::GetPointToMove(const Player & p)
 	}
 }
 
-
 void TheMathGame::DrawEquations()const
 {
 	equation1.Draw();
