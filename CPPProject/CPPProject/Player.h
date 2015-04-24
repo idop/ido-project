@@ -52,7 +52,9 @@ public:
 	void FoundTheSolution(){ playerSolved = true; ++score; } // set the player equation status to solved and add a point to the player
 	void WrongSolution(){ numberOfLives--; } // removes 1a live from the player 
 	bool IsSolutionFound()const{ return playerSolved; }  // checks if the player solved the his equation. used to end the level
-	
+	int getNumberOfBullets(){ return bullets; }
+	void removeBullet(){ bullets--; }
+
 	virtual Direction::value getDirection()const { return direction; }; // gets the player current directions
 	virtual void Move(const Point & p){ position = p; } // moves the player to a new position p according to this direction
 	virtual char Type()const{ return 'p'; } // inherited  from the Screenobject class , returns the type of the screen object in this case p for player

@@ -116,9 +116,8 @@ void TheMathGame::doSubIteration()
 void TheMathGame::runBulletList(){
 	
 	for (list<Bullet*>::const_iterator iterator = bulletList.cbegin() , end = bulletList.cend(); iterator != end; ++iterator) {
-		//"test"
-
-
+		Bullet const& t = *iterator;
+		Point toMove = GetPointToMove(iterator->);
 	}
 
 }
@@ -273,8 +272,11 @@ Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, Player & p)
 		case 'x':
 			return Direction::DOWN;		
 		case 'z':
-			Bullet * t = new Bullet(p.GetPosition(), p.getDirection());
-			AddNewBullet(t);
+			if (p.getNumberOfBullets() > 0){
+				p.removeBullet();
+				Bullet * t = new Bullet(p.GetPosition(), p.getDirection());
+				AddNewBullet(t);
+			}
 			return p.getDirection;
 		default: // we should not get here
 			break;
@@ -293,8 +295,11 @@ Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, Player & p)
 		case 'm':
 			return Direction::DOWN;
 		case 'n':
-			Bullet * t = new Bullet(p.GetPosition(), p.getDirection());
-			AddNewBullet(t);
+			if (p.getNumberOfBullets() > 0){
+				p.removeBullet();
+				Bullet * t = new Bullet(p.GetPosition(), p.getDirection());
+				AddNewBullet(t);
+			}
 			return p.getDirection;
 		default: // we should not get here
 			break;
