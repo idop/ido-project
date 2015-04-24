@@ -53,6 +53,7 @@ public:
 	bool IsSolutionFound()const{ return playerSolved; }  // checks if the player solved the his equation. used to end the level
 	Direction::value getdirection()const { return direction; }; // gets the player current directions
 	void Move(const Point & p){ position = p; } // moves the player to a new position p according to this direction
+	
 	virtual char Type()const{ return 'p'; } // inherited  from the Screenobject class , returns the type of the screen object in this case p for player
 	virtual void Draw()const; //inherited  from the Screenobject class draws the player
 	virtual void Clear()const;//inherited  from the Screenobject class, removes the player char form the screen

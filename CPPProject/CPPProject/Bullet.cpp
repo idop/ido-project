@@ -1,11 +1,16 @@
 #include "Bullet.h"
+#include "io_utils.h"
 
+using namespace std;
 
-Bullet::Bullet()
+void Bullet::Draw()const
 {
+	gotoxy(position.getX(), position.getY());
+	cout << bullet;
 }
 
-
-Bullet::~Bullet()
+void Bullet::Clear()const
 {
+	gotoxy(position.getX(), position.getY());
+	cout << ' ';
 }
