@@ -116,7 +116,7 @@ void TheMathGame::doSubIteration()
 void TheMathGame::runBulletList(){
 	
 	for (list<Bullet*>::const_iterator iterator = bulletList.cbegin() , end = bulletList.cend(); iterator != end; ++iterator) {
-		
+		//"test"
 
 
 	}
