@@ -12,17 +12,16 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
-#include "Point.h"
-#include "ScreenObject.h"
 #include <string>
 #include "Direction.h"
+#include "MovingScreenObject.h"
 using namespace std;
 
 //const variables declration to store the players chars , players playing keys and dufult settings
 const char  P1_DEFULT_CHAR='@';
 const char  P2_DEFULT_CHAR='#';
-const string  P1_KEYBOARD_KEYS = "awdx";
-const string  P2_KEYBOARD_KEYS = "jilm";
+const string  P1_KEYBOARD_KEYS = "awdxz";
+const string  P2_KEYBOARD_KEYS = "jilmn";
 const Point P1_DEFULT_POSITION(10, 9);
 const Point P2_DEFULT_POSITION(70, 9);
 const Direction::value P1_DEFULT_DIRECTION = Direction::RIGHT;
@@ -30,7 +29,7 @@ const Direction::value P2_DEFULT_DIRECTION = Direction::LEFT;
 const int NUM_OF_LIVES = 3;
 
 
-class Player : public ScreenObject
+class Player :  public MovingScreenObject
 {
 	const char playerChar;
 	const string keyboardKeys;
@@ -39,8 +38,10 @@ class Player : public ScreenObject
 	bool playerSolved;
 	Point position;
 	Direction::value direction;
+	int bullets;
+
 public:
-	Player(const char & ch, const string & str) :playerChar(ch), keyboardKeys(str),score(0),playerSolved(false) {}; // constract the play with the defult attributes (player char , keyboard commands and starting score
+	Player(const char & ch, const string & str) :playerChar(ch), keyboardKeys(str),score(0),playerSolved(false), bullets(5) {}; // constract the play with the defult attributes (player char , keyboard commands and starting score
 	void SetToStart(const Point & p, const Direction::value & d); // retrun the player to deuflt start level settings
 	void SetDirection(const Direction::value & d){ direction = d; }; // set the direction of the player
 	void SetNumberOfLives(const int & num){ numberOfLives = num; };// set the number of lives of the player
@@ -51,9 +52,9 @@ public:
 	void FoundTheSolution(){ playerSolved = true; ++score; } // set the player equation status to solved and add a point to the player
 	void WrongSolution(){ numberOfLives--; } // removes 1a live from the player 
 	bool IsSolutionFound()const{ return playerSolved; }  // checks if the player solved the his equation. used to end the level
-	Direction::value getdirection()const { return direction; }; // gets the player current directions
-	void Move(const Point & p){ position = p; } // moves the player to a new position p according to this direction
 	
+	virtual Direction::value getDirection()const { return direction; }; // gets the player current directions
+	virtual void Move(const Point & p){ position = p; } // moves the player to a new position p according to this direction
 	virtual char Type()const{ return 'p'; } // inherited  from the Screenobject class , returns the type of the screen object in this case p for player
 	virtual void Draw()const; //inherited  from the Screenobject class draws the player
 	virtual void Clear()const;//inherited  from the Screenobject class, removes the player char form the screen

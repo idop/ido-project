@@ -1,10 +1,10 @@
 #ifndef _BULLET_H
 #define _BULLET_H
 
-#include "ScreenObject.h"
+#include "MovingScreenObject.h"
 #include "Direction.h"
 
-class Bullet : 	public ScreenObject
+class Bullet : 	public MovingScreenObject
 {
 	char bullet = '*';
 	Point position;
@@ -20,6 +20,7 @@ public:
 	virtual Point GetPosition()const{ return position; }//inherited  from the Screenobject class, returns the current position of the player
 	virtual unsigned int GetData()const { return bullet; } //inherited  from the Screenobject class but not really needed in this class
 	virtual unsigned int GetLength()const{ return 1; } // inherited  from the Screenobject class, returns the length of the player symobl
+	virtual Direction::value getDirection()const { return direction; }
 };
 
 #endif

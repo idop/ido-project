@@ -16,7 +16,8 @@
 
 void TheMathGame::startLevel(unsigned int level)
 {
-	/* each Start level the function will 
+	/* 
+	 * each Start level the function will 
 	 * initiallzie player1 and player2 to thier defualt values
 	 * and put the players in the default places on screen
 	 */
@@ -109,6 +110,16 @@ void TheMathGame::EndTurn()
 
 void TheMathGame::doSubIteration()
 {
+	void runBulletList();
+}
+
+void TheMathGame::runBulletList(){
+	
+	for (list<Bullet*>::const_iterator iterator = bulletList.cbegin() , end = bulletList.cend(); iterator != end; ++iterator) {
+		
+
+
+	}
 
 }
 
@@ -162,7 +173,7 @@ void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 
 	ScreenObject * obj = NULL;
 
-	switch (p.getdirection())
+	switch (p.getDirection())
 	{
 	case Direction::LEFT: 
 		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
@@ -219,7 +230,7 @@ void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 
 //this function clears the current player placment, and if there is an object in the
 //players way, and prints the player in the new position.
-void TheMathGame::clearAndMove(Player & p, const Point & toMove, ScreenObject * obj)
+void TheMathGame::clearAndMove(MovingScreenObject & p, const Point & toMove, ScreenObject * obj)
 {
 	
 	if (obj != NULL)// if there is an object in the movment position
@@ -243,7 +254,7 @@ void TheMathGame::CheckSolution(Equation eq, const ScreenObject * obj, Player & 
 		p.WrongSolution();
 }
 
-Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, const Player & p)
+Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, Player & p)
 {
 
 	//gets a player and keystoke, 
@@ -260,7 +271,11 @@ Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, const Playe
 		case 'd':
 			return Direction::RIGHT;
 		case 'x':
-			return Direction::DOWN;
+			return Direction::DOWN;		
+		case 'z':
+			Bullet * t = new Bullet(p.GetPosition(), p.getDirection());
+			AddNewBullet(t);
+			return p.getDirection;
 		default: // we should not get here
 			break;
 		}
@@ -277,6 +292,10 @@ Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, const Playe
 			return Direction::RIGHT;
 		case 'm':
 			return Direction::DOWN;
+		case 'n':
+			Bullet * t = new Bullet(p.GetPosition(), p.getDirection());
+			AddNewBullet(t);
+			return p.getDirection;
 		default: // we should not get here
 			break;
 		}
@@ -285,11 +304,9 @@ Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, const Playe
 }
 
 //this function manages the next move of the player, loops around the screen
-Point TheMathGame::GetPointToMove(const Player & p)
+Point TheMathGame::GetPointToMove(const MovingScreenObject & p)
 {
-	
-
-	switch (p.getdirection())
+	switch (p.getDirection())
 	{
 	case Direction::LEFT:
 		if (p.GetPosition().getX() == 0) // check if the player is going to move outside of the screen limit
@@ -326,7 +343,6 @@ void TheMathGame::DrawEquations()const
 {
 	equation1.Draw();
 	equation2.Draw();
-
 }
 
 //this function will retrun a color for the screen text based on the current level. each level we will replace the screen color

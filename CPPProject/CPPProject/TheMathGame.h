@@ -19,6 +19,7 @@
 #include "Player.h"
 #include "color.h"
 #include "Screen.h"
+#include "Bullet.h"
 
 const unsigned int MAX_TURNS_PER_LEVEL = 1500;
 
@@ -32,17 +33,22 @@ class TheMathGame : public ISpecificGame
 	Equation equation1, equation2;
 	Player player1, player2;
 	Screen * currentScreen;
+	list<Bullet*> bulletList;
 
 	void PrintScores()const;// this function prints the game/level stats (scores, lives,current level and current turn), refreshes each time there is a change
 	void EndTurn(); //this function handles all end of turn events.
 	void keyStrokeManager(const list<char>& keyHits); //this function will handle the players keystorkes and change theier direction accordingly
 	void PlayerMovment(const Point & toMove, Player & p, Equation & eq);// this function manages the player movment
-	void clearAndMove(Player & p, const Point & toMove, ScreenObject * obj);//halper function to Player movment
+	void clearAndMove(MovingScreenObject & p, const Point & toMove, ScreenObject * obj);//halper function to Player movment
 	void CheckSolution(Equation eq, const ScreenObject * obj, Player & p);//checks if the player found a valid solution or not and acts accordingly
 	void DrawEquations()const;//draws the 2 equations to the screen
-	Point GetPointToMove(const Player & p);//get the point the player needs to move to according to his direction
-	Direction::value MapKeyToDirection(const char & keyHit, const Player & p);//helper function to keyStrokeManager
+	Point GetPointToMove(const MovingScreenObject & p);//get the point the player needs to move to according to his direction
+	Direction::value MapKeyToDirection(const char & keyHit, Player & p);//helper function to keyStrokeManager
 	Color GetColorForText()const; //this function will retrun a color for the screen text based on the current level. each level we will replace the screen color
+	
+	void RemoveBullet(Bullet *b){ bulletList.remove(b); }
+	void AddNewBullet(Bullet *b){ bulletList.push_front(b); }
+	void runBulletList();
 
 public:
 

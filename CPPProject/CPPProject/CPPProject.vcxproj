@@ -84,6 +84,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="io_utils.h" />
     <ClInclude Include="ISpecificGame.h" />
+    <ClInclude Include="MovingScreenObject.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="ScreenObject.h" />
     <ClInclude Include="SolutionPossibility.h" />

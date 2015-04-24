@@ -13,6 +13,7 @@
 #define _SCREEN_OBJECT_H_
 
 #include "Point.h"
+
 class ScreenObject
 {
 
