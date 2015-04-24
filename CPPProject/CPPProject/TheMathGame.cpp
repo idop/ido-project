@@ -115,9 +115,19 @@ void TheMathGame::doSubIteration()
 
 void TheMathGame::runBulletList(){
 	
-	for (list<Bullet*>::const_iterator iterator = bulletList.cbegin() , end = bulletList.cend(); iterator != end; ++iterator) {
-		Bullet const& t = *iterator;
-		Point toMove = GetPointToMove(iterator->);
+	for (list<Bullet*>::const_iterator itr = bulletList.cbegin() , end = bulletList.cend(); itr != end; ++itr) {
+		
+		Point toMove = GetPointToMove(**itr);
+		ScreenObject * obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
+		if (obj == NULL)
+			clearAndMove(**itr, toMove, NULL);
+		else{
+			if (obj->Type == 'p')
+			{
+
+			}
+
+		}
 	}
 
 }
