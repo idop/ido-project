@@ -16,7 +16,7 @@
 // ----           --------                -----------------
 // In the file itself, add above each change/addition a remark saying: "NEW CODE EX2, author=<name>, date=<YYYY-MM-DD>"
 // and close it at the end with a remark saying "END of NEW CODE EX2" 
-//
+//2014-04-10     Ido Perry And Alex Odesser Removed Black Color From enum 
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -25,7 +25,8 @@
 
 enum Color
 {
-	BLACK=0,
+	//NEW CODE EX 1 2014-04-10     Ido Perry And Alex Odesser Removed Black Color From enum 
+	//BLACK=0, we dont want black color
 	BLUE=1,
 	GREEN=2,
 	CYAN=3,
@@ -41,6 +42,7 @@ enum Color
 	LIGHTMAGENTA=13,
 	YELLOW=14,
 	WHITE=15
+	//END of NEW CODE EX1
 };
 
 #endif

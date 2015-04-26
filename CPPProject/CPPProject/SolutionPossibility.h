@@ -24,11 +24,11 @@ class SolutionPosabilty :public ScreenObject
 	const Point position;
 public:
 	SolutionPosabilty(const unsigned int & num, const Point & p) :data(num), position(p){}
-	virtual char Type()const{ return 'n'; } // we will have 2 types for the first EX 'p' for player and  n - number for possible solution
-	virtual void Draw()const ;
-	virtual void Clear()const ;
-	virtual Point GetPosition()const { return position; }
-	virtual unsigned int GetData()const { return data;}
-	virtual unsigned int GetLength()const{ return NumDigits(data); }
+	virtual char Type()const{ return 'n'; } // inherited  from the Screenobject class , returns the type of the screen object in this case n for  the number of the solution posabillity
+	virtual void Draw()const ;//inherited  from the Screenobject class draws solution posabillity
+	virtual void Clear()const ; //inherited  from the Screenobject class, removes the solution posabillity form the screen
+	virtual Point GetPosition()const { return position; } //inherited  from the Screenobject class, returns the current position of the first number of solution posabillity
+	virtual unsigned int GetData()const { return data;} //inherited  from the Screenobject class . returns the date of the solution posabillity
+	virtual unsigned int GetLength()const{ return NumDigits(data); } // inherited  from the Screenobject class, returns the length(number of digits) of the solution posabillity symobl
 };
 #endif

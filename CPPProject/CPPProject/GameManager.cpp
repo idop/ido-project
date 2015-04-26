@@ -17,7 +17,6 @@
 // ----           --------                -----------------
 // In the file itself, add above each change/addition a remark saying: "NEW CODE EX1, author=<name>, date=<YYYY-MM-DD>"
 // and close it at the end with a remark saying "END of NEW CODE EX1" 
-//2015-03-25	 Ido Perry	And Alex Odesser			 change main menu text color to Lightgreen
 //2015-04-10	 Ido Perry	And Alex Odesser			 removed the end level notification from this object and moved it to the TheMathGame object
 //2015-04-10	 Ido Perry	And Alex Odesser			 changed ISoecificGame function start level to send the current level to the game
 //2015-04-10     Ido Perry  And Alex Odesser             handle all main manu option
@@ -40,8 +39,6 @@ using namespace std;
 char GameManager::mainMenu()const
 {
 	// TODO: you may want to improve the menu appearance
-	//NEW CODE EX1, author=Ido Perry date=2015-03-25
-	setTextColor(LIGHTGREEN); //END of NEW CODE EX1
 	cout << "1. instructions" << endl;
 	cout << "2. play game" << endl;
 	cout << "3. start from a specific level" << endl;
@@ -266,20 +263,26 @@ void GameManager::PrintInsturctions()
 {
 	clear_screen();
 	cout << "Welcome to the amazing math Game." << endl;
-	cout << "This is a two player consle game. with 20 levels" << endl;
-	cout << "Player 1: will start at the left of the screen and is represented by the char @." << endl;
-	cout << "Player 2: will start at the right of the screen and is represented by the char #." << endl;
-	cout << "on the start of the level an equation will be generted to each player." << endl;
-	cout << "Player 1 equation will be shown at the top left of the screen and player 2 equation will be shown at the top right of the screen." << endl;
-	cout << "Each equation will hide one of its numbers and the player will need to solve the equation in order to finish the level." << endl;
-	cout << "Possible solution to 1 of the equation will be placed randomly on the screen every other turn." << endl;
-	cout << "The players will be in constent movment. and they will move tile each turn." << endl;
-	cout << "player 1 movment controls  are : a - left, w - up, d - right , x - down " << endl;
-	cout << "player 2 movment controls  are : j - left, i - up, l - right , m - down " << endl;
+	cout << "This is a two player console game with 20 levels" << endl;
+	cout << "Player 1: starts at the left of the screen and is represented by the char @." << endl;
+	cout << "Player 2: starts at the right of the screen and is represented by the char #." << endl;
+	cout << "on the start of the level an equation will be generated to each player." << endl;
+	cout << "Player 1 equation will be shown at the top left of the screen" << endl;
+	cout << "and player 2 equation will be shown at the top right of the screen." << endl; 
+	cout << "Each equation will hide one of its numbers and the player" << endl;
+	cout << "will need to solve the equation in order to finish the level." << endl;
+	cout << "Possible solution to 1 of the equatiosn will be placed" << endl;
+	cout << "randomly on the screen every other turn." << endl; 
+	cout << "The players will be in constant movement, they will move tile each turn." << endl;
+	cout << "player 1 movement controls  are : a - left, w - up, d - right , x - down " << endl;
+	cout << "player 2 movement controls  are : j - left, i - up, l - right , m - down " << endl;
 	cout << "Each Player starts the level with 3 lives." << endl;
-	cout << "the players will try to move to a solution. If a player got the right number his score will increase by 1 and the level will end." << endl;
-	cout << "However wrong solution will cause the player to lose a live and when the lives reach 0 the player will be thrown out of the currnet level." << endl;
+	cout << "the players will try to move to a solution. If a player got the right number " << endl;
+	cout << "his score will increase by 1 and the level will end." << endl;
+	cout << "However wrong solution will cause the player to lose a live and when" << endl;
+	cout << "the lives reach 0 the player will be thrown out of the current level." << endl;
 	cout << "Have Fun!!!!!!!!!" << endl << endl;
-	cout << "press any key to return to main manu" << endl;
+	cout << "press any key to return to main menu" << endl;
+
 }
 //END of NEW CODE EX1

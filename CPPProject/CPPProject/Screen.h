@@ -26,12 +26,12 @@ class Screen
 
 public:
 	Screen();
-	ScreenObject * GetScreenObject(const int & x, const int & y)const{ return screen[x][y]; }
-	void CleanScreen(); // when level is done
-	void DrawScrean()const; 
-	void SetPositionForScreenObject(ScreenObject *object);
-	void ClearScreenObject(ScreenObject *object);
-	void CreateNewSolutionPosability(const unsigned int & currentLevel);
+	ScreenObject * GetScreenObject(const int & x, const int & y)const{ return screen[x][y]; } // returns a screen object in a spesific point (x,y)
+	void CleanScreen(); // when level is done sets all the pointers to null and free the moemory of all dynamic alolocated objects
+	void DrawScrean()const; // draws the dyemic part of the screen from (0,3) to (79,23)
+	void SetPositionForScreenObject(ScreenObject *object); // set the all the relevant positions in the matrix to point to a specific screenobject
+	void ClearScreenObject(ScreenObject *object); // removes a spesific screenobject from the matrix (frees memoery when needed)
+	void CreateNewSolutionPosability(const unsigned int & currentLevel); // dynamicly creates a new solution posability and places it on the screen
 };
 
 #endif

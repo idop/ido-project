@@ -41,6 +41,7 @@ class TheMathGame : public ISpecificGame
 	Player player1, player2;
 	Screen * currentScreen;
 	Direction::value MapKeyToDirection(const char & keyHit, const Player & p);
+	Color GetColorForText()const;
 
 public:
 

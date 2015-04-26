@@ -24,6 +24,7 @@ void TheMathGame::startLevel(unsigned int level)
 	clear_screen();
 	levelDone = false;
 	currentLevel = level;
+	setTextColor(GetColorForText());
 	currentTurn = 0;
 	equation1.Init(currentLevel);
 	equation2.Init(currentLevel);
@@ -315,8 +316,17 @@ Point TheMathGame::GetPointToMove(const Player & p)
 	}
 }
 
+
+//this funciton will draw the 2 equations
 void TheMathGame::DrawEquations()const
 {
 	equation1.Draw();
 	equation2.Draw();
+
+}
+
+//this function will retrun a color for the screen text based on the current level. each level we will replace the screen color
+Color TheMathGame::GetColorForText()const
+{
+	return (Color)((currentLevel % 15) + 1); // we have 15 colors from 1 to 15
 }

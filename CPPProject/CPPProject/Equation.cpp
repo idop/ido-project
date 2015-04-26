@@ -43,7 +43,7 @@ char Equation::RandomSign()
 //this function will get the sign populated for the eqation and return the eqation part we will hide from the player
 char Equation::RandomPartToHide(const char & sign)
 {
-	if (sign == '+' || sign == '*')
+	if (sign == '+' || sign == '*') // sign is +  or * so we want to hide  the left or the right number
 	{
 		if (rand() % 2 == 0)
 			return 'l';
@@ -52,7 +52,7 @@ char Equation::RandomPartToHide(const char & sign)
 	}
 	else
 	{
-		if (rand() % 2 == 0)
+		if (rand() % 2 == 0) // sign is -  or / so we want to hide  the solution or the right number
 			return 's';
 		else
 			return 'r';
@@ -66,29 +66,29 @@ void Equation::Init(const unsigned int & gameLevel)
 
 	switch (sign)
 	{
-	case '+':
+	case '+': // sign is + therfore we will generate 2 radnnom numbers  for the left and right numbers and calculate the solution
 		leftNumber = rand() % (gameLevel + 10) + 1;
 		rightNumber = rand() % (gameLevel + 10) + 1;
 		solution = leftNumber + rightNumber;
-		partToHide = RandomPartToHide('+');
+		partToHide = RandomPartToHide('+'); // sign is + so we want to hide  the left or the right number
 		break;
-	case '-':
+	case '-':// sign is - therfore we will generate 2 radnnom numbers  for the right and and solution numbers and calculate the left number
 		rightNumber = rand() % (gameLevel + 10) + 1;
 		solution = rand() % (gameLevel + 10) + 1;
 		leftNumber = solution + rightNumber;
-		partToHide = RandomPartToHide('-');
+		partToHide = RandomPartToHide('-'); // sign is - so we want to hide  the solution or the right number
 		break;
-	case '*':
+	case '*': // sign is * therfore we will generate 2 randnom numbers  for the left and right numbers and calculate the solution
 		leftNumber = rand() % (gameLevel + 10) + 1;
 		rightNumber = rand() % (gameLevel + 10) + 1;
 		solution = leftNumber * rightNumber;
-		partToHide = RandomPartToHide('*');
+		partToHide = RandomPartToHide('*');// sign is * so we want to hide  the left or the right number
 		break;
-	case '/':
+	case '/':// sign is / therfore we will generate 2 radnnom numbers  for the right and and solution numbers and calculate the left number
 		rightNumber = rand() % (gameLevel + 10) + 1;
 		solution = rand() % (gameLevel + 10) + 1;
 		leftNumber = solution * rightNumber;
-		partToHide = RandomPartToHide('/');
+		partToHide = RandomPartToHide('/');// sign is - so we want to hide  the solution or the right number
 		break;
 	default:  // we should not get here
 		break;
@@ -115,18 +115,19 @@ void Equation::Draw()const
 		break;
 	}
 }
-	
+
+//this fucntion get a number and check if it solves the equations
 bool Equation::IsSolution(const unsigned int & num)
 {
 	switch (partToHide)
 	{
-	case 'l':
+	case 'l': // left part is hidden so check the left number
 		return (num == leftNumber);
 		break;
-	case 'r':
+	case 'r':// right part is hidden so check the right number
 		return (num == rightNumber);
 		break;
-	case 's':
+	case 's':// solution part is hidden so check the solution number
 		return (num == solution);
 		break;
 	default:  // we should not get here
