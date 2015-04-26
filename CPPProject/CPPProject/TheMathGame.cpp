@@ -70,6 +70,9 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 	EndTurn();
 }
 
+
+//this function handles all end of turn events. checks if a player lost all his lives 
+//or if the level should end (player solved the equation, all players lost thier lives , the level passed the possible max turn
 void TheMathGame::EndTurn()
 {
 	++currentTurn;
@@ -109,9 +112,8 @@ void TheMathGame::doSubIteration()
 
 }
 
-void TheMathGame::PrintScores(){
-
-	//prints the stats menu, refreshes each time there is a change
+// this function prints the game/level stats (scores, lives,current level and current turn), refreshes each time there is a change
+void TheMathGame::PrintScores()const{
 
 	gotoxy(0, 0);
 	cout << "Score: " << player1.getScore();
@@ -127,7 +129,7 @@ void TheMathGame::PrintScores(){
 	cout << "Current Turn " << currentTurn;
 
 }
-
+//this function will handle the players keystorkes and change theier direction accordingly
 void TheMathGame::keyStrokeManager(const list<char> & keyHits){
 
 	char keyHit;
@@ -139,71 +141,72 @@ void TheMathGame::keyStrokeManager(const list<char> & keyHits){
 		keyHit = *itr;
 		//checks if the current keystroke valid for one of the players
 		//if so, changes the direction of the correct player
-		if (!player1KbHit && player1.GetKeyboardKeys().find(keyHit) != string::npos)
+		if (!player1KbHit && player1.GetKeyboardKeys().find(keyHit) != string::npos)// player 1 hit a valid key
 		{
-			player1KbHit = true;
-			player1.SetDirection(MapKeyToDirection(keyHit, player1));
+			player1KbHit = true; // player 1 already hit a key this turn
+			player1.SetDirection(MapKeyToDirection(keyHit, player1)); // set the direction of player 1 accoridng to the key he hit
 		}
-		if (!player2KbHit && player2.GetKeyboardKeys().find(keyHit) != string::npos)
+		if (!player2KbHit && player2.GetKeyboardKeys().find(keyHit) != string::npos) // player2 hit a valid key
 		{
-			player2KbHit = true;
-			player2.SetDirection(MapKeyToDirection(keyHit, player2));
+			player2KbHit = true; // player 2 already hit a key this turn
+			player2.SetDirection(MapKeyToDirection(keyHit, player2));// set the direction of player 2 accoridng to the key he hit
 		}
 	}
 }
 
-void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq){
 
-	//manages the player movment, checks if the next move will hit another player
-	//or will hit a number, and handles all the possiblties
+// this function manages the player movment, checks if the next move will hit another player
+//or will hit a number, and handles all the possiblties
+void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
+{
 
 	ScreenObject * obj = NULL;
 
 	switch (p.getdirection())
 	{
-	case Direction::LEFT:
+	case Direction::LEFT: 
 		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
-		// check the new place to move  is free
+		// check if the new place to move  is free
 		if (obj == NULL)
 			clearAndMove(p, toMove, NULL);
 		// check if we are going to eat a solution number
 		else if (obj->Type() == 'n') {
 			{
-				CheckSolution(eq, obj, p);
-				clearAndMove(p, toMove, obj);
+				CheckSolution(eq, obj, p); // check  if its a valid solution
+				clearAndMove(p, toMove, obj); // clear the old object and move the player there instead
 			}
 			//else the object we are colliding with is the other player which means we will not move
 			break;
 	case Direction::UP:
 		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
-		// check the new place to move  is free
+		// check if  the new place to move  is free
 		if (obj == NULL)
 			clearAndMove(p, toMove, NULL);
 		// check if we are going to eat a solution number
 		else if (obj->Type() == 'n') {
-			CheckSolution(eq, obj, p);
-			clearAndMove(p, toMove, obj);
+			CheckSolution(eq, obj, p); // check  if its a valid solution
+			clearAndMove(p, toMove, obj);// clear the old object and move the player there instead
 		}
 		//else the bject we are colliding with is the other player there for we will not move
 		break;
 	case Direction::RIGHT:
 		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
-		if (obj == NULL) // check the new place to move  is free
+		if (obj == NULL) // check  if the new place to move  is free
 			clearAndMove(p, toMove, NULL);
 		else if (obj->Type() == 'n') // check if we are going to eat a solution number
 		{
-			CheckSolution(eq, obj, p);
-			clearAndMove(p, toMove, obj);
+			CheckSolution(eq, obj, p);// check  if its a valid solution
+			clearAndMove(p, toMove, obj); // clear the old object and move the player there instead
 		}//else the bject we are colliding with is the other player there for we will not move
 		break;
 	case Direction::DOWN:
 		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
-		if (obj == NULL) // check the new place to move  is free
+		if (obj == NULL) // check if the new place to move  is free
 			clearAndMove(p, toMove, NULL);
 		else if (obj->Type() == 'n') // check if we are going to eat a solution number
 		{
-			CheckSolution(eq, obj, p);
-			clearAndMove(p, toMove, obj);
+			CheckSolution(eq, obj, p); // check  if its a valid solution
+			clearAndMove(p, toMove, obj);// clear the old object and move the player there instead
 		}
 		//else the bject we are colliding with is the other player there for we will not move
 		break;
@@ -214,25 +217,25 @@ void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 	}
 }
 
-void TheMathGame::clearAndMove(Player & p, const Point & toMove, ScreenObject * obj){
+//this function clears the current player placment, and if there is an object in the
+//players way, and prints the player in the new position.
+void TheMathGame::clearAndMove(Player & p, const Point & toMove, ScreenObject * obj)
+{
 	
-	//clears the current player placment, and if there is an object in the
-	//players way, and prints the player in the new position.
+	if (obj != NULL)// if there is an object in the movment position
+		currentScreen->ClearScreenObject(obj); // clear the object
 
-	if (obj != NULL)
-		currentScreen->ClearScreenObject(obj);
-
-	currentScreen->ClearScreenObject(&p);
-	p.Move(toMove);
-	p.Draw();
-	currentScreen->SetPositionForScreenObject(&p);
+	currentScreen->ClearScreenObject(&p); // clear the old player position formt he screen
+	p.Move(toMove); // move the player
+	p.Draw(); // darw the player
+	currentScreen->SetPositionForScreenObject(&p); // set the player position in the screen
 }
 
+//this function gets the equation of the player, and the object the player gathered
+//and changes the player data if the solution was correct 
+//or did he used one of his lives.
 void TheMathGame::CheckSolution(Equation eq, const ScreenObject * obj, Player & p){
 
-	//gets the equation of the player, and the object the player gathered
-	//and changes the player data if the solution was correct 
-	//or did he used one of his lives.
 
 	if (eq.IsSolution(obj->GetData()))
 		p.FoundTheSolution();
@@ -281,35 +284,36 @@ Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, const Playe
 	}
 }
 
+//this function manages the next move of the player, loops around the screen
 Point TheMathGame::GetPointToMove(const Player & p)
 {
-	//manages the next move of the player, loops around the screen
+	
 
 	switch (p.getdirection())
 	{
 	case Direction::LEFT:
 		if (p.GetPosition().getX() == 0) // check if the player is going to move outside of the screen limit
-			return Point(79, p.GetPosition().getY());
+			return Point(79, p.GetPosition().getY());// direction is left so go to the right limit of the screen
 		else
-			return Point(p.GetPosition().getX() - 1, p.GetPosition().getY());
+			return Point(p.GetPosition().getX() - 1, p.GetPosition().getY()); // direction is left to reduce 1 from x
 		break;
 	case Direction::RIGHT:
 		if (p.GetPosition().getX() == 79) // check if the player is going to move outside of the screen limit
-			return Point(0, p.GetPosition().getY());
+			return Point(0, p.GetPosition().getY());// direction is  right so go to the left limit of the screen
 		else
-			return Point(p.GetPosition().getX() + 1, p.GetPosition().getY());
+			return Point(p.GetPosition().getX() + 1, p.GetPosition().getY());// direction is right so add 1 to x
 		break;
 	case Direction::UP:
 		if (p.GetPosition().getY() == 3) // check if the player is going to move outside of the screen limit
-			return Point(p.GetPosition().getX(), 23);
+			return Point(p.GetPosition().getX(), 23);// direction is up to go to the bottom of the screen
 		else
-			return Point(p.GetPosition().getX(), p.GetPosition().getY() - 1);
+			return Point(p.GetPosition().getX(), p.GetPosition().getY() - 1); // direction is up so subtruct 1 from y
 		break;
 	case Direction::DOWN:
 		if (p.GetPosition().getY() == 23) // check if the player is going to move outside of the screen limit
-			return Point(p.GetPosition().getX(), 3);
+			return Point(p.GetPosition().getX(), 3);// direction is down so go to the upper limit of the game screen
 		else
-			return Point(p.GetPosition().getX(), p.GetPosition().getY() + 1);
+			return Point(p.GetPosition().getX(), p.GetPosition().getY() + 1); // direction is down so add 1 to y
 		break;
 	default:// we should not get here
 		break;
