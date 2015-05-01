@@ -46,8 +46,8 @@ class TheMathGame : public ISpecificGame
 	Direction::value MapKeyToDirection(const char & keyHit, Player & p);//helper function to keyStrokeManager
 	Color GetColorForText()const; //this function will retrun a color for the screen text based on the current level. each level we will replace the screen color
 	
-	void RemoveBullet(Bullet *b){ bulletList.remove(b); }
-	void AddNewBullet(Bullet *b){ bulletList.push_front(b); }
+	void RemoveBullet(Bullet * b){ bulletList.remove(b); }
+	void AddNewBullet(Bullet * b){ bulletList.push_front(b); }
 	void runBulletList();
 
 public:

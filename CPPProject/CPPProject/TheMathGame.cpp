@@ -105,29 +105,28 @@ void TheMathGame::EndTurn()
 		Sleep(1500); 
 	}
 
+	bulletList.clear();
 	PrintScores();
 }
 
 void TheMathGame::doSubIteration()
 {
-	void runBulletList();
+	runBulletList();
 }
 
 void TheMathGame::runBulletList(){
-	
-	for (list<Bullet*>::const_iterator itr = bulletList.cbegin() , end = bulletList.cend(); itr != end; ++itr) {
-		
-		Point toMove = GetPointToMove(**itr);
-		ScreenObject * obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
-		if (obj == NULL)
-			clearAndMove(**itr, toMove, NULL);
-		else{
-			if (obj->Type == 'p')
-			{
-
+	for (list<Bullet*>::const_iterator itr = bulletList.cbegin(), end = bulletList.cend(); itr != end; ++itr) {
+		Bullet tempBullet = **itr;
+		if (tempBullet.isFlying() == true){
+			Point toMove = GetPointToMove(tempBullet);
+			ScreenObject * obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
+			if (obj == NULL)
+				clearAndMove(tempBullet, toMove, NULL);
+			else if (obj->Type == 'n'){
 			}
-
 		}
+		else
+			RemoveBullet(*itr);
 	}
 
 }
@@ -147,7 +146,10 @@ void TheMathGame::PrintScores()const{
 	cout << "Level " << currentLevel;
 	gotoxy(35, 1);
 	cout << "Current Turn " << currentTurn;
-
+	gotoxy(0,1);
+	cout << "Bullets " << player1.getNumberOfBullets();
+	gotoxy(70, 1);
+	cout << "Bullets " << player2.getNumberOfBullets();
 }
 //this function will handle the players keystorkes and change theier direction accordingly
 void TheMathGame::keyStrokeManager(const list<char> & keyHits){
@@ -191,10 +193,10 @@ void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 			clearAndMove(p, toMove, NULL);
 		// check if we are going to eat a solution number
 		else if (obj->Type() == 'n') {
-			{
+			
 				CheckSolution(eq, obj, p); // check  if its a valid solution
 				clearAndMove(p, toMove, obj); // clear the old object and move the player there instead
-			}
+			
 			//else the object we are colliding with is the other player which means we will not move
 			break;
 	case Direction::UP:
@@ -284,10 +286,12 @@ Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, Player & p)
 		case 'z':
 			if (p.getNumberOfBullets() > 0){
 				p.removeBullet();
-				Bullet * t = new Bullet(p.GetPosition(), p.getDirection());
+				Bullet * t = new Bullet(GetPointToMove(p), p.getDirection());
 				AddNewBullet(t);
+				t->Draw();
+				currentScreen->SetPositionForScreenObject(t);
 			}
-			return p.getDirection;
+			break;
 		default: // we should not get here
 			break;
 		}
@@ -307,15 +311,18 @@ Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, Player & p)
 		case 'n':
 			if (p.getNumberOfBullets() > 0){
 				p.removeBullet();
-				Bullet * t = new Bullet(p.GetPosition(), p.getDirection());
+				Bullet * t = new Bullet(GetPointToMove(p), p.getDirection());
 				AddNewBullet(t);
+				t->Draw();
+				currentScreen->SetPositionForScreenObject(t);
 			}
-			return p.getDirection;
+			break;
 		default: // we should not get here
 			break;
 		}
 		break;
 	}
+	return p.getDirection();
 }
 
 //this function manages the next move of the player, loops around the screen
