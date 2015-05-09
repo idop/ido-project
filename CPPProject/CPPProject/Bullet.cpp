@@ -13,5 +13,4 @@ void Bullet::Clear()const
 {
 	gotoxy(position.getX(), position.getY());
 	cout << ' ';
-
 }
