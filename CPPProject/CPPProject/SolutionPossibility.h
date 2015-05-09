@@ -30,6 +30,6 @@ public:
 	virtual Point GetPosition()const { return position; } //inherited  from the Screenobject class, returns the current position of the first number of solution posabillity
 	virtual unsigned int GetData()const { return data;} //inherited  from the Screenobject class . returns the date of the solution posabillity
 	virtual unsigned int GetLength()const{ return NumDigits(data); } // inherited  from the Screenobject class, returns the length(number of digits) of the solution posabillity symobl
-	virtual void GotHit(){ Clear(); }
+	virtual void GotHit(){  }
 };
 #endif

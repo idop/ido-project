@@ -59,7 +59,7 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 
 	// get keystrokes from keyhist list untill the end of the list or until both players got a valid keystroke
 	keyStrokeManager(keyHits); 
-
+	runBulletList();
 	//for each player we echeck if he has lives to keep on playing , and manage his movment.
 	if (player1.getNumberOfLives() != 0)
 		PlayerMovment(GetPointToMove(player1), player1, equation1);
@@ -105,7 +105,7 @@ void TheMathGame::EndTurn()
 		Sleep(1500); 
 	}
 
-	bulletList.clear();
+	//bulletList.clear();
 	PrintScores();
 }
 
@@ -116,19 +116,24 @@ void TheMathGame::doSubIteration()
 
 void TheMathGame::runBulletList(){
 	for (list<Bullet*>::const_iterator itr = bulletList.cbegin(), end = bulletList.cend(); itr != end; ++itr) {
-		Bullet tempBullet = **itr;
-		if (tempBullet.isFlying() == true){
-			Point toMove = GetPointToMove(tempBullet);
+		Bullet *tempBullet = *itr;
+		if (tempBullet->getIsLive()){
+			Point toMove = GetPointToMove(*tempBullet);
 			ScreenObject * obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
 			if (obj == NULL)
-				clearAndMove(tempBullet, toMove, NULL);
-			else if (obj->Type() == 'n'){
+				clearAndMove(*tempBullet, toMove, NULL);
+			else{
+				currentScreen->ClearScreenObject(obj);
+				currentScreen->ClearScreenObject(tempBullet);
+				obj->GotHit();
+				tempBullet->GotHit();
+				//RemoveBullet(tempBullet);
 			}
 		}
-		else
-			RemoveBullet(*itr);
+//		else{
+			//RemoveBullet(tempBullet);
+	//	}
 	}
-
 }
 
 // this function prints the game/level stats (scores, lives,current level and current turn), refreshes each time there is a change
@@ -286,10 +291,7 @@ Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, Player & p)
 		case 'z':
 			if (p.getNumberOfBullets() > 0){
 				p.removeBullet();
-				Bullet * t = new Bullet(GetPointToMove(p), p.getDirection());
-				AddNewBullet(t);
-				t->Draw();
-				currentScreen->SetPositionForScreenObject(t);
+				AddNewBullet(Bullet(GetPointToMove(p), p.getDirection()));
 			}
 			break;
 		default: // we should not get here
@@ -311,10 +313,7 @@ Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, Player & p)
 		case 'n':
 			if (p.getNumberOfBullets() > 0){
 				p.removeBullet();
-				Bullet * t = new Bullet(GetPointToMove(p), p.getDirection());
-				AddNewBullet(t);
-				t->Draw();
-				currentScreen->SetPositionForScreenObject(t);
+				AddNewBullet(Bullet(GetPointToMove(p), p.getDirection()));
 			}
 			break;
 		default: // we should not get here
@@ -371,4 +370,11 @@ void TheMathGame::DrawEquations()const
 Color TheMathGame::GetColorForText()const
 {
 	return (Color)((currentLevel % 15) + 1); // we have 15 colors from 1 to 15
+}
+
+void TheMathGame::AddNewBullet(Bullet b){
+	Bullet * newB = new Bullet(b.GetPosition(), b.getDirection());
+	bulletList.push_front(newB);
+	currentScreen->SetPositionForScreenObject(newB);
+	newB->Draw();
 }
