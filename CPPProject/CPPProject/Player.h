@@ -55,6 +55,8 @@ public:
 	bool IsSolutionFound()const{ return playerSolved; }  // checks if the player solved the his equation. used to end the level
 	int getNumberOfBullets()const{ return bullets; }
 	void removeBullet(){ bullets--; }
+	void resetNumberOfBullets(){ bullets = NUM_OF_BULLETS; }
+
 
 	virtual Direction::value getDirection()const { return direction; }; // gets the player current directions
 	virtual void Move(const Point & p){ position = p; } // moves the player to a new position p according to this direction

@@ -34,9 +34,15 @@ void TheMathGame::startLevel(unsigned int level)
 	player1.Draw();
 	player2.SetToStart(P2_DEFULT_POSITION, P2_DEFULT_DIRECTION);
 	player2.Draw();
+	player1.resetNumberOfBullets();
+	player2.resetNumberOfBullets();
+	bulletList.clear();
 
 	PrintScores();
 
+	if (currentScreen != NULL){
+		delete currentScreen;
+	}
 	currentScreen = new Screen;
 	currentScreen->SetPositionForScreenObject(&player1);
 	currentScreen->SetPositionForScreenObject(&player2);
@@ -122,17 +128,18 @@ void TheMathGame::runBulletList(){
 			ScreenObject * obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
 			if (obj == NULL)
 				clearAndMove(*tempBullet, toMove, NULL);
+			else if (obj->Type() == 'n'){
+				currentScreen->ClearScreenObject(obj);
+				currentScreen->ClearScreenObject(tempBullet);
+				tempBullet->GotHit();
+			}
 			else{
 				currentScreen->ClearScreenObject(obj);
 				currentScreen->ClearScreenObject(tempBullet);
 				obj->GotHit();
 				tempBullet->GotHit();
-				//RemoveBullet(tempBullet);
 			}
 		}
-//		else{
-			//RemoveBullet(tempBullet);
-	//	}
 	}
 }
 
@@ -151,9 +158,9 @@ void TheMathGame::PrintScores()const{
 	cout << "Level " << currentLevel;
 	gotoxy(35, 1);
 	cout << "Current Turn " << currentTurn;
-	gotoxy(0,1);
+	gotoxy(10,2);
 	cout << "Bullets " << player1.getNumberOfBullets();
-	gotoxy(70, 1);
+	gotoxy(60, 2);
 	cout << "Bullets " << player2.getNumberOfBullets();
 }
 //this function will handle the players keystorkes and change theier direction accordingly

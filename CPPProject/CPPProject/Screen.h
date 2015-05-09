@@ -25,6 +25,7 @@ class Screen
 	ScreenObject * screen[SCREEN_WIDTH][SCREEN_HIGHT];
 
 public:
+	~Screen(){ CleanScreen(); }
 	Screen();
 	ScreenObject * GetScreenObject(const int & x, const int & y)const{ return screen[x][y]; } // returns a screen object in a spesific point (x,y)
 	void CleanScreen(); // when level is done sets all the pointers to null and free the moemory of all dynamic alolocated objects
