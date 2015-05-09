@@ -122,7 +122,7 @@ void TheMathGame::runBulletList(){
 			ScreenObject * obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
 			if (obj == NULL)
 				clearAndMove(tempBullet, toMove, NULL);
-			else if (obj->Type == 'n'){
+			else if (obj->Type() == 'n'){
 			}
 		}
 		else
