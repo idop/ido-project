@@ -142,9 +142,6 @@ SolutionType Equation::IsSolutionAfterLevel20(const unsigned int & num)
 			break;
 		}
 		res = SolvePartialEquation(SecondHiddenNumberIndex);
-
-		if (res == PARTIAL_SOLUTION)
-			operandsArray[firstHiddenNumberIndex] = num;
 	}
 	else
 	{
@@ -166,6 +163,10 @@ SolutionType Equation::IsSolutionAfterLevel20(const unsigned int & num)
 			break;
 		}
 	}
+	
+	if (res == PARTIAL_SOLUTION)
+		operandsArray[firstHiddenNumberIndex] = num;
+
 	return res;
 }
 
@@ -198,13 +199,13 @@ void Equation::DrawUntilLevel20()const
 	switch (partToHide)
 	{
 	case 'l':
-		cout << "??" << operator1 << num2 << '=' << solution;
+		cout << "?" << operator1 << num2 << '=' << solution;
 		break;
 	case 'r':
-		cout << num1 << operator1 << "??" << '=' << solution;
+		cout << num1 << operator1 << "?" << '=' << solution;
 		break;
 	case 's':
-		cout << num1 << operator1 << num2 << '=' << "??";
+		cout << num1 << operator1 << num2 << '=' << "?";
 		break;
 	default:  // we should not get here
 		break;
@@ -248,7 +249,7 @@ void Equation::DrawAfterLevel20()const
 		if (operandsArray[i] != -1)
 			cout << operandsArray[i];
 		else
-			cout << "??";
+			cout << "?";
 		if (i < 3)
 			cout << ' ' << operatorsArray[i] << ' ';
 	}

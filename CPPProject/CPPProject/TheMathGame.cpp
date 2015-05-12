@@ -271,7 +271,7 @@ void TheMathGame::clearAndMove(MovingScreenObject & p, const Point & toMove, Scr
 //this function gets the equation of the player, and the object the player gathered
 //and changes the player data if the solution was correct 
 //or did he used one of his lives.
-void TheMathGame::CheckSolution(Equation eq, const ScreenObject * obj, Player & p)
+void TheMathGame::CheckSolution(Equation & eq, const ScreenObject * obj, Player & p)
 {
 	SolutionType currentSolutionStatus = eq.IsSolution(obj->GetData());
 
