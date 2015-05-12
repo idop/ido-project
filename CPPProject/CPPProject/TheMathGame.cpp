@@ -393,6 +393,7 @@ void TheMathGame::AddNewBullet(Bullet b){
 	newB->Draw();
 }
 
+//helper methood adds new bullet to players ( will be called every 200 turns)
 void TheMathGame::AddBulletToPlayers()
 {
 	player1.AddBullet();

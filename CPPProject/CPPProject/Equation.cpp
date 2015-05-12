@@ -217,12 +217,10 @@ void Equation::operandsArrayHideMinium(){
 
 	int min, index;
 
-	//TODO MAKE THE CODE WORK WITHOUT THIS 
 	operandsArray[0] = num1;
 	operandsArray[1] = num2;
 	operandsArray[2] = num3;
 	operandsArray[3] = solution;
-	//END TODO
 
 	for (int t = 0; t < 2; t++)
 	{
