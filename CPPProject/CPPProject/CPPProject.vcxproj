@@ -88,6 +88,7 @@
     <ClInclude Include="Screen.h" />
     <ClInclude Include="ScreenObject.h" />
     <ClInclude Include="SolutionPossibility.h" />
+    <ClInclude Include="SolutionType.h" />
     <ClInclude Include="TheMathGame.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Point.h" />

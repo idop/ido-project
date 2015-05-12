@@ -54,7 +54,8 @@ public:
 	void WrongSolution(){ numberOfLives--; } // removes 1a live from the player 
 	bool IsSolutionFound()const{ return playerSolved; }  // checks if the player solved the his equation. used to end the level
 	int getNumberOfBullets()const{ return bullets; }
-	void removeBullet(){ bullets--; }
+	void removeBullet(){ --bullets; }
+	void AddBullet(){ ++bullets; }
 	void resetNumberOfBullets(){ bullets = NUM_OF_BULLETS; }
 
 

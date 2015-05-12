@@ -35,7 +35,7 @@
 using namespace std;
 
 //NEW CODE EX1!! 2015-04-10	 Ido Perry And Alex Odessr added const for max level
-const unsigned int MAX_LEVEL = 20;
+const unsigned int MAX_LEVEL = 40;
 //END of NEW CODE EX1
 
 // this is a base class for actual games

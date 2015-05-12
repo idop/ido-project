@@ -60,6 +60,9 @@
     <ClInclude Include="MovingScreenObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SolutionType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">

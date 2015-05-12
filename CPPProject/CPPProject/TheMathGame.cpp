@@ -63,6 +63,9 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 	if (currentTurn % 2 == 0)
 		currentScreen->CreateNewSolutionPosability(currentLevel);
 
+	if (currentTurn % 200 == 0 && currentTurn != 0)
+		AddBulletToPlayers();
+
 	// get keystrokes from keyhist list untill the end of the list or until both players got a valid keystroke
 	keyStrokeManager(keyHits); 
 	runBulletList();
@@ -148,19 +151,19 @@ void TheMathGame::PrintScores()const{
 
 	gotoxy(0, 0);
 	cout << "Score: " << player1.getScore();
-	gotoxy(70, 0);
+	gotoxy(55, 0);
 	cout << "Score: " << player2.getScore();
 	gotoxy(0, 2);
 	cout << "Lives: " << player1.getNumberOfLives();
-	gotoxy(70, 2);
+	gotoxy(55, 2);
 	cout << "Lives: " << player2.getNumberOfLives();
-	gotoxy(35, 0);
+	gotoxy(30, 0);
 	cout << "Level " << currentLevel;
-	gotoxy(35, 1);
+	gotoxy(30, 1);
 	cout << "Current Turn " << currentTurn;
 	gotoxy(10,2);
 	cout << "Bullets " << player1.getNumberOfBullets();
-	gotoxy(60, 2);
+	gotoxy(65, 2);
 	cout << "Bullets " << player2.getNumberOfBullets();
 }
 //this function will handle the players keystorkes and change theier direction accordingly
@@ -268,13 +271,16 @@ void TheMathGame::clearAndMove(MovingScreenObject & p, const Point & toMove, Scr
 //this function gets the equation of the player, and the object the player gathered
 //and changes the player data if the solution was correct 
 //or did he used one of his lives.
-void TheMathGame::CheckSolution(Equation eq, const ScreenObject * obj, Player & p){
+void TheMathGame::CheckSolution(Equation eq, const ScreenObject * obj, Player & p)
+{
+	SolutionType currentSolutionStatus = eq.IsSolution(obj->GetData());
 
-
-	if (eq.IsSolution(obj->GetData()))
-		p.FoundTheSolution();
-	else
-		p.WrongSolution();
+	if (currentSolutionStatus == IS_SOLUTION)
+		p.FoundTheSolution(); // solution found!!!
+	else if (currentSolutionStatus == WRONG_SOLUTION)
+		p.WrongSolution(); // Not the solution better luck next time!!!
+	else if (currentSolutionStatus == PARTIAL_SOLUTION)
+		eq.Draw(); // the solution posability is ok so draw the upadated equation
 }
 
 Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, Player & p)
@@ -384,4 +390,10 @@ void TheMathGame::AddNewBullet(Bullet b){
 	bulletList.push_front(newB);
 	currentScreen->SetPositionForScreenObject(newB);
 	newB->Draw();
+}
+
+void TheMathGame::AddBulletToPlayers()
+{
+	player1.AddBullet();
+	player2.AddBullet();
 }

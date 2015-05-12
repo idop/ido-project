@@ -49,6 +49,7 @@ class TheMathGame : public ISpecificGame
 	//void RemoveBullet(Bullet * b){ delete b; }
 	void AddNewBullet(Bullet b);
 	void runBulletList();
+	void AddBulletToPlayers();
 
 public:
 
