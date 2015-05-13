@@ -1,3 +1,14 @@
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// Bullet.h
+// -------------
+// This class creates the the bullets that the players will be able to shoot while playing.
+// This class will handle the oporation of the bullet
+//
+// Author: Ido Perry and Alex Odesser
+// First version: 2015-05-03
+//
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 #ifndef _BULLET_H
 #define _BULLET_H
 
