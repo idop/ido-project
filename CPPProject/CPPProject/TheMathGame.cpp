@@ -108,6 +108,7 @@ void TheMathGame::EndTurn()
 	{
 		currentScreen->CleanScreen(); // free memory of all dyemic objects
 		delete currentScreen; // free the memory for the screen object
+		currentScreen = NULL;
 		levelDone = true;
 		clear_screen();
 		gotoxy(20, 12);

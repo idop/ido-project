@@ -120,9 +120,9 @@ SolutionType Equation::IsSolutionAfterLevel20(const unsigned int & num)
 
 		int firstHiddenNumberIndex = 0, SecondHiddenNumberIndex = MAX_NUMBER_OF_OPERANDS - 1;
 		// get the hidden parts
-		while (operandsArray[firstHiddenNumberIndex] != -1)
+		while (operandsArray[firstHiddenNumberIndex] != 0)
 			++firstHiddenNumberIndex;
-		while (operandsArray[SecondHiddenNumberIndex] != -1)
+		while (operandsArray[SecondHiddenNumberIndex] != 0)
 			--SecondHiddenNumberIndex;
 	if (firstHiddenNumberIndex != SecondHiddenNumberIndex)
 		{
@@ -212,29 +212,43 @@ void Equation::DrawUntilLevel20()const
 	}
 }
 
+// hides the 2 minimum numbers in the array
+void Equation::operandsArrayHideMinium()
+{
 
-void Equation::operandsArrayHideMinium(){
+	int min1 , min2, index1=0 , index2=1;
 
-	int min, index;
-
-	operandsArray[0] = num1;
-	operandsArray[1] = num2;
+	operandsArray[0] = min1 =  num1;
+	operandsArray[1] = min2 = num2;
 	operandsArray[2] = num3;
 	operandsArray[3] = solution;
 
-	for (int t = 0; t < 2; t++)
-	{
-		min = 10001;
-		index = 0;
-		for (int i = 0; i < MAX_NUMBER_OF_OPERANDS; i++)
+
+		for (int i = 2; i < MAX_NUMBER_OF_OPERANDS; i++)
 		{
-			if (operandsArray[i] < min && operandsArray[i] > -1){
-				min = operandsArray[i];
-				index = i;
+			if (operandsArray[i] < min1) // curent number is less then min1
+				if (min1 > min2) // curent number is less then min1 and min2 and min 1 is greater then min2
+				{
+				min1 = operandsArray[i];
+				index1 = i;
+				}
+				else // curent number is less then min1 and min2 and min1 is less then min2
+				{
+					min2 = min1;
+					index2 = index1;
+					min1 = operandsArray[i];
+					index1 = i;
+				}
+			else if (operandsArray[i] < min2) // current number is greater then min 1 but less then min2
+			{
+				min2 = operandsArray[i];
+				index2 = i;
 			}
+			else{} // do nothing
 		}
-		operandsArray[index] = -1;
-	}
+
+		operandsArray[index1] = 0; // 0 will point out the hidden number
+		operandsArray[index2] = 0; // 0 will point out the hidden number
 }
 
 // helper methood to draw. Draws the equation for levels maxRandomNumber and above
@@ -244,7 +258,7 @@ void Equation::DrawAfterLevel20()const
 
 	for (int i = 0; i < MAX_NUMBER_OF_OPERANDS; i++)
 	{
-		if (operandsArray[i] != -1)
+		if (operandsArray[i] != 0)
 			cout << operandsArray[i];
 		else
 			cout << "?";

@@ -31,7 +31,7 @@ class Equation
 {
 	unsigned int currentLevel;
 	unsigned int  num1, num2, num3, solution;
-	int operandsArray[MAX_NUMBER_OF_OPERANDS]; // for display only
+	unsigned int operandsArray[MAX_NUMBER_OF_OPERANDS]; // for display only
 	Point position;
 	char operator1;
 	char  partToHide; // partTohide will store the part that the eqations will hide : 'l' - left , 'r' - right, 's' - solution
