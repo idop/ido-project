@@ -1,3 +1,13 @@
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// MovingScreenObject.h
+// -------------
+// This class inherits from screenObject, and is the father class for all moving objects.
+// All Objects that should have the ability to move in the game will inherit this calss
+//
+// Author: Ido Perry and Alex Odesser
+// First version: 2015-05-03
+//
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 #ifndef _MOVINGSCREENOBJECT_T_
 #define _MOVINGSCREENOBJECT_T_
 
