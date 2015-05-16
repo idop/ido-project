@@ -39,6 +39,7 @@ using namespace std;
 //==========================
 int main(){
 	srand((unsigned int)time(NULL));
+	//test
 	clear_screen();
 	hideCursor();
 	GameManager(TheMathGame(), 200, 2).run();
