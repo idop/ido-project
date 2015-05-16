@@ -40,3 +40,26 @@ void Player::Clear()const
 	cout << ' ';
 }
 
+void Player::GotHit(){
+	
+	WrongSolution();
+	
+	switch (getPlayerChar())
+	{
+	case P1_DEFULT_CHAR:
+		SetDirection(P1_DEFULT_DIRECTION);
+		Move(P1_DEFULT_POSITION);
+		Draw();
+		break;
+	case P2_DEFULT_CHAR:
+		SetDirection(P2_DEFULT_DIRECTION);
+		Move(P2_DEFULT_POSITION);
+		Draw();
+		break;
+	default: // we should not get here
+		break;
+	}
+	
+
+}
+
