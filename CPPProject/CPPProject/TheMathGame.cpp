@@ -14,6 +14,10 @@
 #include "io_utils.h"
 
 
+bool TheMathGame::hasNextLevel () const {
+	return (currentLevel < maxLevel);
+}
+
 void TheMathGame::startLevel(unsigned int level)
 {
 	/* 
@@ -34,13 +38,13 @@ void TheMathGame::startLevel(unsigned int level)
 	player1.Draw();
 	player2.SetToStart(P2_DEFULT_POSITION, P2_DEFULT_DIRECTION);
 	player2.Draw();
-	player1.resetNumberOfBullets();
-	player2.resetNumberOfBullets();
+	player1.ResetNumberOfBullets();
+	player2.ResetNumberOfBullets();
 	bulletList.clear();
 
 	PrintScores();
 
-	if (currentScreen != NULL){
+	if (currentScreen != nullptr){
 		delete currentScreen;
 	}
 	currentScreen = new Screen;
@@ -70,10 +74,10 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 	keyStrokeManager(keyHits); 
 	runBulletList();
 	//for each player we echeck if he has lives to keep on playing , and manage his movment.
-	if (player1.getNumberOfLives() != 0)
+	if (player1.GetNumberOfLives() != 0)
 		PlayerMovment(GetPointToMove(player1), player1, equation1);
 
-	if (player2.getNumberOfLives() != 0)
+	if (player2.GetNumberOfLives() != 0)
 		PlayerMovment(GetPointToMove(player2), player2, equation2);
 	
 	//initialazing the end turn checks
@@ -87,28 +91,28 @@ void TheMathGame::EndTurn()
 {
 	++currentTurn;
 
-	if (player1.getNumberOfLives() == 0) // if player1 lost all  of his lives  remove him from the screen
+	if (player1.GetNumberOfLives() == 0) // if player1 lost all  of his lives  remove him from the screen
 		currentScreen->ClearScreenObject(&player1);
 	
-	if (player2.getNumberOfLives() == 0) // if player2 lost all  of his lives  remove him from the screen
+	if (player2.GetNumberOfLives() == 0) // if player2 lost all  of his lives  remove him from the screen
 		currentScreen->ClearScreenObject(&player2);
 	
 	if (player1.IsSolutionFound() || player2.IsSolutionFound()) // one of the players solved the equations
 	{
 		currentScreen->CleanScreen(); // free memory of all dyemic objects
 		delete currentScreen;// free the memory for the screen object
-		currentScreen = NULL;
+		currentScreen = nullptr;
 		levelDone = true;
 		clear_screen();
 		gotoxy(35, 12);
 		cout << "Well Done";
 		Sleep(1500); 
 	}
-	else if (currentTurn >= MAX_TURNS_PER_LEVEL || (player2.getNumberOfLives() == 0 && player1.getNumberOfLives() == 0)) // current screen reached its max turns limit
+	else if (currentTurn >= MAX_TURNS_PER_LEVEL || (player2.GetNumberOfLives() == 0 && player1.GetNumberOfLives() == 0)) // current screen reached its max turns limit
 	{
 		currentScreen->CleanScreen(); // free memory of all dyemic objects
 		delete currentScreen; // free the memory for the screen object
-		currentScreen = NULL;
+		currentScreen = nullptr;
 		levelDone = true;
 		clear_screen();
 		gotoxy(20, 12);
@@ -128,21 +132,21 @@ void TheMathGame::doSubIteration()
 void TheMathGame::runBulletList(){
 	for (list<Bullet*>::const_iterator itr = bulletList.cbegin(), end = bulletList.cend(); itr != end; ++itr) {
 		Bullet *tempBullet = *itr;
-		if (tempBullet->getIsLive()){
+		if (tempBullet->GetIsLive()){
 			Point toMove = GetPointToMove(*tempBullet);
 			ScreenObject * obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
-			if (obj == NULL)
+			if (obj == nullptr)
 				clearAndMove(*tempBullet, toMove, NULL);
-			else if (obj->Type() == 'n'){
+			else if (obj->GetType() == 'n'){
 				currentScreen->ClearScreenObject(obj);
 				currentScreen->ClearScreenObject(tempBullet);
-				tempBullet->GotHit();
+				tempBullet->Collesion();
 			}
 			else{
 				currentScreen->ClearScreenObject(obj);
 				currentScreen->ClearScreenObject(tempBullet);
-				obj->GotHit();
-				tempBullet->GotHit();
+				obj->Collesion();
+				tempBullet->Collesion();
 			}
 		}
 	}
@@ -152,21 +156,21 @@ void TheMathGame::runBulletList(){
 void TheMathGame::PrintScores()const{
 
 	gotoxy(0, 0);
-	cout << "Score: " << player1.getScore();
+	cout << "Score: " << player1.GetScore();
 	gotoxy(55, 0);
-	cout << "Score: " << player2.getScore();
+	cout << "Score: " << player2.GetScore();
 	gotoxy(0, 2);
-	cout << "Lives: " << player1.getNumberOfLives();
+	cout << "Lives: " << player1.GetNumberOfLives();
 	gotoxy(55, 2);
-	cout << "Lives: " << player2.getNumberOfLives();
+	cout << "Lives: " << player2.GetNumberOfLives();
 	gotoxy(30, 0);
 	cout << "Level " << currentLevel;
 	gotoxy(30, 1);
 	cout << "Current Turn " << currentTurn;
 	gotoxy(10,2);
-	cout << "Bullets " << player1.getNumberOfBullets();
+	cout << "Bullets " << player1.GetNumberOfBullets();
 	gotoxy(65, 2);
-	cout << "Bullets " << player2.getNumberOfBullets();
+	cout << "Bullets " << player2.GetNumberOfBullets();
 }
 //this function will handle the players keystorkes and change theier direction accordingly
 void TheMathGame::keyStrokeManager(const list<char> & keyHits){
@@ -199,17 +203,17 @@ void TheMathGame::keyStrokeManager(const list<char> & keyHits){
 void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 {
 
-	ScreenObject * obj = NULL;
+	ScreenObject * obj = nullptr;
 
-	switch (p.getDirection())
+	switch (p.GetDirection())
 	{
 	case Direction::LEFT: 
 		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
 		// check if the new place to move  is free
-		if (obj == NULL)
-			clearAndMove(p, toMove, NULL);
+		if (obj == nullptr)
+			clearAndMove(p, toMove, nullptr);
 		// check if we are going to eat a solution number
-		else if (obj->Type() == 'n') {
+		else if (obj->GetType() == 'n') {
 			
 				CheckSolution(eq, obj, p); // check  if its a valid solution
 				clearAndMove(p, toMove, obj); // clear the old object and move the player there instead
@@ -219,10 +223,10 @@ void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 	case Direction::UP:
 		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
 		// check if  the new place to move  is free
-		if (obj == NULL)
-			clearAndMove(p, toMove, NULL);
+		if (obj == nullptr)
+			clearAndMove(p, toMove, nullptr);
 		// check if we are going to eat a solution number
-		else if (obj->Type() == 'n') {
+		else if (obj->GetType() == 'n') {
 			CheckSolution(eq, obj, p); // check  if its a valid solution
 			clearAndMove(p, toMove, obj);// clear the old object and move the player there instead
 		}
@@ -230,9 +234,9 @@ void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 		break;
 	case Direction::RIGHT:
 		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
-		if (obj == NULL) // check  if the new place to move  is free
-			clearAndMove(p, toMove, NULL);
-		else if (obj->Type() == 'n') // check if we are going to eat a solution number
+		if (obj == nullptr) // check  if the new place to move  is free
+			clearAndMove(p, toMove, nullptr);
+		else if (obj->GetType() == 'n') // check if we are going to eat a solution number
 		{
 			CheckSolution(eq, obj, p);// check  if its a valid solution
 			clearAndMove(p, toMove, obj); // clear the old object and move the player there instead
@@ -240,9 +244,9 @@ void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 		break;
 	case Direction::DOWN:
 		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
-		if (obj == NULL) // check if the new place to move  is free
-			clearAndMove(p, toMove, NULL);
-		else if (obj->Type() == 'n') // check if we are going to eat a solution number
+		if (obj == nullptr) // check if the new place to move  is free
+			clearAndMove(p, toMove, nullptr);
+		else if (obj->GetType() == 'n') // check if we are going to eat a solution number
 		{
 			CheckSolution(eq, obj, p); // check  if its a valid solution
 			clearAndMove(p, toMove, obj);// clear the old object and move the player there instead
@@ -261,12 +265,11 @@ void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 void TheMathGame::clearAndMove(MovingScreenObject & p, const Point & toMove, ScreenObject * obj)
 {
 	
-	if (obj != NULL)// if there is an object in the movment position
+	if (obj != nullptr)// if there is an object in the movment position
 		currentScreen->ClearScreenObject(obj); // clear the object
 
 	currentScreen->ClearScreenObject(&p); // clear the old player position formt he screen
 	p.Move(toMove); // move the player
-	p.Draw(); // darw the player
 	currentScreen->SetPositionForScreenObject(&p); // set the player position in the screen
 }
 
@@ -290,7 +293,7 @@ Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, Player & p)
 
 	//gets a player and keystoke, 
 	//return the direction by mapping the keystroke to the player possibile movments
-	switch (p.getPlayerChar()){
+	switch (p.GetPlayerChar()){
 
 	case '@':
 		switch (keyHit)
@@ -304,9 +307,9 @@ Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, Player & p)
 		case 'x':
 			return Direction::DOWN;		
 		case 'z':
-			if (p.getNumberOfBullets() > 0){
-				p.removeBullet();
-				AddNewBullet(Bullet(GetPointToMove(p), p.getDirection()));
+			if (p.GetNumberOfBullets() > 0){
+				p.RemoveBullet();
+				AddNewBullet(Bullet(GetPointToMove(p), p.GetDirection()));
 			}
 			break;
 		default: // we should not get here
@@ -326,9 +329,9 @@ Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, Player & p)
 		case 'm':
 			return Direction::DOWN;
 		case 'n':
-			if (p.getNumberOfBullets() > 0){
-				p.removeBullet();
-				AddNewBullet(Bullet(GetPointToMove(p), p.getDirection()));
+			if (p.GetNumberOfBullets() > 0){
+				p.RemoveBullet();
+				AddNewBullet(Bullet(GetPointToMove(p), p.GetDirection()));
 			}
 			break;
 		default: // we should not get here
@@ -336,13 +339,13 @@ Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, Player & p)
 		}
 		break;
 	}
-	return p.getDirection();
+	return p.GetDirection();
 }
 
 //this function manages the next move of the player, loops around the screen
 Point TheMathGame::GetPointToMove(const MovingScreenObject & p)
 {
-	switch (p.getDirection())
+	switch (p.GetDirection())
 	{
 	case Direction::LEFT:
 		if (p.GetPosition().getX() == 0) // check if the player is going to move outside of the screen limit
@@ -388,7 +391,7 @@ Color TheMathGame::GetColorForText()const
 }
 
 void TheMathGame::AddNewBullet(Bullet b){
-	Bullet * newB = new Bullet(b.GetPosition(), b.getDirection());
+	Bullet * newB = new Bullet(b.GetPosition(), b.GetDirection());
 	bulletList.push_front(newB);
 	currentScreen->SetPositionForScreenObject(newB);
 	newB->Draw();

@@ -14,12 +14,12 @@ using namespace std;
 
 void Bullet::Draw()const
 {
-	gotoxy(position.getX(), position.getY());
+	gotoxy(GetPosition().getX(), GetPosition().getY());
 	cout << bullet;
 }
 
-void Bullet::Clear()const
-{
-	gotoxy(position.getX(), position.getY());
-	cout << ' ';
-}
+ void Bullet::Move(const Point & p){
+	Clear();
+	SetPosition(p);
+	Draw();
+} // moves the player to a new position p according to this direction

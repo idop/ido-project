@@ -23,6 +23,15 @@ unsigned int NumDigits(unsigned int num)
 		return 2;
 }
 
+unsigned SolutionPosabilty::GetData() const
+{
+	return data;
+}
+
+unsigned SolutionPosabilty::GetLength() const
+{
+	return NumDigits(data);
+}
 
 void SolutionPosabilty::Draw()const
 {
