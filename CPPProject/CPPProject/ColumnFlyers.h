@@ -3,6 +3,8 @@
 class ColumnFlyers :
 	public Creature
 {
+	const char sign = '$';
+
 public:
 	ColumnFlyers(const Point & p, const Direction::value & d) : Creature(p, d, '$'){};
 	virtual ~ColumnFlyers();

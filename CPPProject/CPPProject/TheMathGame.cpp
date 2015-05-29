@@ -14,7 +14,8 @@
 #include "io_utils.h"
 
 
-bool TheMathGame::hasNextLevel () const {
+bool TheMathGame::hasNextLevel() const
+{
 	return (currentLevel < maxLevel);
 }
 
@@ -34,7 +35,7 @@ void TheMathGame::startLevel(unsigned int level)
 	equation1.Init(currentLevel);
 	equation2.Init(currentLevel);
 	DrawEquations();
-	player1.SetToStart(P1_DEFULT_POSITION , P1_DEFULT_DIRECTION);
+	player1.SetToStart(P1_DEFULT_POSITION, P1_DEFULT_DIRECTION);
 	player1.Draw();
 	player2.SetToStart(P2_DEFULT_POSITION, P2_DEFULT_DIRECTION);
 	player2.Draw();
@@ -44,7 +45,8 @@ void TheMathGame::startLevel(unsigned int level)
 
 	PrintScores();
 
-	if (currentScreen != nullptr){
+	if (currentScreen != nullptr)
+	{
 		delete currentScreen;
 	}
 	currentScreen = new Screen;
@@ -129,12 +131,15 @@ void TheMathGame::doSubIteration()
 	runBulletList();
 }
 
-void TheMathGame::runBulletList(){
-	for (list<Bullet*>::const_iterator itr = bulletList.cbegin(), end = bulletList.cend(); itr != end; ++itr) {
-		Bullet *tempBullet = *itr;
-		if (tempBullet->GetIsLive()){
+void TheMathGame::runBulletList()
+{
+	for (list<Bullet*>::const_iterator itr = bulletList.cbegin(), end = bulletList.cend(); itr != end; ++itr)
+	{
+		Bullet* tempBullet = *itr;
+		if (tempBullet->getIsLive())
+		{
 			Point toMove = GetPointToMove(*tempBullet);
-			ScreenObject * obj = currentScreen->GetScreenObject(toMove.GetX(), toMove.GetY());
+			ScreenObject* obj = currentScreen->GetScreenObject(toMove.GetX(), toMove.GetY());
 			if (obj == nullptr)
 				clearAndMove(*tempBullet, toMove, NULL);
 			else if (obj->IsSolutionPossibility()){
@@ -142,7 +147,8 @@ void TheMathGame::runBulletList(){
 				currentScreen->ClearScreenObject(tempBullet);
 				tempBullet->Collesion();
 			}
-			else{
+			else
+			{
 				currentScreen->ClearScreenObject(obj);
 				currentScreen->ClearScreenObject(tempBullet);
 				obj->Collesion();
@@ -153,8 +159,8 @@ void TheMathGame::runBulletList(){
 }
 
 // this function prints the game/level stats (scores, lives,current level and current turn), refreshes each time there is a change
-void TheMathGame::PrintScores()const{
-
+void TheMathGame::PrintScores()const
+{
 	gotoxy(0, 0);
 	cout << "Score: " << player1.GetScore();
 	gotoxy(55, 0);
@@ -167,19 +173,20 @@ void TheMathGame::PrintScores()const{
 	cout << "Level " << currentLevel;
 	gotoxy(30, 1);
 	cout << "Current Turn " << currentTurn;
-	gotoxy(10,2);
+	gotoxy(10, 2);
 	cout << "Bullets " << player1.GetNumberOfBullets();
 	gotoxy(65, 2);
 	cout << "Bullets " << player2.GetNumberOfBullets();
 }
-//this function will handle the players keystorkes and change theier direction accordingly
-void TheMathGame::keyStrokeManager(const list<char> & keyHits){
 
+//this function will handle the players keystorkes and change theier direction accordingly
+void TheMathGame::keyStrokeManager(const list<char>& keyHits)
+{
 	char keyHit;
 	bool player1KbHit, player2KbHit;
 	player1KbHit = player2KbHit = false;
 	//iteration on the key hits from both players, 
-	for (list < char >::const_iterator itr = keyHits.cbegin(); itr != keyHits.cend() && (!player1KbHit || !player2KbHit); ++itr)
+	for (list<char>::const_iterator itr = keyHits.cbegin(); itr != keyHits.cend() && (!player1KbHit || !player2KbHit); ++itr)
 	{
 		keyHit = *itr;
 		//checks if the current keystroke valid for one of the players
@@ -200,11 +207,10 @@ void TheMathGame::keyStrokeManager(const list<char> & keyHits){
 
 // this function manages the player movment, checks if the next move will hit another player
 //or will hit a number, and handles all the possiblties
-void TheMathGame::PlayerMovment(Player & p, Equation & eq)
+void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 {
 
 	ScreenObject * obj = nullptr;
-	Point toMove = p.getPointToMove();
 
 	switch (p.GetDirection())
 	{
@@ -214,7 +220,7 @@ void TheMathGame::PlayerMovment(Player & p, Equation & eq)
 		if (obj == nullptr)
 			clearAndMove(p, toMove, nullptr);
 		// check if we are going to eat a solution number
-		else if (obj->IsSolutionPossibility()) {
+		else if (obj->GetType() == 'n') {
 			
 				CheckSolution(eq, obj, p); // check  if its a valid solution
 				clearAndMove(p, toMove, obj); // clear the old object and move the player there instead
@@ -227,7 +233,7 @@ void TheMathGame::PlayerMovment(Player & p, Equation & eq)
 		if (obj == nullptr)
 			clearAndMove(p, toMove, nullptr);
 		// check if we are going to eat a solution number
-		else if (obj->IsSolutionPossibility()) {
+		else if (obj->GetType() == 'n') {
 			CheckSolution(eq, obj, p); // check  if its a valid solution
 			clearAndMove(p, toMove, obj);// clear the old object and move the player there instead
 		}
@@ -257,15 +263,13 @@ void TheMathGame::PlayerMovment(Player & p, Equation & eq)
 	default: // we should not get here
 		break;
 		}
-
 	}
 }
 
 //this function clears the current player placment, and if there is an object in the
 //players way, and prints the player in the new position.
-void TheMathGame::clearAndMove(MovingScreenObject & p, const Point & toMove, ScreenObject * obj)
+void TheMathGame::clearAndMove(MovingScreenObject& p, const Point& toMove, ScreenObject* obj)
 {
-	
 	if (obj != nullptr)// if there is an object in the movment position
 		currentScreen->ClearScreenObject(obj); // clear the object
 
@@ -277,7 +281,7 @@ void TheMathGame::clearAndMove(MovingScreenObject & p, const Point & toMove, Scr
 //this function gets the equation of the player, and the object the player gathered
 //and changes the player data if the solution was correct 
 //or did he used one of his lives.
-void TheMathGame::CheckSolution(Equation & eq, const ScreenObject * obj, Player & p)
+void TheMathGame::CheckSolution(Equation& eq, const ScreenObject* obj, Player& p)
 {
 	SolutionType currentSolutionStatus = eq.IsSolution(obj->GetData());
 
@@ -289,13 +293,12 @@ void TheMathGame::CheckSolution(Equation & eq, const ScreenObject * obj, Player 
 		eq.Draw(); // the solution posability is ok so draw the upadated equation
 }
 
-Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, Player & p)
+Direction::value TheMathGame::MapKeyToDirection(const char& keyHit, Player& p)
 {
-
 	//gets a player and keystoke, 
 	//return the direction by mapping the keystroke to the player possibile movments
-	switch (p.GetPlayerChar()){
-
+	switch (p.GetPlayerChar())
+	{
 	case '@':
 		switch (keyHit)
 		{
@@ -308,7 +311,8 @@ Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, Player & p)
 		case 'x':
 			return Direction::DOWN;		
 		case 'z':
-			if (p.GetNumberOfBullets() > 0){
+			if (p.GetNumberOfBullets() > 0)
+			{
 				p.RemoveBullet();
 				AddNewBullet(Bullet(GetPointToMove(p), p.GetDirection()));
 			}
@@ -330,7 +334,8 @@ Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, Player & p)
 		case 'm':
 			return Direction::DOWN;
 		case 'n':
-			if (p.GetNumberOfBullets() > 0){
+			if (p.GetNumberOfBullets() > 0)
+			{
 				p.RemoveBullet();
 				AddNewBullet(Bullet(GetPointToMove(p), p.GetDirection()));
 			}
@@ -344,7 +349,7 @@ Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, Player & p)
 }
 
 //this function manages the next move of the player, loops around the screen
-Point TheMathGame::GetPointToMove(const MovingScreenObject & p)
+Point TheMathGame::GetPointToMove(const MovingScreenObject& p)
 {
 	return p.GetPosition().GetPointToMoveFromDirection(p.GetDirection()); // TODO CHANGE THIS PART TO FINISH THE NEW LOGIC
 }
@@ -364,8 +369,9 @@ Color TheMathGame::GetColorForText()const
 	return (Color)((currentLevel % 15) + 1); // we have 15 colors from 1 to 15
 }
 
-void TheMathGame::AddNewBullet(Bullet b){
-	Bullet * newB = new Bullet(b.GetPosition(), b.GetDirection());
+void TheMathGame::AddNewBullet(Bullet b)
+{
+	Bullet* newB = new Bullet(b.GetPosition(), b.GetDirection());
 	bulletList.push_front(newB);
 	currentScreen->SetPositionForScreenObject(newB);
 	newB->Draw();
