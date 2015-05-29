@@ -207,9 +207,9 @@ void TheMathGame::keyStrokeManager(const list<char>& keyHits)
 
 // this function manages the player movment, checks if the next move will hit another player
 //or will hit a number, and handles all the possiblties
-void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
+void TheMathGame::PlayerMovment(Player & p, Equation & eq)
 {
-
+	Point toMove = p.getPointToMove();
 	ScreenObject * obj = nullptr;
 
 	switch (p.GetDirection())
@@ -220,7 +220,7 @@ void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 		if (obj == nullptr)
 			clearAndMove(p, toMove, nullptr);
 		// check if we are going to eat a solution number
-		else if (obj->GetType() == 'n') {
+		else if (obj->IsSolutionPossibility()) {
 			
 				CheckSolution(eq, obj, p); // check  if its a valid solution
 				clearAndMove(p, toMove, obj); // clear the old object and move the player there instead
@@ -233,7 +233,7 @@ void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 		if (obj == nullptr)
 			clearAndMove(p, toMove, nullptr);
 		// check if we are going to eat a solution number
-		else if (obj->GetType() == 'n') {
+		else if (obj->IsSolutionPossibility()) {
 			CheckSolution(eq, obj, p); // check  if its a valid solution
 			clearAndMove(p, toMove, obj);// clear the old object and move the player there instead
 		}

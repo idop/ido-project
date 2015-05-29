@@ -42,7 +42,7 @@ class Equation
 	//this function will get the sign populated for the eqation and return the eqation part we will hide from the player
 	char RandomPartToHide(const char & op);
 	bool IsInteger(const int & dividend, const int & divisor)const{ return (dividend % divisor == 0); } // this function checks if a caluclated solution posability is an integer
-	bool IsSolutionInRange(const int & num)const{ return (num > 0 && num <= (currentLevel + 10)); };
+	bool IsSolutionInRange(const unsigned int & num)const{ return (num > 0 && num <= (currentLevel + 10)); };
 	void DrawUntilLevel20()const; // helper methood to draw. Draws the equation for levels 1-20
 	void DrawAfterLevel20()const; // helper methood to draw. Draws the equation for levels  21+
 	void CreateEquationUntilLevel20();  //helper methood to init, creates an equation for levels 1-20
