@@ -34,16 +34,16 @@ class TheMathGame : public ISpecificGame
 	Screen* currentScreen;
 	list<Bullet*> bulletList;
 
-	void PrintScores()const;// this function prints the game/level stats (scores, lives,current level and current turn), refreshes each time there is a change
-	void EndTurn(); //this function handles all end of turn events.
-	void keyStrokeManager(const list<char>& keyHits); //this function will handle the players keystorkes and change theier direction accordingly
-	void PlayerMovment(const Point& toMove, Player& p, Equation& eq);// this function manages the player movment
-	void clearAndMove(MovingScreenObject& p, const Point& toMove, ScreenObject* obj);//halper function to Player movment
-	void CheckSolution(Equation& eq, const ScreenObject* obj, Player& p);//checks if the player found a valid solution or not and acts accordingly
-	void DrawEquations()const;//draws the 2 equations to the screen
-	Point GetPointToMove(const MovingScreenObject& p);//get the point the player needs to move to according to his direction
-	Direction::value MapKeyToDirection(const char& keyHit, Player& p);//helper function to keyStrokeManager
-	Color GetColorForText()const; //this function will retrun a color for the screen text based on the current level. each level we will replace the screen color
+	void PrintScores ()const;// this function prints the game/level stats (scores, lives,current level and current turn), refreshes each time there is a change
+	void EndTurn (); //this function handles all end of turn events.
+	void keyStrokeManager ( const list<char> & keyHits ); //this function will handle the players keystorkes and change theier direction accordingly
+	void PlayerMovment ( const Point & toMove , Player & p , Equation & eq );// this function manages the player movment
+	void clearAndMove ( MovingScreenObject & p , const Point & toMove , ScreenObject * obj );//halper function to Player movment
+	void CheckSolution ( Equation & eq , const ScreenObject * obj , Player & p );//checks if the player found a valid solution or not and acts accordingly
+	void DrawEquations ()const;//draws the 2 equations to the screen
+	Point GetPointToMove ( const MovingScreenObject & p );//get the point the player needs to move to according to his direction
+	Direction::value MapKeyToDirection ( const char & keyHit , Player & p );//helper function to keyStrokeManager
+	Color GetColorForText ()const; //this function will retrun a color for the screen text based on the current level. each level we will replace the screen color
 
 	//void RemoveBullet(Bullet * b){ delete b; }
 	void AddNewBullet(Bullet b);
