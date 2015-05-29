@@ -21,7 +21,9 @@ class SolutionPosabilty :public ScreenObject
 	const unsigned int data;
 
 public:
-	SolutionPosabilty(const Point& p, const unsigned int& num) : ScreenObject('n', p), data(num){};
+	SolutionPosabilty(const Point& p, const unsigned int& num) : ScreenObject('n', p), data(num)
+	{
+	};
 
 	virtual void Collesion() override
 	{
@@ -31,7 +33,7 @@ public:
 	//CPP
 	virtual void Draw()const override;//inherited  from the Screenobject class draws solution posabillity
 	virtual void Clear()const override; //inherited  from the Screenobject class, removes the solution posabillity form the screen
-	virtual unsigned int GetLength()const override;	// inherited  from the Screenobject class, returns the length(number of digits) of the solution posabillity symobl
-	virtual unsigned int GetData()const override;	//inherited  from the Screenobject class . returns the date of the solution posabillity
+	virtual unsigned int GetLength()const override; // inherited  from the Screenobject class, returns the length(number of digits) of the solution posabillity symobl
+	virtual unsigned int GetData()const override; //inherited  from the Screenobject class . returns the date of the solution posabillity
 };
 #endif

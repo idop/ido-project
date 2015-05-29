@@ -63,6 +63,18 @@
     <ClInclude Include="SolutionType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Creature.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NumberEaters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RowFlyers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ColumnFlyers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameManager.cpp">
@@ -90,6 +102,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NumberEaters.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RowFlyers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ColumnFlyers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
