@@ -138,7 +138,7 @@ void TheMathGame::runBulletList()
 		Bullet* tempBullet = *itr;
 		if (tempBullet->getIsLive())
 		{
-			Point toMove = GetPointToMove(*tempBullet);
+			Point toMove = tempBullet->getPointToMove();
 			ScreenObject* obj = currentScreen->GetScreenObject(toMove.GetX(), toMove.GetY());
 			if (obj == nullptr)
 				clearAndMove(*tempBullet, toMove, NULL);
@@ -314,7 +314,7 @@ Direction::value TheMathGame::MapKeyToDirection(const char& keyHit, Player& p)
 			if (p.GetNumberOfBullets() > 0)
 			{
 				p.RemoveBullet();
-				AddNewBullet(Bullet(GetPointToMove(p), p.GetDirection()));
+				AddNewBullet(Bullet(p.getPointToMove(), p.GetDirection()));
 			}
 			break;
 		default: // we should not get here
@@ -337,7 +337,7 @@ Direction::value TheMathGame::MapKeyToDirection(const char& keyHit, Player& p)
 			if (p.GetNumberOfBullets() > 0)
 			{
 				p.RemoveBullet();
-				AddNewBullet(Bullet(GetPointToMove(p), p.GetDirection()));
+				AddNewBullet(Bullet(p.getPointToMove(), p.GetDirection()));
 			}
 			break;
 		default: // we should not get here
@@ -346,12 +346,6 @@ Direction::value TheMathGame::MapKeyToDirection(const char& keyHit, Player& p)
 		break;
 	}
 	return p.GetDirection();
-}
-
-//this function manages the next move of the player, loops around the screen
-Point TheMathGame::GetPointToMove(const MovingScreenObject& p)
-{
-	return p.GetPosition().GetPointToMoveFromDirection(p.GetDirection()); // TODO CHANGE THIS PART TO FINISH THE NEW LOGIC
 }
 
 

@@ -195,7 +195,7 @@ char ChangeOperatorSide(const char &op)
 // helper methood to draw. Draws the equation for levels 1-20
 void Equation::DrawUntilLevel20()const
 {
-	gotoxy(position.getX(), position.GetY());
+	gotoxy(position.GetX(), position.GetY());
 	switch (partToHide)
 	{
 	case 'l':
@@ -254,7 +254,7 @@ void Equation::operandsArrayHideMinium()
 // helper methood to draw. Draws the equation for levels maxRandomNumber and above
 void Equation::DrawAfterLevel20()const
 {
-	gotoxy(position.getX(), position.GetY());
+	gotoxy(position.GetX(), position.GetY());
 
 	for (int i = 0; i < MAX_NUMBER_OF_OPERANDS; i++)
 	{
