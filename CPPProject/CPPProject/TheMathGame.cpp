@@ -137,7 +137,7 @@ void TheMathGame::runBulletList(){
 			ScreenObject * obj = currentScreen->GetScreenObject(toMove.GetX(), toMove.GetY());
 			if (obj == nullptr)
 				clearAndMove(*tempBullet, toMove, NULL);
-			else if (obj->GetType() == 'n'){
+			else if (obj->IsSolutionPossibility()){
 				currentScreen->ClearScreenObject(obj);
 				currentScreen->ClearScreenObject(tempBullet);
 				tempBullet->Collesion();
@@ -213,7 +213,7 @@ void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 		if (obj == nullptr)
 			clearAndMove(p, toMove, nullptr);
 		// check if we are going to eat a solution number
-		else if (obj->GetType() == 'n') {
+		else if (obj->IsSolutionPossibility()) {
 			
 				CheckSolution(eq, obj, p); // check  if its a valid solution
 				clearAndMove(p, toMove, obj); // clear the old object and move the player there instead
@@ -226,7 +226,7 @@ void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 		if (obj == nullptr)
 			clearAndMove(p, toMove, nullptr);
 		// check if we are going to eat a solution number
-		else if (obj->GetType() == 'n') {
+		else if (obj->IsSolutionPossibility()) {
 			CheckSolution(eq, obj, p); // check  if its a valid solution
 			clearAndMove(p, toMove, obj);// clear the old object and move the player there instead
 		}
@@ -236,7 +236,7 @@ void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 		obj = currentScreen->GetScreenObject(toMove.GetX(), toMove.GetY());
 		if (obj == nullptr) // check  if the new place to move  is free
 			clearAndMove(p, toMove, nullptr);
-		else if (obj->GetType() == 'n') // check if we are going to eat a solution number
+		else if (obj->IsSolutionPossibility()) // check if we are going to eat a solution number
 		{
 			CheckSolution(eq, obj, p);// check  if its a valid solution
 			clearAndMove(p, toMove, obj); // clear the old object and move the player there instead
@@ -246,7 +246,7 @@ void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 		obj = currentScreen->GetScreenObject(toMove.GetX(), toMove.GetY());
 		if (obj == nullptr) // check if the new place to move  is free
 			clearAndMove(p, toMove, nullptr);
-		else if (obj->GetType() == 'n') // check if we are going to eat a solution number
+		else if (obj->IsSolutionPossibility()) // check if we are going to eat a solution number
 		{
 			CheckSolution(eq, obj, p); // check  if its a valid solution
 			clearAndMove(p, toMove, obj);// clear the old object and move the player there instead
@@ -351,6 +351,7 @@ Point TheMathGame::GetPointToMove(const MovingScreenObject & p)
 
 //this funciton will draw the 2 equations
 void TheMathGame::DrawEquations()const
+
 {
 	equation1.Draw();
 	equation2.Draw();

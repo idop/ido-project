@@ -30,7 +30,7 @@ void Screen::CleanScreen()
 		{
 			if (screen[i][j] != nullptr)
 			{
-				if (screen[i][j]->GetType() == 'n') // if the current object is a solution Posability object we need to the memory
+				if (screen[i][j]->IsSolutionPossibility()) // if the current object is a solution Posability object we need to the memory
 				{
 					currLength = screen[i][j]->GetLength();
 					delete screen[i][j]; // delete the current object
@@ -79,7 +79,7 @@ void Screen::ClearScreenObject(ScreenObject *object)
 		screen[object->GetPosition().GetX() + i][object->GetPosition().GetY()] = nullptr;
 	}
 	object->Clear();
-	if (object->GetType() == 'n') // if the current object is a solution Posability object we need to free the memory
+	if (object->IsSolutionPossibility()) // if the current object is a solution Posability object we need to free the memory
 		delete object;
 }
 

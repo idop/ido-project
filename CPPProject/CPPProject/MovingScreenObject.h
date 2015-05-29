@@ -23,7 +23,7 @@ class MovingScreenObject : public ScreenObject
 
 public:
 
-	MovingScreenObject(const char& t, const Point& p, const Direction::value& d) : ScreenObject(t, p), direction(d)
+	MovingScreenObject(const Point& p, const Direction::value& d) : ScreenObject(p), direction(d)
 	{
 	};
 

@@ -37,7 +37,7 @@ class Player : public MovingScreenObject {
 	int			 bullets;
 
 public:
-	Player ( const char & ch , const string & str , const Point & p , const Direction::value & d ) : MovingScreenObject ( 'p' , p , d ), playerChar ( ch ), keyboardKeys ( str ), score ( 0 ), playerSolved ( false ), bullets ( NUM_OF_BULLETS ) {
+	Player ( const char & ch , const string & str , const Point & p , const Direction::value & d ) : MovingScreenObject ( p , d ), playerChar ( ch ), keyboardKeys ( str ), score ( 0 ), playerSolved ( false ), bullets ( NUM_OF_BULLETS ) {
 	}; // constract the play with the defult attributes (player char , keyboard commands and starting score
 
 	~Player () {
