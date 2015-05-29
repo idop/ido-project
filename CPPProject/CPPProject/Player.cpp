@@ -33,7 +33,7 @@ void Player::Move(const Point & p){
 
 //this functions draws the player
 void Player::Draw ()const {
-	gotoxy ( GetPosition().getX() , GetPosition().getY() );
+	gotoxy ( GetPosition().GetX() , GetPosition().GetY() );
 	cout << playerChar;
 }
 

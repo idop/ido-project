@@ -134,7 +134,7 @@ void TheMathGame::runBulletList(){
 		Bullet *tempBullet = *itr;
 		if (tempBullet->GetIsLive()){
 			Point toMove = GetPointToMove(*tempBullet);
-			ScreenObject * obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
+			ScreenObject * obj = currentScreen->GetScreenObject(toMove.GetX(), toMove.GetY());
 			if (obj == nullptr)
 				clearAndMove(*tempBullet, toMove, NULL);
 			else if (obj->GetType() == 'n'){
@@ -208,7 +208,7 @@ void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 	switch (p.GetDirection())
 	{
 	case Direction::LEFT: 
-		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
+		obj = currentScreen->GetScreenObject(toMove.GetX(), toMove.GetY());
 		// check if the new place to move  is free
 		if (obj == nullptr)
 			clearAndMove(p, toMove, nullptr);
@@ -221,7 +221,7 @@ void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 			//else the object we are colliding with is the other player which means we will not move
 			break;
 	case Direction::UP:
-		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
+		obj = currentScreen->GetScreenObject(toMove.GetX(), toMove.GetY());
 		// check if  the new place to move  is free
 		if (obj == nullptr)
 			clearAndMove(p, toMove, nullptr);
@@ -233,7 +233,7 @@ void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 		//else the bject we are colliding with is the other player there for we will not move
 		break;
 	case Direction::RIGHT:
-		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
+		obj = currentScreen->GetScreenObject(toMove.GetX(), toMove.GetY());
 		if (obj == nullptr) // check  if the new place to move  is free
 			clearAndMove(p, toMove, nullptr);
 		else if (obj->GetType() == 'n') // check if we are going to eat a solution number
@@ -243,7 +243,7 @@ void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
 		}//else the bject we are colliding with is the other player there for we will not move
 		break;
 	case Direction::DOWN:
-		obj = currentScreen->GetScreenObject(toMove.getX(), toMove.getY());
+		obj = currentScreen->GetScreenObject(toMove.GetX(), toMove.GetY());
 		if (obj == nullptr) // check if the new place to move  is free
 			clearAndMove(p, toMove, nullptr);
 		else if (obj->GetType() == 'n') // check if we are going to eat a solution number
@@ -345,35 +345,7 @@ Direction::value TheMathGame::MapKeyToDirection(const char & keyHit, Player & p)
 //this function manages the next move of the player, loops around the screen
 Point TheMathGame::GetPointToMove(const MovingScreenObject & p)
 {
-	switch (p.GetDirection())
-	{
-	case Direction::LEFT:
-		if (p.GetPosition().getX() == 0) // check if the player is going to move outside of the screen limit
-			return Point(79, p.GetPosition().getY());// direction is left so go to the right limit of the screen
-		else
-			return Point(p.GetPosition().getX() - 1, p.GetPosition().getY()); // direction is left to reduce 1 from x
-		break;
-	case Direction::RIGHT:
-		if (p.GetPosition().getX() == 79) // check if the player is going to move outside of the screen limit
-			return Point(0, p.GetPosition().getY());// direction is  right so go to the left limit of the screen
-		else
-			return Point(p.GetPosition().getX() + 1, p.GetPosition().getY());// direction is right so add 1 to x
-		break;
-	case Direction::UP:
-		if (p.GetPosition().getY() == 3) // check if the player is going to move outside of the screen limit
-			return Point(p.GetPosition().getX(), 23);// direction is up to go to the bottom of the screen
-		else
-			return Point(p.GetPosition().getX(), p.GetPosition().getY() - 1); // direction is up so subtruct 1 from y
-		break;
-	case Direction::DOWN:
-		if (p.GetPosition().getY() == 23) // check if the player is going to move outside of the screen limit
-			return Point(p.GetPosition().getX(), 3);// direction is down so go to the upper limit of the game screen
-		else
-			return Point(p.GetPosition().getX(), p.GetPosition().getY() + 1); // direction is down so add 1 to y
-		break;
-	default:// we should not get here
-		break;
-	}
+	return p.GetPosition().GetPointToMoveFromDirection(p.GetDirection()); // TODO CHANGE THIS PART TO FINISH THE NEW LOGIC
 }
 
 

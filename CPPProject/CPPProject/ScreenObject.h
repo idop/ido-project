@@ -35,7 +35,7 @@ public:
 
 	virtual void Clear()const
 	{
-		gotoxy(GetPosition().getX(), GetPosition().getY());
+		gotoxy(GetPosition().GetX(), GetPosition().GetY());
 		cout << ' ';
 	}
 
