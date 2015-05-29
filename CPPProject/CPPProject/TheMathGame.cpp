@@ -75,10 +75,10 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 	runBulletList();
 	//for each player we echeck if he has lives to keep on playing , and manage his movment.
 	if (player1.GetNumberOfLives() != 0)
-		PlayerMovment(GetPointToMove(player1), player1, equation1);
+		PlayerMovment(player1, equation1);
 
 	if (player2.GetNumberOfLives() != 0)
-		PlayerMovment(GetPointToMove(player2), player2, equation2);
+		PlayerMovment(player2, equation2);
 	
 	//initialazing the end turn checks
 	EndTurn();
@@ -200,10 +200,11 @@ void TheMathGame::keyStrokeManager(const list<char> & keyHits){
 
 // this function manages the player movment, checks if the next move will hit another player
 //or will hit a number, and handles all the possiblties
-void TheMathGame::PlayerMovment(const Point & toMove, Player & p, Equation & eq)
+void TheMathGame::PlayerMovment(Player & p, Equation & eq)
 {
 
 	ScreenObject * obj = nullptr;
+	Point toMove = p.getPointToMove();
 
 	switch (p.GetDirection())
 	{
