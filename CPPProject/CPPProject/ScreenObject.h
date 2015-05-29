@@ -15,16 +15,18 @@
 
 #include "Point.h"
 #include "io_utils.h"
+#include <iostream>
+
+using namespace std;
 
 class ScreenObject {
-	char type;
 	Point position;
 
 public:
 	virtual ~ScreenObject () {
 	}
 
-	ScreenObject ( const char & t , const Point & p ) : type ( t ), position ( position ) {
+	ScreenObject (const Point & p ) :  position ( position ) {
 	}
 
 	virtual void Draw ()const = 0; // draw funciton for the screenobject the classes who will inheret this class will implement this class
@@ -32,7 +34,7 @@ public:
 	virtual unsigned int GetData ()const = 0; // get the numral value of the current screenobject( needed only for the solution posabilities) the classes who will inheret this class will implement this class
 	virtual unsigned int GetLength ()const = 0; // get char length of the current screenobject, the classes who will inheret this class will implement this class
 	virtual void Collesion () = 0; // each object will implement its own collesion handeling
-
+	virtual bool IsSolutionPossibility(){ return false; }; // used only to know if the screenobject is a solutionPossivility object
 	virtual void Clear()const
 	{
 		gotoxy(GetPosition().GetX(), GetPosition().GetY());
@@ -43,17 +45,12 @@ public:
 		return position;
 	} // get the screen object current position;
 
-	char GetType ()const {
-		return type;
-	} // we will have 2 types for EX 1 the 'p' for player and  n - number for possible solution
 
 	void SetPosition ( const Point & p ) {
 		position = p;
 	}
+	
 
-	void SetType ( const char & t ) {
-		type = t;
-	}
 };
 
 #endif
