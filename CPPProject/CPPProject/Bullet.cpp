@@ -14,7 +14,7 @@ using namespace std;
 
 void Bullet::Draw()const
 {
-	gotoxy(GetPosition().getX(), GetPosition().getY());
+	gotoxy(GetPosition().GetX(), GetPosition().GetY());
 	cout << bullet;
 }
 

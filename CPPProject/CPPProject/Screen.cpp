@@ -51,7 +51,7 @@ void Screen::DrawScrean()const
 		{
 			if (screen[i][j] != nullptr)
 			{
-				if (screen[i][j]->GetPosition().getX() == i && screen[i][j]->GetPosition().getY() == j) // check the object to see if we are in the first position of the object so we will only draw it once
+				if (screen[i][j]->GetPosition().GetX() == i && screen[i][j]->GetPosition().GetY() == j) // check the object to see if we are in the first position of the object so we will only draw it once
 				{ 
 					gotoxy(i, j);
 					screen[i][j]->Draw(); // draw the object
@@ -67,7 +67,7 @@ void Screen::SetPositionForScreenObject(ScreenObject *object)
 
 	for (unsigned int i = 0; i < object->GetLength(); ++i) // if the object length is greater then 1 we want to set all the relevant pointers to the object
 	{
-		screen[object->GetPosition().getX() + i][object->GetPosition().getY()] = object;
+		screen[object->GetPosition().GetX() + i][object->GetPosition().GetY()] = object;
 	}
 }
 
@@ -76,7 +76,7 @@ void Screen::ClearScreenObject(ScreenObject *object)
 {
 	for (unsigned int i = 0; i < object->GetLength(); ++i) // if the object length is greater then 1 we want to remove all the relevant pointers to the object
 	{
-		screen[object->GetPosition().getX() + i][object->GetPosition().getY()] = nullptr;
+		screen[object->GetPosition().GetX() + i][object->GetPosition().GetY()] = nullptr;
 	}
 	object->Clear();
 	if (object->GetType() == 'n') // if the current object is a solution Posability object we need to free the memory

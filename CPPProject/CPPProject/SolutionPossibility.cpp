@@ -35,14 +35,14 @@ unsigned SolutionPosabilty::GetLength() const
 
 void SolutionPosabilty::Draw()const
 {
-	gotoxy(GetPosition().getX(), GetPosition().getY());
+	gotoxy(GetPosition().GetX(), GetPosition().GetY());
 	cout << data;
 }
 
 void SolutionPosabilty::Clear()const
 {
 	unsigned int length = GetLength();
-	gotoxy(GetPosition().getX(), GetPosition().getY());
+	gotoxy(GetPosition().GetX(), GetPosition().GetY());
 	for (unsigned int i = 0; i < length; ++i)
 		cout << ' ';
 }

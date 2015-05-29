@@ -89,13 +89,13 @@
     <ClInclude Include="MovingScreenObject.h" />
     <ClInclude Include="NumberEaters.h" />
     <ClInclude Include="RowFlyers.h" />
+    <ClInclude Include="Point.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="ScreenObject.h" />
     <ClInclude Include="SolutionPossibility.h" />
     <ClInclude Include="SolutionType.h" />
     <ClInclude Include="TheMathGame.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Point.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
@@ -106,7 +106,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="NumberEaters.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="RowFlyers.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="SolutionPossibility.cpp" />
     <ClCompile Include="TheMathGame.cpp" />
