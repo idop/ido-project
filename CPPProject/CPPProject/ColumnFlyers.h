@@ -6,7 +6,7 @@ class ColumnFlyers :
 	const char sign = '$';
 
 public:
-	ColumnFlyers(const Point & p, const Direction::value & d) : Creature(p, d, '$'){};
+	ColumnFlyers(const Point & p, const Direction::value & d) : Creature(p, d){};
 	virtual ~ColumnFlyers();
 
 	virtual void Draw()const override; //inherited  from the Screenobject class draws the player

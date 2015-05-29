@@ -5,9 +5,11 @@
 class NumberEaters :
 	public Creature
 {
+	char sign = '%';
+
 public:
 
-	NumberEaters(const Point & p, const Direction::value & d) : Creature(p, d, '%'){};
+	NumberEaters(const Point & p, const Direction::value & d) : Creature(p, d){};
 	virtual ~NumberEaters();
 
 	virtual void Draw()const override; //inherited  from the Screenobject class draws the player
