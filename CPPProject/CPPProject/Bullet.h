@@ -24,6 +24,8 @@ public:
 	Bullet(const Point & p, const Direction::value & d) : MovingScreenObject('b', p, d), isLive(true) {};
 	~Bullet(){};
 
+	bool getIsLive()const{ return isLive; }
+
 	virtual void Draw()const override; //inherited  from the Screenobject class draws the player
 	virtual void Collesion() override{ isLive = false; };
 
