@@ -19,15 +19,13 @@ const char BULLET_SIGN = '*';
 
 class Bullet : 	public MovingScreenObject
 {
-	bool isLive;
+
+
 
 public:
-	Bullet(const Point & p, const Direction::value & d) : MovingScreenObject(p, d, BULLET_SIGN), isLive(true) {};
+	Bullet(const Point & p, const Direction::value & d) : MovingScreenObject(p, d, BULLET_SIGN){};
 	~Bullet(){};
 
-	bool getIsLive()const{ return isLive; }
-
-	virtual void Collesion() override{ isLive = false; };
 };
 
 #endif

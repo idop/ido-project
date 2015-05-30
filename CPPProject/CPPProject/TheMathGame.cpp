@@ -12,7 +12,8 @@
 
 #include "TheMathGame.h"
 #include "io_utils.h"
-
+#include "SolutionPossibility.h"
+#include "CollisionManager.h"
 
 bool TheMathGame::hasNextLevel() const
 {
@@ -42,8 +43,8 @@ void TheMathGame::startLevel(unsigned int level)
 	player1.ResetNumberOfBullets();
 	player2.ResetNumberOfBullets();
 	bulletList.clear();
-
 	PrintScores();
+	initCreatureList();
 
 	if (currentScreen != nullptr)
 	{
@@ -54,6 +55,16 @@ void TheMathGame::startLevel(unsigned int level)
 	currentScreen->SetPositionForScreenObject(&player2);
 }
 
+
+void TheMathGame::initCreatureList()
+{
+	creatureList[0] = RowFlyers(Point(30, 23), Direction::RIGHT);
+	creatureList[1] = RowFlyers(Point(50, 15), Direction::LEFT);
+	creatureList[2] = NumberEaters(Point(10, 19), Direction::LEFT);
+	creatureList[3] = NumberEaters(Point(70, 19), Direction::RIGHT);
+	creatureList[4] = ColumnFlyers(Point(45, 23), Direction::UP);
+	creatureList[5] = ColumnFlyers(Point(55, 15), Direction::DOWN);
+}
 //this function will resume the level after sub mani option continue
 void TheMathGame::ResumeLevel()
 {
@@ -75,6 +86,7 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 	// get keystrokes from keyhist list untill the end of the list or until both players got a valid keystroke
 	keyStrokeManager(keyHits); 
 	runBulletList();
+	runCreatuerList(6);
 	//for each player we echeck if he has lives to keep on playing , and manage his movment.
 	if (player1.GetNumberOfLives() != 0)
 		PlayerMovment(player1, equation1);
@@ -129,6 +141,7 @@ void TheMathGame::EndTurn()
 void TheMathGame::doSubIteration()
 {
 	runBulletList();
+	runCreatuerList(4);
 }
 
 void TheMathGame::runBulletList()
@@ -136,23 +149,55 @@ void TheMathGame::runBulletList()
 	for (list<Bullet*>::const_iterator itr = bulletList.cbegin(), end = bulletList.cend(); itr != end; ++itr)
 	{
 		Bullet* tempBullet = *itr;
-		if (tempBullet->getIsLive())
+		if (!tempBullet->isMarkForDestruction())
 		{
 			Point toMove = tempBullet->getPointToMove();
 			ScreenObject* obj = currentScreen->GetScreenObject(toMove.GetX(), toMove.GetY());
 			if (obj == nullptr)
-				clearAndMove(*tempBullet, toMove, NULL);
-			else if (obj->IsSolutionPossibility()){
+				clearAndMove(*tempBullet, toMove, nullptr);
+			else if (dynamic_cast<SolutionPosabilty*>(obj) != nullptr){
 				currentScreen->ClearScreenObject(obj);
 				currentScreen->ClearScreenObject(tempBullet);
-				tempBullet->Collesion();
+				tempBullet->destroy();
 			}
 			else
 			{
-				currentScreen->ClearScreenObject(obj);
+				CollisionManager::collesion(tempBullet, obj);
+				if (obj->isMarkForDestruction())
+					currentScreen->ClearScreenObject(obj);
 				currentScreen->ClearScreenObject(tempBullet);
-				obj->Collesion();
-				tempBullet->Collesion();
+			}
+		}
+		else
+
+	}
+}
+
+
+void TheMathGame::runCreatuerList(unsigned int len)
+{
+
+	for (int i = 0; i < len; i++)
+	{
+		Creature* tempCreature = &creatureList[i];
+		if (!tempCreature->isMarkForDestruction())
+		{
+			Point toMove = tempCreature->getPointToMove();
+			ScreenObject* obj = currentScreen->GetScreenObject(toMove.GetX(), toMove.GetY());
+			if (obj == nullptr)
+				clearAndMove(*tempCreature, toMove, nullptr);
+			else if (dynamic_cast<SolutionPosabilty*>(obj) != nullptr){
+				currentScreen->ClearScreenObject(obj);
+				if(tempCreature->isMarkForDestruction())
+					currentScreen->ClearScreenObject(tempCreature);
+			}
+			else
+			{
+				CollisionManager::collesion(tempCreature, obj);
+				if (obj->isMarkForDestruction())
+					currentScreen->ClearScreenObject(obj);
+				if (tempCreature->isMarkForDestruction())
+					currentScreen->ClearScreenObject(tempCreature);
 			}
 		}
 	}
@@ -297,55 +342,30 @@ Direction::value TheMathGame::MapKeyToDirection(const char& keyHit, Player& p)
 {
 	//gets a player and keystoke, 
 	//return the direction by mapping the keystroke to the player possibile movments
-	switch (p.GetPlayerChar())
-	{
-	case '@':
-		switch (keyHit)
-		{
-		case 'a':
-			return Direction::LEFT;
-		case 'w':
-			return Direction::UP;
-		case 'd':
-			return Direction::RIGHT;
-		case 'x':
-			return Direction::DOWN;		
-		case 'z':
-			if (p.GetNumberOfBullets() > 0)
-			{
-				p.RemoveBullet();
-				AddNewBullet(Bullet(p.getPointToMove(), p.GetDirection()));
-			}
-			break;
-		default: // we should not get here
-			break;
-		}
-		break;
+	
+	if (p.GetKeyboardKeys().at(LEFT) == keyHit)
+		return Direction::LEFT;
 
-	case '#':
-		switch (keyHit)
+	if (p.GetKeyboardKeys().at(UP) == keyHit)
+		return Direction::UP;
+
+	if (p.GetKeyboardKeys().at(RIGHT) == keyHit)
+		return Direction::RIGHT;
+
+	if (p.GetKeyboardKeys().at(DOWN) == keyHit)
+		return Direction::DOWN;
+
+	if (p.GetKeyboardKeys().at(SHOOT) == keyHit)
+	{
+		if (p.GetNumberOfBullets() > 0)
 		{
-		case 'j':
-			return Direction::LEFT;
-		case 'i':
-			return Direction::UP;
-		case 'l':
-			return Direction::RIGHT;
-		case 'm':
-			return Direction::DOWN;
-		case 'n':
-			if (p.GetNumberOfBullets() > 0)
-			{
-				p.RemoveBullet();
-				AddNewBullet(Bullet(p.getPointToMove(), p.GetDirection()));
-			}
-			break;
-		default: // we should not get here
-			break;
+			p.RemoveBullet();
+			AddNewBullet(Bullet(p.getPointToMove(), p.GetDirection()));
 		}
-		break;
 	}
+
 	return p.GetDirection();
+	
 }
 
 

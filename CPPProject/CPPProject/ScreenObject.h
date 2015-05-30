@@ -22,6 +22,7 @@ using namespace std;
 class ScreenObject {
 	Point position;
 	int lenght;
+	bool markForDestruction;
 
 public:
 	virtual ~ScreenObject () {
@@ -32,7 +33,6 @@ public:
 
 	virtual void Draw ()const = 0; // draw funciton for the screenobject the classes who will inheret this class will implement this class
 	virtual unsigned int GetData ()const = 0; // get the numral value of the current screenobject( needed only for the solution posabilities) the classes who will inheret this class will implement this class	
-	virtual void Collesion () = 0; // each object will implement its own collesion handeling
 	virtual bool IsSolutionPossibility(){ return false; }; // used only to know if the screenobject is a solutionPossivility object
 
 	virtual void Clear()const
@@ -51,6 +51,17 @@ public:
 	void SetPosition ( const Point & p ) {
 		position = p;
 	}
+
+	bool isMarkForDestruction()
+	{
+		return markForDestruction;
+	}
+
+	void destroy()
+	{
+		markForDestruction = true;
+	}
+
 };
 
 #endif

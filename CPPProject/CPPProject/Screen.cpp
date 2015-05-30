@@ -79,7 +79,7 @@ void Screen::ClearScreenObject(ScreenObject *object)
 		screen[object->GetPosition().GetX() + i][object->GetPosition().GetY()] = nullptr;
 	}
 	object->Clear();
-	if (object->IsSolutionPossibility()) // if the current object is a solution Posability object we need to free the memory
+	if (dynamic_cast<SolutionPosabilty*>(object) != nullptr) // if the current object is a solution Posability object we need to free the memory
 		delete object;
 }
 

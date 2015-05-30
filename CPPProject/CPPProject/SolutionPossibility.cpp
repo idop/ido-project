@@ -28,11 +28,6 @@ unsigned SolutionPosabilty::GetData() const
 	return data;
 }
 
-unsigned SolutionPosabilty::GetLength() const
-{
-	return NumDigits(data);
-}
-
 void SolutionPosabilty::Draw()const
 {
 	gotoxy(GetPosition().GetX(), GetPosition().GetY());

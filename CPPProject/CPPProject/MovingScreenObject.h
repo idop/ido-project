@@ -31,8 +31,7 @@ public:
 	};
 
 	virtual void Move(const Point& p);
-	virtual void Draw()const override; // draw funciton for the screenobject the classes who will inheret this class will implement this class
-	virtual void Collesion() override = 0; // each object will implement its own collesion handeling
+	void Draw()const override; // draw funciton for the screenobject the classes who will inheret this class will implement this class
 
 	virtual unsigned int GetData()const override
 	{
