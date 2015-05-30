@@ -107,6 +107,7 @@
     <ClCompile Include="MovingScreenObject.cpp" />
     <ClCompile Include="NumberEaters.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Point.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="SolutionPossibility.cpp" />
     <ClCompile Include="TheMathGame.cpp" />

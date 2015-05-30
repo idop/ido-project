@@ -35,3 +35,4 @@ Point Point::GetPointToMoveFromDirection(const Direction::value& direction)
 
 	return res;
 }
+

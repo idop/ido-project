@@ -33,6 +33,8 @@ public:
 	void SetPositionForScreenObject(ScreenObject *object); // set the all the relevant positions in the matrix to point to a specific screenobject
 	void ClearScreenObject(ScreenObject *object); // removes a spesific screenobject from the matrix (frees memoery when needed)
 	void CreateNewSolutionPosability(const unsigned int & currentLevel); // dynamicly creates a new solution posability and places it on the screen
+
+	Point findClosesetTarget(const Point & currentPosition, const Point & currentTargetPoint)const;
 };
 
 #endif

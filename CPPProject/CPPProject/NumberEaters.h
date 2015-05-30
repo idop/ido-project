@@ -14,6 +14,7 @@
 #pragma once
 #include "Creature.h"
 #include "Point.h"
+#include "Screen.h"
 
 const char NUMBEREATERS_SIGN = '%';
 
@@ -21,16 +22,18 @@ class NumberEaters :
 	public Creature
 {
 	char sign;
-
+	Point targetPosition; // used to store the target position
+	Screen * CurrentScreen;
+	void setDirectionToTargetPosition();
+	bool isPositive(const int & num)const{ return (num > 0); };
+	bool needToCrossMoreThenHalfTheScreen(const int & num)const{ return (abs(num) > SCREEN_WIDTH / 2); };
 public:
 
-	NumberEaters(const Point & p, const Direction::value & d) : Creature(p, d, NUMBEREATERS_SIGN){};
+	NumberEaters(const Point & p, const Direction::value & d,  Screen * s) : Creature(p, d, NUMBEREATERS_SIGN){ CurrentScreen = s; };
 	virtual ~NumberEaters();
-
-	virtual void Draw()const;//inherited  from the Screenobject class draws the player
-	virtual void Collesion() override{ };
-	virtual void Move(const Point & p);
 	virtual Point getPointToMove() override;
+
+
 
 };
 
