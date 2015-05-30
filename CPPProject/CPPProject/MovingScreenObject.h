@@ -54,7 +54,7 @@ public:
 		return direction;
 	}
 
-	virtual Point getPointToMove(){ return this->GetPosition().GetPointToMoveFromDirection(direction); };
+	 Point getPointToMove(){ return this->GetPosition().GetPointToMoveFromDirection(direction); };
 
 };
 

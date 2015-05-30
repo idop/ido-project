@@ -41,7 +41,6 @@ class TheMathGame : public ISpecificGame
 	void clearAndMove ( MovingScreenObject & p , const Point & toMove , ScreenObject * obj );//halper function to Player movment
 	void CheckSolution ( Equation & eq , const ScreenObject * obj , Player & p );//checks if the player found a valid solution or not and acts accordingly
 	void DrawEquations ()const;//draws the 2 equations to the screen
-	Point GetPointToMove ( const MovingScreenObject & p );//get the point the player needs to move to according to his direction
 	Direction::value MapKeyToDirection ( const char & keyHit , Player & p );//helper function to keyStrokeManager
 	Color GetColorForText ()const; //this function will retrun a color for the screen text based on the current level. each level we will replace the screen color
 

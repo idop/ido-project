@@ -8,6 +8,6 @@ void ColumnFlyers::Draw() const
 {
 }
 
-void ColumnFlyers::Move(const Point& p)
-{
+void ColumnFlyers::Move(const Point& p){
+	this->SetPosition(p);
 }
