@@ -117,7 +117,8 @@ void Screen::CreateNewSolutionPosability(const unsigned int & currentLevel)
 
 	if (foundPosition)
 	{
-		SolutionPosabilty * newPosability = new SolutionPosabilty(Point(x, y), data); // if we have a valid position we will create a new pbject
+		latestSolutionPosabilityPosition = Point(x, y);
+		SolutionPosabilty * newPosability = new SolutionPosabilty(latestSolutionPosabilityPosition, data); // if we have a valid position we will create a new pbject
 		newPosability->Draw(); // we wont forget to draw the new solution posability
 		
 		for (int i = 0; i < length; ++i) // set the screen to point to the new object in all relvaln positions
@@ -126,4 +127,32 @@ void Screen::CreateNewSolutionPosability(const unsigned int & currentLevel)
 
 		}
 	}
+}
+
+Point Screen::findClosestSolutionPossibility(const Point currentPosition) const
+{
+	Point res;
+	int x = currentPosition.GetX(), y = currentPosition.GetY();
+	bool found = false;
+
+	while (!found)
+	{
+	
+
+	}
+
+	return res;
+}
+
+Point Screen::findClosestTarget(const Point& currentPosition, const Point& currentTargetPosition) const
+{
+	Point res;
+		
+	if (currentPosition == currentTargetPosition || currentTargetDied(currentTargetPosition))
+		res = findClosestSolutionPossibility(currentPosition);
+	else 
+		res = currentPosition.getCloserPoint(currentTargetPosition,latestSolutionPosabilityPosition);
+
+
+	return res;
 }

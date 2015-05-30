@@ -23,6 +23,9 @@ const int Y_OFFSET = 3; //  y offset position for the dynemic part of the screen
 class Screen
 {
 	ScreenObject * screen[SCREEN_WIDTH][SCREEN_HIGHT];
+	Point latestSolutionPosabilityPosition;
+
+	bool currentTargetDied(const Point & currentTargetPosition) const { return (screen[currentTargetPosition.GetX()][currentTargetPosition.GetY()] == nullptr); };
 
 public:
 	~Screen(){ CleanScreen(); }
@@ -34,7 +37,9 @@ public:
 	void ClearScreenObject(ScreenObject *object); // removes a spesific screenobject from the matrix (frees memoery when needed)
 	void CreateNewSolutionPosability(const unsigned int & currentLevel); // dynamicly creates a new solution posability and places it on the screen
 
-	Point findClosesetTarget(const Point & currentPosition, const Point & currentTargetPoint)const;
+
+	Point findClosestSolutionPossibility(const Point currentPosition) const;
+	Point findClosestTarget(const Point & currentPosition, const Point & currentTargetPosition) const;
 };
 
 #endif

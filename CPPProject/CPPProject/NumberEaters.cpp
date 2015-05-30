@@ -1,5 +1,5 @@
 #include "NumberEaters.h"
-#include <math.h>
+
 NumberEaters::~NumberEaters()
 {
 }
@@ -12,13 +12,13 @@ void NumberEaters::setDirectionToTargetPosition()
 	int yDiffrence = this->GetPosition().getYDiffrence(targetPosition);
 
 	if (xDiffrence != 0)
-		if ((isPositive(xDiffrence) && needToCrossMoreThenHalfTheScreen(xDiffrence)) || (!isPositive(xDiffrence) && !needToCrossMoreThenHalfTheScreen(xDiffrence))) 
+		if ((isPositive(xDiffrence) && needToCrossMoreThenHalfTheScreen(xDiffrence, SCREEN_WIDTH)) || (!isPositive(xDiffrence) && !needToCrossMoreThenHalfTheScreen(xDiffrence,SCREEN_WIDTH)))
 			this->SetDirection(Direction::value::RIGHT);  // change direction to right
 		else
 			this->SetDirection(Direction::value::LEFT); // change direction to left
 	else //  only  ydiffrence is greater then 0
 	{
-		if ((isPositive(yDiffrence) && needToCrossMoreThenHalfTheScreen(yDiffrence)) || (!isPositive(yDiffrence) && !needToCrossMoreThenHalfTheScreen(yDiffrence)))
+		if ((isPositive(yDiffrence) && needToCrossMoreThenHalfTheScreen(yDiffrence, SCREEN_HIGHT)) || (!isPositive(yDiffrence) && !needToCrossMoreThenHalfTheScreen(yDiffrence, SCREEN_HIGHT)))
 			this->SetDirection(Direction::value::DOWN); 
 
 			this->SetDirection(Direction::value::UP); 
@@ -28,7 +28,7 @@ void NumberEaters::setDirectionToTargetPosition()
 
 Point NumberEaters::getPointToMove()
 {
-	targetPosition = CurrentScreen->findClosesetTarget(this->GetPosition(),targetPosition);
+	targetPosition = CurrentScreen->findClosestTarget(this->GetPosition(),targetPosition);
 	setDirectionToTargetPosition();
 	return MovingScreenObject::getPointToMove();
 }
