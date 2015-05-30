@@ -26,6 +26,8 @@ class Screen
 	Point latestSolutionPosabilityPosition;
 
 	bool currentTargetDied(const Point & currentTargetPosition) const { return (screen[currentTargetPosition.GetX()][currentTargetPosition.GetY()] == nullptr); };
+	int getValidXValue(int x) const;
+	int getValidYValue(int y) const;
 
 public:
 	~Screen(){ CleanScreen(); }
@@ -38,6 +40,7 @@ public:
 	void CreateNewSolutionPosability(const unsigned int & currentLevel); // dynamicly creates a new solution posability and places it on the screen
 
 
+	
 	Point findClosestSolutionPossibility(const Point currentPosition) const;
 	Point findClosestTarget(const Point & currentPosition, const Point & currentTargetPosition) const;
 };

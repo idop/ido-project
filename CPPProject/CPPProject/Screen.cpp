@@ -14,6 +14,34 @@
 #include <iostream>
 using namespace std;
 
+int Screen::getValidXValue(int x) const
+{
+	int res;
+	
+	if (x > X_OFFSET && x < SCREEN_WIDTH)
+		res = x;
+	else if (x >= SCREEN_WIDTH)
+		res = x - SCREEN_WIDTH + X_OFFSET;
+	else
+		res = SCREEN_WIDTH + x;
+
+	return res;
+}
+
+int Screen::getValidYValue(int y) const
+{
+	int res;
+
+	if (y > Y_OFFSET && y < SCREEN_HIGHT)
+		res = y;
+	else if (y >= SCREEN_HIGHT)
+		res = y - SCREEN_HIGHT + Y_OFFSET;
+	else
+		res = SCREEN_HIGHT + y;
+
+	return res;
+}
+
 Screen::Screen() // constarctor for the screen. points all the pointers of the matrix to NULL
 {
 	for (int i = 0; i < SCREEN_WIDTH; ++i) 
@@ -129,18 +157,53 @@ void Screen::CreateNewSolutionPosability(const unsigned int & currentLevel)
 	}
 }
 
-Point Screen::findClosestSolutionPossibility(const Point currentPosition) const
+Point Screen::findClosestSolutionPossibility(const Point currentPosition) const // we will scan Rhombus's to find the closest posability
 {
 	Point res;
 	int x = currentPosition.GetX(), y = currentPosition.GetY();
+	int xtoCheck, yToCheck;
 	bool found = false;
+	ScreenObject * tmpObject;
 
 	while (!found)
 	{
-	
+		for (int i = 1; i < SCREEN_WIDTH/2; ++i)
+		{					// limit the search TODO FIX THIS 
 
+			for (int t = 1; t > -2; t -= 2)
+			{
+				xtoCheck = getValidXValue(x);
+				yToCheck = getValidYValue(y + t*i);
+				tmpObject = screen[xtoCheck][yToCheck];
+				if (dynamic_cast<SolutionPosabilty*>(tmpObject) != nullptr)
+				{
+					res = Point(xtoCheck, yToCheck);
+					found = true;
+					break;
+				}
+				for (int j = 1; j <= i; ++j)
+				{
+					xtoCheck = x+j;
+					yToCheck = y + (t*(i - j));
+					tmpObject = screen[xtoCheck][yToCheck];
+					if (dynamic_cast<SolutionPosabilty*>(tmpObject) != nullptr)
+					{
+						res = Point(xtoCheck, yToCheck);
+						found = true;
+						break;
+					}
+					xtoCheck = x - j;
+					tmpObject = screen[xtoCheck][yToCheck];
+					if (dynamic_cast<SolutionPosabilty*>(tmpObject) != nullptr)
+					{
+						res = Point(xtoCheck, yToCheck);
+						found = true;
+						break;
+					}
+				}
+			}
+			}
 	}
-
 	return res;
 }
 

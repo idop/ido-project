@@ -23,13 +23,13 @@ class NumberEaters :
 {
 	char sign;
 	Point targetPosition; // used to store the target position
-	Screen * CurrentScreen;
+	const Screen * CurrentScreen;
 	void setDirectionToTargetPosition();
 	bool isPositive(const int & num)const{ return (num > 0); };
 	bool needToCrossMoreThenHalfTheScreen(const int & num , const int & size)const{ return (abs(num) > size/ 2); };
 public:
 
-	NumberEaters(const Point & p, const Direction::value & d,  Screen * s) : Creature(p, d, NUMBEREATERS_SIGN){ CurrentScreen = s; };
+	NumberEaters(const Point & p, const Direction::value & d, Screen * s) : Creature(p, d, NUMBEREATERS_SIGN), CurrentScreen(s){};
 	virtual ~NumberEaters();
 	virtual Point getPointToMove() override;
 
