@@ -27,10 +27,7 @@ public:
 
 	bool getIsLive()const{ return isLive; }
 
-	virtual void Draw()const override; //inherited  from the Screenobject class draws the player
 	virtual void Collesion() override{ isLive = false; };
-
-	virtual void Move(const Point & p) override;
 };
 
 #endif

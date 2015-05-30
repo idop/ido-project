@@ -10,4 +10,5 @@ void NumberEaters::Draw() const
 
 void NumberEaters::Move(const Point& p)
 {
+
 }

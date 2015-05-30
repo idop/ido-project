@@ -84,10 +84,6 @@ public:
 		bullets = NUM_OF_BULLETS;
 	}
 
-	virtual void Move(const Point & p) override;
-
-	//CPP:
-	virtual void Draw ()const override; //inherited  from the Screenobject class draws the player
 	void SetToStart ( const Point & p , const Direction::value & d ); // retrun the player to deuflt start level settings
 	virtual void Collesion () override;
 

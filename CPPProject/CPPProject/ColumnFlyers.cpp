@@ -3,11 +3,3 @@
 ColumnFlyers::~ColumnFlyers()
 {
 }
-
-void ColumnFlyers::Draw() const
-{
-}
-
-void ColumnFlyers::Move(const Point& p){
-	this->SetPosition(p);
-}

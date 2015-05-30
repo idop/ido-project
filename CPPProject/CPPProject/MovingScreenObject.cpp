@@ -1,16 +1,23 @@
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// Bullet.cpp
+// MovingScreenObject.cpp
 // -------------
-// This Bullet class is resposible for the Draw and Clear options of the object.
+// TODO ADD SHIT HERE
 //
 // Author: Ido Perry and Alex Odesser
 // First version: 2015-05-03
 //
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#include "Bullet.h"
-#include "io_utils.h"
+#include "MovingScreenObject.h" 
 
-using namespace std;
+void MovingScreenObject::Move(const Point& p)
+{
+	Clear();
+	SetPosition(p);
+	Draw();
+}
 
-
-
+void MovingScreenObject::Draw() const
+{
+	gotoxy(GetPosition().GetX(), GetPosition().GetY());
+	cout << this->sign;
+}

@@ -104,6 +104,7 @@
     <ClCompile Include="io_utils.cpp" />
     <ClCompile Include="ColumnFlyers.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MovingScreenObject.cpp" />
     <ClCompile Include="NumberEaters.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Screen.cpp" />

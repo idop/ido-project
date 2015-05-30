@@ -20,17 +20,17 @@ const char NUMBEREATERS_SIGN = '%';
 class NumberEaters :
 	public Creature
 {
-	char sign = '%';
+	char sign;
 
 public:
 
 	NumberEaters(const Point & p, const Direction::value & d) : Creature(p, d, NUMBEREATERS_SIGN){};
 	virtual ~NumberEaters();
 
-	virtual void Draw()const override; //inherited  from the Screenobject class draws the player
+	virtual void Draw()const;//inherited  from the Screenobject class draws the player
 	virtual void Collesion() override{ };
-	virtual void Move(const Point & p) override;
-	virtual Point getPointToMove() override { return this->GetPosition().GetPointToMoveFromDirection(direction); };
+	virtual void Move(const Point & p);
+	virtual Point getPointToMove() override;
 
 };
 

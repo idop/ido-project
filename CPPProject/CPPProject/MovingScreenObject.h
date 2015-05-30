@@ -17,7 +17,7 @@
 
 using namespace std;
 
-const unsigned int MOVINGOBJECT_LENGHT = 1;
+const unsigned int MOVINGOBJECT_LENGTH = 1;
 
 class MovingScreenObject : public ScreenObject
 {
@@ -26,12 +26,12 @@ class MovingScreenObject : public ScreenObject
 
 public:
 
-	MovingScreenObject(const Point& p, const Direction::value& d, const char & sign) : ScreenObject(p, MOVINGOBJECT_LENGHT), direction(d), sign(sign)
+	MovingScreenObject(const Point& p, const Direction::value& d, const char & sign) : ScreenObject(p, MOVINGOBJECT_LENGTH), direction(d), sign(sign)
 	{
 	};
 
-	virtual void Move(const Point& p) = 0;
-	virtual void Draw()const override = 0; // draw funciton for the screenobject the classes who will inheret this class will implement this class
+	virtual void Move(const Point& p);
+	virtual void Draw()const override; // draw funciton for the screenobject the classes who will inheret this class will implement this class
 	virtual void Collesion() override = 0; // each object will implement its own collesion handeling
 
 	virtual unsigned int GetData()const override
@@ -39,10 +39,6 @@ public:
 		return 0;
 	}; // get the numral value of the current screenobject( needed only for the solution posabilities) the classes who will inheret this class will implement this class
 
-	virtual unsigned int GetLength()const override
-	{
-		return 1;
-	} // inherited  from the Screenobject class, returns the length of the player symobl
 
 	void SetDirection(const Direction::value& d)
 	{
@@ -57,5 +53,6 @@ public:
 	virtual Point getPointToMove(){ return this->GetPosition().GetPointToMoveFromDirection(direction); };
 
 };
+
 
 #endif

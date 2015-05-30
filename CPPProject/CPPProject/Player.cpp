@@ -25,17 +25,6 @@ void Player::SetToStart ( const Point & p , const Direction::value & d ) {
 	playerSolved = false;
 }
 
-void Player::Move(const Point & p){
-	Clear();
-	SetPosition(p);
-	Draw();
-} // moves the player to a new position p according to this direction
-
-//this functions draws the player
-void Player::Draw ()const {
-	gotoxy ( GetPosition().GetX() , GetPosition().GetY() );
-	cout << playerChar;
-}
 
 
 void Player::Collesion () {
