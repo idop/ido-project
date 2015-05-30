@@ -20,11 +20,25 @@
 #include "color.h"
 #include "Screen.h"
 #include "Bullet.h"
+#include "Creature.h"
 
 const unsigned int MAX_TURNS_PER_LEVEL = 1500;
 
+const unsigned int LEFT = 0;
+const unsigned int UP = 1;
+const unsigned int RIGHT = 2;
+const unsigned int DOWN = 3;
+const unsigned int SHOOT = 4;
+
+
 class TheMathGame : public ISpecificGame
 {
+protected:
+	~TheMathGame()
+	{
+	}
+
+private:
 	unsigned int currentLevel;
 	unsigned int maxLevel;
 	unsigned int currentTurn;
@@ -33,6 +47,7 @@ class TheMathGame : public ISpecificGame
 	Player player1, player2;
 	Screen* currentScreen;
 	list<Bullet*> bulletList;
+	Creature creatureList[6];
 
 	void PrintScores ()const;// this function prints the game/level stats (scores, lives,current level and current turn), refreshes each time there is a change
 	void EndTurn (); //this function handles all end of turn events.
@@ -43,11 +58,12 @@ class TheMathGame : public ISpecificGame
 	void DrawEquations ()const;//draws the 2 equations to the screen
 	Direction::value MapKeyToDirection ( const char & keyHit , Player & p );//helper function to keyStrokeManager
 	Color GetColorForText ()const; //this function will retrun a color for the screen text based on the current level. each level we will replace the screen color
-
+	void runCreatuerList(unsigned int len);
 	//void RemoveBullet(Bullet * b){ delete b; }
 	void AddNewBullet(Bullet b);
 	void runBulletList();
 	void AddBulletToPlayers();
+	void initCreatureList();
 
 public:
 	TheMathGame() : currentLevel(0), maxLevel(MAX_LEVEL), currentTurn(0), levelDone(false), equation1(P1_EQUATION_POSITION), equation2(P2_EQUATION_POSITION),

@@ -42,6 +42,11 @@ const unsigned int MAX_LEVEL = 40;
 // actual games will inherit from this class and implement the required methods
 class ISpecificGame
 {
+protected:
+	~ISpecificGame()
+	{
+	}
+
 public:
 	// virtual fucnction with =0 is called an "abstract method"
 	// abstract method must be implemented by non-abstract inherited class
