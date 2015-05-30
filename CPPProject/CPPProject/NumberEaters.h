@@ -13,6 +13,7 @@
 #define _NUMBEREATERS_H_
 #pragma once
 #include "Creature.h"
+#include "Point.h"
 
 
 class NumberEaters :
@@ -28,6 +29,7 @@ public:
 	virtual void Draw()const override; //inherited  from the Screenobject class draws the player
 	virtual void Collesion() override{ };
 	virtual void Move(const Point & p) override;
+	virtual Point getPointToMove() override { return this->GetPosition().GetPointToMoveFromDirection(direction); };
 
 };
 
