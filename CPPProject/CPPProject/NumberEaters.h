@@ -15,6 +15,7 @@
 #include "Creature.h"
 #include "Point.h"
 
+const char NUMBEREATERS_SIGN = '%';
 
 class NumberEaters :
 	public Creature
@@ -23,7 +24,7 @@ class NumberEaters :
 
 public:
 
-	NumberEaters(const Point & p, const Direction::value & d) : Creature(p, d){};
+	NumberEaters(const Point & p, const Direction::value & d) : Creature(p, d, NUMBEREATERS_SIGN){};
 	virtual ~NumberEaters();
 
 	virtual void Draw()const override; //inherited  from the Screenobject class draws the player

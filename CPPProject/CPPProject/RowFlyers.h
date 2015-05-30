@@ -13,6 +13,9 @@
 #define _ROWFLYERS_H_
 #pragma once
 #include "Creature.h"
+
+const char ROWFLYERS_SIGN = '!';
+
 class RowFlyers :
 	public Creature
 {
@@ -20,7 +23,7 @@ class RowFlyers :
 	char sign = '!';
 public:
 
-	RowFlyers(const Point & p, const Direction::value & d) : Creature(p, d){};
+	RowFlyers(const Point & p, const Direction::value & d) : Creature(p, d, ROWFLYERS_SIGN){};
 	virtual ~RowFlyers();
 
 	virtual void Draw()const override; //inherited  from the Screenobject class draws the player
