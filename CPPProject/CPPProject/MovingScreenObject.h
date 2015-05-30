@@ -17,13 +17,16 @@
 
 using namespace std;
 
+const unsigned int MOVINGOBJECT_LENGHT = 1;
+
 class MovingScreenObject : public ScreenObject
 {
 	Direction::value direction;
+	const char sign;
 
 public:
 
-	MovingScreenObject(const Point& p, const Direction::value& d) : ScreenObject(p), direction(d)
+	MovingScreenObject(const Point& p, const Direction::value& d, const char & sign) : ScreenObject(p, MOVINGOBJECT_LENGHT), direction(d), sign(sign)
 	{
 	};
 

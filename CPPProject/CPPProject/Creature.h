@@ -18,7 +18,7 @@ class Creature : public MovingScreenObject
 {
 
 public:
-	Creature(const Point & p, const Direction::value & d) : MovingScreenObject(p, d) {};
+	Creature(const Point & p, const Direction::value & d, const char &sign) : MovingScreenObject(p, d, sign) {};
 	~Creature(){};
 
 	virtual void Draw()const override = 0; //inherited  from the Screenobject class draws the player

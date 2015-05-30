@@ -15,13 +15,14 @@
 #include "MovingScreenObject.h"
 #include "Direction.h"
 
+const char BULLET_SIGN = '*';
+
 class Bullet : 	public MovingScreenObject
 {
-	char bullet = '*';
 	bool isLive;
 
 public:
-	Bullet(const Point & p, const Direction::value & d) : MovingScreenObject(p, d), isLive(true) {};
+	Bullet(const Point & p, const Direction::value & d) : MovingScreenObject(p, d, BULLET_SIGN), isLive(true) {};
 	~Bullet(){};
 
 	bool getIsLive()const{ return isLive; }
