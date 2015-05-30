@@ -18,8 +18,8 @@ class Creature : public MovingScreenObject
 {
 
 public:
-	Creature(const Point & p, const Direction::value & d, const char &sign) : MovingScreenObject(p, d, sign) {};
-	~Creature(){};
+
+	Creature(const Point & p, const Direction::value & d, const char &sign) : MovingScreenObject(p, d, sign){};
 };
 
 #endif

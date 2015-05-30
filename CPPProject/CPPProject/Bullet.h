@@ -20,11 +20,8 @@ const char BULLET_SIGN = '*';
 class Bullet : 	public MovingScreenObject
 {
 
-
-
 public:
-	Bullet(const Point & p, const Direction::value & d) : MovingScreenObject(p, d, BULLET_SIGN){};
-	~Bullet(){};
+	Bullet(const Point & point, const Direction::value & d) : MovingScreenObject(point, d, BULLET_SIGN){};
 
 };
 

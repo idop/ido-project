@@ -20,22 +20,11 @@ class RowFlyers :
 	public Creature
 {
 
-	char sign = '!';
 public:
 
 	RowFlyers(const Point & p, const Direction::value & d) : Creature(p, d, ROWFLYERS_SIGN){};
-	virtual ~RowFlyers();
-
-	virtual void Collesion() override{ };
-
-
 
 };
-
-inline RowFlyers::~RowFlyers()
-{
-}
-
 
 
 #endif

@@ -58,12 +58,26 @@ void TheMathGame::startLevel(unsigned int level)
 
 void TheMathGame::initCreatureList()
 {
-	creatureList[0] = RowFlyers(Point(30, 23), Direction::RIGHT);
-	creatureList[1] = RowFlyers(Point(50, 15), Direction::LEFT);
-	creatureList[2] = NumberEaters(Point(10, 19), Direction::LEFT);
-	creatureList[3] = NumberEaters(Point(70, 19), Direction::RIGHT);
-	creatureList[4] = ColumnFlyers(Point(45, 23), Direction::UP);
-	creatureList[5] = ColumnFlyers(Point(55, 15), Direction::DOWN);
+	if (!creatureList.empty())
+	{
+		creatureList.clear();
+	}
+	
+	RowFlyers * firstRowFlyer = new RowFlyers(Point(30, 23), Direction::RIGHT);
+	RowFlyers * seecondRowFlyer = new RowFlyers(Point(50, 15), Direction::LEFT);
+	NumberEaters * firstNumberEater = new NumberEaters(Point(10, 19), Direction::LEFT, currentScreen);
+	NumberEaters * secondNumberEater = new NumberEaters(Point(70, 19), Direction::RIGHT, currentScreen);
+	ColumnFlyers * firstColumnFlyers = new  ColumnFlyers(Point(45, 23), Direction::UP);
+	ColumnFlyers * seconfClumnFlyers = new ColumnFlyers(Point(55, 15), Direction::DOWN);
+	
+	creatureList.push_front(firstRowFlyer);
+	creatureList.push_front(seecondRowFlyer);
+	creatureList.push_front(firstNumberEater);
+	creatureList.push_front(secondNumberEater);
+	creatureList.push_front(firstColumnFlyers);
+	creatureList.push_front(seconfClumnFlyers);
+
+
 }
 //this function will resume the level after sub mani option continue
 void TheMathGame::ResumeLevel()
@@ -86,14 +100,28 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 	// get keystrokes from keyhist list untill the end of the list or until both players got a valid keystroke
 	keyStrokeManager(keyHits); 
 	runBulletList();
-	runCreatuerList(6);
+	//runCreatuerList(6);
 	//for each player we echeck if he has lives to keep on playing , and manage his movment.
 	if (player1.GetNumberOfLives() != 0)
+	{ 
+		if (player1.isMarkForDestruction())
+			{
+				player1.revive();
+				player1.SetToStart(P1_DEFULT_POSITION, P1_DEFULT_DIRECTION);
+			}
 		PlayerMovment(player1, equation1);
+	}
 
 	if (player2.GetNumberOfLives() != 0)
+	{
+		if (player2.isMarkForDestruction())
+		{
+			player2.revive();
+			player2.SetToStart(P2_DEFULT_POSITION, P2_DEFULT_DIRECTION);
+		}
+
 		PlayerMovment(player2, equation2);
-	
+	}
 	//initialazing the end turn checks
 	EndTurn();
 }
@@ -133,15 +161,13 @@ void TheMathGame::EndTurn()
 		cout << "Too bad, better luck in the next level";
 		Sleep(1500); 
 	}
-
-	//bulletList.clear();
 	PrintScores();
 }
 
 void TheMathGame::doSubIteration()
 {
 	runBulletList();
-	runCreatuerList(4);
+//	runCreatuerList(4);
 }
 
 void TheMathGame::runBulletList()
@@ -168,7 +194,6 @@ void TheMathGame::runBulletList()
 				currentScreen->ClearScreenObject(tempBullet);
 			}
 		}
-		else
 
 	}
 }
@@ -176,10 +201,10 @@ void TheMathGame::runBulletList()
 
 void TheMathGame::runCreatuerList(unsigned int len)
 {
-
-	for (int i = 0; i < len; i++)
+	int i = 0;
+	for (list<Creature*>::const_iterator itr = creatureList.cbegin(), end = creatureList.cend(); i < len, itr != end; ++i, ++itr)
 	{
-		Creature* tempCreature = &creatureList[i];
+		Creature* tempCreature = *itr;
 		if (!tempCreature->isMarkForDestruction())
 		{
 			Point toMove = tempCreature->getPointToMove();
@@ -255,59 +280,21 @@ void TheMathGame::keyStrokeManager(const list<char>& keyHits)
 void TheMathGame::PlayerMovment(Player & p, Equation & eq)
 {
 	Point toMove = p.getPointToMove();
-	ScreenObject * obj = nullptr;
+	ScreenObject * obj = currentScreen->GetScreenObject(toMove.GetX(), toMove.GetY());
 
-	switch (p.GetDirection())
+	if (obj == nullptr){
+		clearAndMove(p, toMove, nullptr);
+	}
+	else if (dynamic_cast<SolutionPosabilty*>(obj) != nullptr)
 	{
-	case Direction::LEFT: 
-		obj = currentScreen->GetScreenObject(toMove.GetX(), toMove.GetY());
-		// check if the new place to move  is free
-		if (obj == nullptr)
+		CheckSolution(eq, obj, p); // check  if its a valid solution
+		clearAndMove(p, toMove, obj); // clear the old object and move the player there instead
+	}
+	else
+	{
+		CollisionManager::collesion(&p, obj);
+		if (p.isMarkForDestruction())
 			clearAndMove(p, toMove, nullptr);
-		// check if we are going to eat a solution number
-		else if (obj->IsSolutionPossibility()) {
-			
-				CheckSolution(eq, obj, p); // check  if its a valid solution
-				clearAndMove(p, toMove, obj); // clear the old object and move the player there instead
-			
-			//else the object we are colliding with is the other player which means we will not move
-			break;
-	case Direction::UP:
-		obj = currentScreen->GetScreenObject(toMove.GetX(), toMove.GetY());
-		// check if  the new place to move  is free
-		if (obj == nullptr)
-			clearAndMove(p, toMove, nullptr);
-		// check if we are going to eat a solution number
-		else if (obj->IsSolutionPossibility()) {
-			CheckSolution(eq, obj, p); // check  if its a valid solution
-			clearAndMove(p, toMove, obj);// clear the old object and move the player there instead
-		}
-		//else the bject we are colliding with is the other player there for we will not move
-		break;
-	case Direction::RIGHT:
-		obj = currentScreen->GetScreenObject(toMove.GetX(), toMove.GetY());
-		if (obj == nullptr) // check  if the new place to move  is free
-			clearAndMove(p, toMove, nullptr);
-		else if (obj->IsSolutionPossibility()) // check if we are going to eat a solution number
-		{
-			CheckSolution(eq, obj, p);// check  if its a valid solution
-			clearAndMove(p, toMove, obj); // clear the old object and move the player there instead
-		}//else the bject we are colliding with is the other player there for we will not move
-		break;
-	case Direction::DOWN:
-		obj = currentScreen->GetScreenObject(toMove.GetX(), toMove.GetY());
-		if (obj == nullptr) // check if the new place to move  is free
-			clearAndMove(p, toMove, nullptr);
-		else if (obj->IsSolutionPossibility()) // check if we are going to eat a solution number
-		{
-			CheckSolution(eq, obj, p); // check  if its a valid solution
-			clearAndMove(p, toMove, obj);// clear the old object and move the player there instead
-		}
-		//else the bject we are colliding with is the other player there for we will not move
-		break;
-	default: // we should not get here
-		break;
-		}
 	}
 }
 
@@ -388,7 +375,7 @@ void TheMathGame::AddNewBullet(Bullet b)
 	Bullet* newB = new Bullet(b.GetPosition(), b.GetDirection());
 	bulletList.push_front(newB);
 	currentScreen->SetPositionForScreenObject(newB);
-	newB->Draw();
+	b.Draw();
 }
 
 //helper methood adds new bullet to players ( will be called every 200 turns)

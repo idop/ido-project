@@ -25,10 +25,8 @@ class ScreenObject {
 	bool markForDestruction;
 
 public:
-	virtual ~ScreenObject () {
-	}
-
-	ScreenObject (const Point & p , const int & len) :  position ( position ), lenght(len) {
+	
+	ScreenObject (const Point & p , const int & len) :  position (p), lenght(len), markForDestruction(false) {
 	}
 
 	virtual void Draw ()const = 0; // draw funciton for the screenobject the classes who will inheret this class will implement this class
@@ -62,6 +60,10 @@ public:
 		markForDestruction = true;
 	}
 
+	void revive()
+	{
+		markForDestruction = false;
+	}
 };
 
 #endif

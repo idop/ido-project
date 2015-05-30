@@ -25,7 +25,6 @@ public:
 	{
 	};
 
-	//CPP
 	virtual void Draw()const override;//inherited  from the Screenobject class draws solution posabillity
 	virtual void Clear()const override; //inherited  from the Screenobject class, removes the solution posabillity form the screen
 	virtual unsigned int GetData()const override; //inherited  from the Screenobject class . returns the date of the solution posabillity

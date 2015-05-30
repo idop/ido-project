@@ -21,6 +21,7 @@
 #include "Screen.h"
 #include "Bullet.h"
 #include "Creature.h"
+#include "RowFlyers.h"
 
 const unsigned int MAX_TURNS_PER_LEVEL = 1500;
 
@@ -33,10 +34,6 @@ const unsigned int SHOOT = 4;
 
 class TheMathGame : public ISpecificGame
 {
-protected:
-	~TheMathGame()
-	{
-	}
 
 private:
 	unsigned int currentLevel;
@@ -47,7 +44,7 @@ private:
 	Player player1, player2;
 	Screen* currentScreen;
 	list<Bullet*> bulletList;
-	Creature creatureList[6];
+	list<Creature*> creatureList;
 
 	void PrintScores ()const;// this function prints the game/level stats (scores, lives,current level and current turn), refreshes each time there is a change
 	void EndTurn (); //this function handles all end of turn events.
@@ -67,7 +64,7 @@ private:
 
 public:
 	TheMathGame() : currentLevel(0), maxLevel(MAX_LEVEL), currentTurn(0), levelDone(false), equation1(P1_EQUATION_POSITION), equation2(P2_EQUATION_POSITION),
-	                player1(P1_DEFULT_CHAR, P1_KEYBOARD_KEYS, P1_DEFULT_POSITION, P1_DEFULT_DIRECTION), player2(P2_DEFULT_CHAR, P2_KEYBOARD_KEYS, P2_DEFULT_POSITION, P2_DEFULT_DIRECTION)
+		player1(P1_DEFULT_CHAR, P1_KEYBOARD_KEYS, P1_DEFULT_POSITION, P1_DEFULT_DIRECTION), player2(P2_DEFULT_CHAR, P2_KEYBOARD_KEYS, P2_DEFULT_POSITION, P2_DEFULT_DIRECTION)
 	{
 		currentScreen = nullptr;
 	}

@@ -23,10 +23,6 @@ class ColumnFlyers :
 
 public:
 	ColumnFlyers(const Point & p, const Direction::value & d) : Creature(p, d, COLUMNFLYERS_SIGN){};
-	virtual ~ColumnFlyers();
-
-	virtual void Collesion() override{ };
-
 
 };
 

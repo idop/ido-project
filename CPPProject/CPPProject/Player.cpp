@@ -26,7 +26,7 @@ void Player::SetToStart ( const Point & p , const Direction::value & d ) {
 }
 
 
-
+/*
 void Player::Collesion () {
 
 	WrongSolution();
@@ -44,4 +44,4 @@ void Player::Collesion () {
 	default: // we should not get here
 		break;
 	}
-}
+}*/

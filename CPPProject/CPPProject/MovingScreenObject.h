@@ -49,7 +49,11 @@ public:
 		return direction;
 	}
 
-	virtual Point getPointToMove(){ return this->GetPosition().GetPointToMoveFromDirection(direction); };
+	virtual Point getPointToMove()
+	{
+		Point a = GetPosition().GetPointToMoveFromDirection(direction);
+		return a;
+	};
 
 };
 

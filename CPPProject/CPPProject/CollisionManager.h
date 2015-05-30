@@ -14,11 +14,9 @@
 class CollisionManager
 {
 public:
-	void static collesion(ScreenObject * obj1, ScreenObject * obj2);
 	void static collesion(Bullet * obj1, ScreenObject * obj2);
 	void static collesion(Creature * obj1, ScreenObject * obj2);
-	void static collesionWithSolutionPoss(ScreenObject * obj1, ScreenObject * obj2);
-/*	void collesionWithBullet(ScreenObject * obj1, ScreenObject * obj2);*/
+	void static collesion(Player * obj1, ScreenObject * obj2);
 	void static collesionWithBulletMain(Bullet * obj1, ScreenObject * obj2);
 	void static collesionWithPlayer(ScreenObject * obj1, ScreenObject * obj2);
 	void static collesionWithPlayerMain(ScreenObject * obj1, ScreenObject * obj2);
