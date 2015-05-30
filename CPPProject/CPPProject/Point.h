@@ -31,6 +31,8 @@ public:
 	void SetX(int x1){ x = x1; }
 	void SetY(int y1){ y = y1; }
 	Point GetPointToMoveFromDirection(const Direction::value & direction);
+	int getXDiffrence(const Point & targetPoint){ return (this->GetX() - targetPoint.GetX()); }; // returns the diffrence in x values of 2 points
+	int getYDiffrence(const Point & targetPoint){ return (this->GetY() - targetPoint.GetY()); }; // returns the diffrence in Y values of 2 points
 
 };
 
