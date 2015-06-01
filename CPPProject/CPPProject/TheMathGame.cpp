@@ -44,15 +44,16 @@ void TheMathGame::startLevel(unsigned int level)
 	player2.ResetNumberOfBullets();
 	bulletList.clear();
 	PrintScores();
-	initCreatureList();
 
 	if (currentScreen != nullptr)
 	{
 		delete currentScreen;
 	}
+
 	currentScreen = new Screen;
 	currentScreen->SetPositionForScreenObject(&player1);
 	currentScreen->SetPositionForScreenObject(&player2);
+	initCreatureList();
 }
 
 
@@ -70,6 +71,23 @@ void TheMathGame::initCreatureList()
 	ColumnFlyers * firstColumnFlyers = new  ColumnFlyers(Point(45, 23), Direction::UP);
 	ColumnFlyers * seconfClumnFlyers = new ColumnFlyers(Point(55, 15), Direction::DOWN);
 	
+
+	firstRowFlyer->Draw();
+	seecondRowFlyer->Draw();
+	firstNumberEater->Draw();
+	secondNumberEater->Draw();
+	firstColumnFlyers->Draw();
+	seconfClumnFlyers->Draw();
+
+
+	currentScreen->SetPositionForScreenObject(firstRowFlyer);
+	currentScreen->SetPositionForScreenObject(seecondRowFlyer);
+	currentScreen->SetPositionForScreenObject(firstNumberEater);
+	currentScreen->SetPositionForScreenObject(secondNumberEater);
+	currentScreen->SetPositionForScreenObject(firstColumnFlyers);
+	currentScreen->SetPositionForScreenObject(seconfClumnFlyers);
+
+
 	creatureList.push_front(firstRowFlyer);
 	creatureList.push_front(seecondRowFlyer);
 	creatureList.push_front(firstNumberEater);
@@ -100,7 +118,7 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 	// get keystrokes from keyhist list untill the end of the list or until both players got a valid keystroke
 	keyStrokeManager(keyHits); 
 	runBulletList();
-	//runCreatuerList(6);
+	runCreatuerList(6);
 	//for each player we echeck if he has lives to keep on playing , and manage his movment.
 	if (player1.GetNumberOfLives() != 0)
 	{ 
@@ -167,7 +185,7 @@ void TheMathGame::EndTurn()
 void TheMathGame::doSubIteration()
 {
 	runBulletList();
-//	runCreatuerList(4);
+	runCreatuerList(4);
 }
 
 void TheMathGame::runBulletList()
