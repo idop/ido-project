@@ -102,11 +102,33 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 	runBulletList();
 	//runCreatuerList(6);
 	//for each player we echeck if he has lives to keep on playing , and manage his movment.
-	if (player1.GetNumberOfLives() > 0) // TODO Make 1 function for this
+	if (player1.GetNumberOfLives() > 0)
+	{
+		if (player1.GetNumberOfLives() > 0 && player1.isMarkForDestruction()) // TODO Make 1 function for this
+		{
+			player1.revive();
+			player1.SetDirection(P1_DEFULT_DIRECTION);
+			player1.Move(P1_DEFULT_POSITION);
+			currentScreen->SetPositionForScreenObject(&player1);
+		}
+
 		PlayerMovment(player1, equation1);
+	}
+		
 
 	if (player2.GetNumberOfLives() > 0)
+	{
+		if (player2.GetNumberOfLives() > 0 && player2.isMarkForDestruction())
+		{
+			player2.revive();
+			player2.SetDirection(P2_DEFULT_DIRECTION);
+			player2.Move(P2_DEFULT_POSITION);
+			currentScreen->SetPositionForScreenObject(&player2);
+		}
+
 		PlayerMovment(player2, equation2);
+	}
+		
 	
 	
 	//initialazing the end turn checks
@@ -120,27 +142,11 @@ void TheMathGame::EndTurn()
 {
 	++currentTurn;
 
-	if (player1.GetNumberOfLives() > 0 && player1.isMarkForDestruction()) // TODO Make 1 function for this
-	{
-		player1.revive();
-		player1.SetDirection(P1_DEFULT_DIRECTION);
-		player1.Move(P1_DEFULT_POSITION);
-		player1.Draw();
-		currentScreen->SetPositionForScreenObject(&player1);
-	}
 	
 	if (player1.GetNumberOfLives() == 0)
 		currentScreen->ClearScreenObject(&player1);
 
-	if (player2.GetNumberOfLives() > 0 && player2.isMarkForDestruction())
-	{
-			player2.revive();
-			player2.SetDirection(P2_DEFULT_DIRECTION);
-			player2.Move(P2_DEFULT_POSITION);
-			player2.Draw();
-			currentScreen->SetPositionForScreenObject(&player2);
-	}
-	
+
 	if (player2.GetNumberOfLives() == 0)  // if player2 lost all  of his lives  remove him from the screen
 		currentScreen->ClearScreenObject(&player2);
 	
@@ -299,10 +305,12 @@ void TheMathGame::PlayerMovment(Player & p, Equation & eq)
 		clearAndMove(p, toMove, obj); // clear the old object and move the player there instead
 	}
 	else
-	{
+	{ // TAKE NOTE TO ADD THIS
 		CollisionManager::collesion(&p, obj);
 		if (p.isMarkForDestruction())
-			clearAndMove(p, toMove, nullptr);
+			currentScreen->ClearScreenObject(&p);
+		if (obj->isMarkForDestruction())
+			currentScreen->ClearScreenObject(obj);
 	}
 }
 
