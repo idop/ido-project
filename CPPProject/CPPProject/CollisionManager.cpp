@@ -11,7 +11,6 @@ void CollisionManager::collesion(Player* obj1, ScreenObject* obj2)
 	if (dynamic_cast<NumberEaters*>(obj2) != nullptr)
 	{
 		obj2->destroy();
-		obj2->Clear();
 		return;
 	}
 	if (dynamic_cast<Bullet*>(obj2) != nullptr)
@@ -31,7 +30,6 @@ void CollisionManager::collesion(Creature* obj1, ScreenObject* obj2)
 	if (dynamic_cast<RowFlyers*>(obj2) == nullptr)
 	{
 		obj2->destroy();
-		obj2->Clear();
 		return;
 	}
 }
@@ -40,20 +38,9 @@ void CollisionManager::collesionWithPlayerMain(ScreenObject * obj1, ScreenObject
 {
 	if (dynamic_cast<Player*>(obj2) == nullptr)
 	{
-		if (dynamic_cast<NumberEaters*>(obj2) != nullptr)
-		{
-			Player * tmpPlayer = dynamic_cast<Player*>(obj1);
-			NumberEaters * tmpNumberEaters = dynamic_cast<NumberEaters*>(obj2);
-			tmpPlayer->destroy();
-			tmpPlayer->Clear();
-			tmpNumberEaters->destroy();
-			tmpNumberEaters->Clear();
-		} else
-		{
-			Player * tmpPlayer = dynamic_cast<Player*>(obj1);
-			tmpPlayer->destroy();
-			tmpPlayer->Clear();
-		}
+		obj1->destroy();
+		if (dynamic_cast<NumberEaters*>(obj1) != nullptr)
+			obj2->destroy();
 	}
 }
 void CollisionManager::collesionWithPlayer(ScreenObject * obj1, ScreenObject * obj2)
@@ -95,9 +82,5 @@ void CollisionManager::collesionWithNumberEatersMain(NumberEaters * obj1, Screen
 {
 	obj1->destroy();
 	if (dynamic_cast<NumberEaters*>(obj2) != nullptr)
-	{
-		NumberEaters * tmpNumberEaters = dynamic_cast<NumberEaters*>(obj2);
-		tmpNumberEaters->destroy();
-		tmpNumberEaters->Clear();
-	}
+		obj2->destroy();
 }

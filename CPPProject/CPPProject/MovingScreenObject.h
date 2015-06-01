@@ -51,10 +51,10 @@ public:
 
 	virtual Point getPointToMove()
 	{
-		Point a = GetPosition().GetPointToMoveFromDirection(direction);
-		return a;
+		return  GetPosition().GetPointToMoveFromDirection(direction);
+		
 	};
-
+	virtual ~MovingScreenObject(){};
 };
 
 

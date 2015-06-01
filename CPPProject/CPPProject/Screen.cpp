@@ -94,9 +94,7 @@ void Screen::SetPositionForScreenObject(ScreenObject *object)
 {
 
 	for (unsigned int i = 0; i < object->GetLength(); ++i) // if the object length is greater then 1 we want to set all the relevant pointers to the object
-	{
-		screen[object->GetPosition().GetX() + i][object->GetPosition().GetY()] = object;
-	}
+		screen[object->GetPosition().GetX()+i][object->GetPosition().GetY()] = object;
 }
 
 // this funciton will remove an object from the screen
@@ -104,8 +102,7 @@ void Screen::ClearScreenObject(ScreenObject *object)
 {
 	for (unsigned int i = 0; i < object->GetLength(); ++i) // if the object length is greater then 1 we want to remove all the relevant pointers to the object
 	{
-		int x = object->GetPosition().GetX(), y = object->GetPosition().GetY();
-	    screen[x + i][y] = nullptr;
+		screen[object->GetPosition().GetX() + i][object->GetPosition().GetY()] = nullptr;
 	}
 	object->Clear();
 	if (dynamic_cast<SolutionPosabilty*>(object) != nullptr) // if the current object is a solution Posability object we need to free the memory
