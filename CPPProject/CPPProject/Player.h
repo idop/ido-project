@@ -102,6 +102,8 @@ public:
 		numberOfLives--;
 		ScreenObject::destroy();
 	}
+
+	virtual ~Player(){};
 };
 
 

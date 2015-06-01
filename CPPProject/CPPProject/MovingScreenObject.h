@@ -54,6 +54,7 @@ public:
 		return  GetPosition().GetPointToMoveFromDirection(direction);
 		
 	};
+
 	virtual ~MovingScreenObject(){};
 };
 

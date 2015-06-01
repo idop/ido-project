@@ -30,7 +30,7 @@ class NumberEaters :
 public:
 
 	NumberEaters(const Point & p, const Direction::value & d, Screen * s) : Creature(p, d, NUMBEREATERS_SIGN), CurrentScreen(s){};
-	virtual ~NumberEaters();
+	virtual ~NumberEaters(){};
 	virtual Point getPointToMove() override;
 
 

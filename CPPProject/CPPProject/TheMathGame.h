@@ -60,7 +60,8 @@ private:
 	void AddNewBullet(Bullet b);
 	void runBulletList();
 	void AddBulletToPlayers();
-	void initCreatureList();
+	void initCreatureList(Screen * currentScreen);
+	void addNewCreature(Creature * a);
 
 public:
 	TheMathGame() : currentLevel(0), maxLevel(MAX_LEVEL), currentTurn(0), levelDone(false), equation1(P1_EQUATION_POSITION), equation2(P2_EQUATION_POSITION),

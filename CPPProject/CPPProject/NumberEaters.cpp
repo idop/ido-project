@@ -1,11 +1,5 @@
 #include "NumberEaters.h"
 
-NumberEaters::~NumberEaters()
-{
-}
-
-
-
 void NumberEaters::setDirectionToTargetPosition()
 {
 	int xDiffrence = this->GetPosition().getXDiffrence(targetPosition);

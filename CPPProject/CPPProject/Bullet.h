@@ -22,7 +22,7 @@ class Bullet : 	public MovingScreenObject
 
 public:
 	Bullet(const Point & point, const Direction::value & d) : MovingScreenObject(point, d, BULLET_SIGN){};
-
+	virtual ~Bullet(){};
 };
 
 #endif
