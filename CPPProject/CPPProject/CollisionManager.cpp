@@ -83,20 +83,9 @@ void CollisionManager::collesionWithBulletMain(Bullet * obj1, ScreenObject * obj
 {
 	obj1->destroy();
 
-	if (dynamic_cast<Player*>(obj2) != nullptr)
+	if (dynamic_cast<Player*>(obj2) != nullptr || dynamic_cast<NumberEaters*>(obj2) != nullptr)
 	{
-		Player * tmpPlayer = dynamic_cast<Player*>(obj2);
-		tmpPlayer->destroy();
-		tmpPlayer->Clear();
-		return;
-	}
-
-	if (dynamic_cast<NumberEaters*>(obj2) != nullptr)
-	{
-		NumberEaters * tmpNumberEaters = dynamic_cast<NumberEaters*>(obj2);
-		tmpNumberEaters->destroy();
-		tmpNumberEaters->Clear();
-		return;
+		obj2->destroy();
 	}
 	
 }

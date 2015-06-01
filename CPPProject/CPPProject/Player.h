@@ -96,6 +96,12 @@ public:
 	}
 
 	void SetToStart(const Point& p, const Direction::value& d); // retrun the player to deuflt start level settings
+
+	virtual void destroy() override
+	{
+		numberOfLives--;
+		ScreenObject::destroy();
+	}
 };
 
 
