@@ -55,7 +55,7 @@ public:
 		return markForDestruction;
 	}
 
-	void destroy()
+	virtual void destroy()
 	{
 		markForDestruction = true;
 	}
