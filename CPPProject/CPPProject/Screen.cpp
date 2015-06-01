@@ -21,7 +21,7 @@ int Screen::getValidXValue(int x) const
 	if (x > X_OFFSET && x < SCREEN_WIDTH)
 		res = x;
 	else if (x >= SCREEN_WIDTH)
-		res = x - SCREEN_WIDTH + X_OFFSET;
+		res = ((x - SCREEN_WIDTH) % SCREEN_WIDTH) + X_OFFSET;
 	else
 		res = SCREEN_WIDTH + x;
 
@@ -35,7 +35,7 @@ int Screen::getValidYValue(int y) const
 	if (y > Y_OFFSET && y < SCREEN_HIGHT)
 		res = y;
 	else if (y >= SCREEN_HIGHT)
-		res = y - SCREEN_HIGHT + Y_OFFSET;
+		res = ((y - SCREEN_HIGHT) % SCREEN_HIGHT) + Y_OFFSET;
 	else
 		res = SCREEN_HIGHT + y;
 
@@ -161,42 +161,42 @@ Point Screen::findClosestSolutionPossibility(const Point currentPosition) const 
 {
 	Point res;
 	int x = currentPosition.GetX(), y = currentPosition.GetY();
-	int xtoCheck, yToCheck;
+	int xToCheck, yToCheck;
 	bool found = false;
 	ScreenObject * tmpObject;
 
 	while (!found)
 	{
-		for (int i = 1; i < SCREEN_WIDTH/2; ++i)
+		for (int i = 1; i < 50; ++i)
 		{					// limit the search TODO FIX THIS 
 
 			for (int t = 1; t > -2; t -= 2)
 			{
-				xtoCheck = getValidXValue(x);
-				yToCheck = getValidYValue(y + t*i);
-				tmpObject = screen[xtoCheck][yToCheck];
+				xToCheck = getValidXValue(x + t*i);
+				yToCheck = getValidYValue(y);
+				tmpObject = screen[xToCheck][yToCheck];
 				if (dynamic_cast<SolutionPosabilty*>(tmpObject) != nullptr)
 				{
-					res = Point(xtoCheck, yToCheck);
+					res = Point(xToCheck, yToCheck);
 					found = true;
 					break;
 				}
 				for (int j = 1; j <= i; ++j)
 				{
-					xtoCheck = x+j;
-					yToCheck = y + (t*(i - j));
-					tmpObject = screen[xtoCheck][yToCheck];
+					xToCheck = x+ (t*(i - j));
+					yToCheck = y +j;
+					tmpObject = screen[xToCheck][yToCheck];
 					if (dynamic_cast<SolutionPosabilty*>(tmpObject) != nullptr)
 					{
-						res = Point(xtoCheck, yToCheck);
+						res = Point(xToCheck, yToCheck);
 						found = true;
 						break;
 					}
-					xtoCheck = x - j;
-					tmpObject = screen[xtoCheck][yToCheck];
+					yToCheck = y - j;
+					tmpObject = screen[xToCheck][yToCheck];
 					if (dynamic_cast<SolutionPosabilty*>(tmpObject) != nullptr)
 					{
-						res = Point(xtoCheck, yToCheck);
+						res = Point(xToCheck, yToCheck);
 						found = true;
 						break;
 					}
