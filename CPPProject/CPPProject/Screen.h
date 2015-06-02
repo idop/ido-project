@@ -21,6 +21,7 @@ const int X_OFFSET = 0; //  x offset position for the dynemic part of the screen
 const int Y_OFFSET = 3; //  y offset position for the dynemic part of the screen
 
 class Screen {
+	int numberOfSolutionPossibilities;
 	ScreenObject * screen[SCREEN_WIDTH][SCREEN_HIGHT];
 	Point latestSolutionPosabilityPosition;
 
@@ -36,7 +37,7 @@ public:
 		CleanScreen();
 	}
 
-	Screen ();
+	Screen();
 
 	ScreenObject* GetScreenObject ( const int & x , const int & y )const {
 		return screen[x][y];

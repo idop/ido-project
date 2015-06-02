@@ -21,9 +21,9 @@ int Screen::getValidXValue(int x) const
 	if (x > X_OFFSET && x < SCREEN_WIDTH)
 		res = x;
 	else if (x >= SCREEN_WIDTH)
-		res = ((x - SCREEN_WIDTH) % SCREEN_WIDTH) + X_OFFSET;
+		res = ((x - SCREEN_WIDTH + X_OFFSET) % SCREEN_WIDTH);
 	else
-		res = SCREEN_WIDTH + x;
+		res = (SCREEN_WIDTH + (x % SCREEN_WIDTH)) % SCREEN_WIDTH;
 
 	return res;
 }
@@ -35,15 +35,17 @@ int Screen::getValidYValue(int y) const
 	if (y > Y_OFFSET && y < SCREEN_HIGHT)
 		res = y;
 	else if (y >= SCREEN_HIGHT)
-		res = ((y - SCREEN_HIGHT) % SCREEN_HIGHT) + Y_OFFSET;
+		res = ((y - SCREEN_HIGHT + Y_OFFSET) % SCREEN_HIGHT);
 	else
-		res = SCREEN_HIGHT + y;
+		res = (SCREEN_HIGHT + (y % SCREEN_HIGHT)) % SCREEN_HIGHT;
 
 	return res;
 }
 
 Screen::Screen() // constarctor for the screen. points all the pointers of the matrix to NULL
 {
+	numberOfSolutionPossibilities = 0;
+
 	for (int i = 0; i < SCREEN_WIDTH; ++i) 
 		for (int j = 0; j < SCREEN_HIGHT; ++j) 
 			screen[i][j] = nullptr;
@@ -105,8 +107,10 @@ void Screen::ClearScreenObject(ScreenObject *object)
 		screen[object->GetPosition().GetX() + i][object->GetPosition().GetY()] = nullptr;
 	}
 	object->Clear();
-	if (dynamic_cast<SolutionPosabilty*>(object) != nullptr) // if the current object is a solution Posability object we need to free the memory
+	if (dynamic_cast<SolutionPosabilty*>(object) != nullptr){ // if the current object is a solution Posability object we need to free the memory
 		delete object;
+		--numberOfSolutionPossibilities;
+	}
 }
 
 //this funciton will create a new solution object
@@ -143,10 +147,10 @@ void Screen::CreateNewSolutionPosability(const unsigned int & currentLevel)
 
 	if (foundPosition)
 	{
+		++numberOfSolutionPossibilities;
 		latestSolutionPosabilityPosition = Point(x, y);
 		SolutionPosabilty * newPosability = new SolutionPosabilty(latestSolutionPosabilityPosition, data); // if we have a valid position we will create a new pbject
 		newPosability->Draw(); // we wont forget to draw the new solution posability
-		
 		for (int i = 0; i < length; ++i) // set the screen to point to the new object in all relvaln positions
 		{
 			screen[x+i][y] = newPosability; // set the screen
@@ -173,26 +177,29 @@ Point Screen::findClosestSolutionPossibility(const Point currentPosition) const 
 				xToCheck = getValidXValue(x + t*i);
 				yToCheck = getValidYValue(y);
 				tmpObject = screen[xToCheck][yToCheck];
-				if (dynamic_cast<SolutionPosabilty*>(tmpObject) != nullptr)
+				if (tmpObject != nullptr)
 				{
-					res = Point(xToCheck, yToCheck);
-					found = true;
-					break;
-				}
-				for (int j = 1; j <= i; ++j)
-				{
-					xToCheck = x+ (t*(i - j));
-					yToCheck = y +j;
-					tmpObject = screen[xToCheck][yToCheck];
 					if (dynamic_cast<SolutionPosabilty*>(tmpObject) != nullptr)
 					{
 						res = Point(xToCheck, yToCheck);
 						found = true;
 						break;
 					}
-					yToCheck = y - j;
+				}
+				for (int j = 1; j <= i; ++j)
+				{
+					xToCheck = getValidXValue(x + (t*(i - j)));
+					yToCheck = getValidYValue(y + j);
 					tmpObject = screen[xToCheck][yToCheck];
-					if (dynamic_cast<SolutionPosabilty*>(tmpObject) != nullptr)
+					if (tmpObject != nullptr && dynamic_cast<SolutionPosabilty*>(tmpObject) != nullptr)
+					{
+						res = Point(xToCheck, yToCheck);
+						found = true;
+						break;
+					}
+					yToCheck = getValidYValue(y - j);
+					tmpObject = screen[xToCheck][yToCheck];
+					if (tmpObject != nullptr && dynamic_cast<SolutionPosabilty*>(tmpObject) != nullptr)
 					{
 						res = Point(xToCheck, yToCheck);
 						found = true;
@@ -209,7 +216,9 @@ Point Screen::findClosestTarget(const Point& currentPosition, const Point& curre
 {
 	Point res;
 		
-	if (currentPosition == currentTargetPosition || currentTargetDied(currentTargetPosition))
+	if (numberOfSolutionPossibilities == 0)
+		res = currentPosition;
+	else if (currentPosition == currentTargetPosition || currentTargetDied(currentTargetPosition))
 		res = findClosestSolutionPossibility(currentPosition);
 	else 
 		res = currentPosition.getCloserPoint(currentTargetPosition,latestSolutionPosabilityPosition);

@@ -72,7 +72,7 @@ void TheMathGame::initCreatureList(Screen * currentScreen)
 
 
 	addNewCreature(new NumberEaters(Point(10, 19), Direction::LEFT, currentScreen));
-	//addNewCreature(new NumberEaters(Point(70, 19), Direction::RIGHT, currentScreen));
+	addNewCreature(new NumberEaters(Point(70, 19), Direction::RIGHT, currentScreen));
 
 
 
@@ -94,7 +94,7 @@ void TheMathGame::ResumeLevel()
 void TheMathGame::doIteration(const list<char>& keyHits)  
 {
 	//for better game play we reduce the refresh rate of new solution possiblties
-	if (currentTurn % 2 == 0)
+	if (currentTurn % 2 == 1)
 		currentScreen->CreateNewSolutionPosability(currentLevel);
 
 	if (currentTurn % 200 == 0 && currentTurn != 0)
@@ -103,7 +103,7 @@ void TheMathGame::doIteration(const list<char>& keyHits)
 	// get keystrokes from keyhist list untill the end of the list or until both players got a valid keystroke
 	keyStrokeManager(keyHits); 
 	runBulletList();
-	runCreatuerList(4);
+	runCreatuerList(6);
 	//for each player we echeck if he has lives to keep on playing , and manage his movment.
 	if (player1.GetNumberOfLives() > 0)
 	{
@@ -181,7 +181,7 @@ void TheMathGame::EndTurn()
 void TheMathGame::doSubIteration()
 {
 	runBulletList();
-	runCreatuerList(2);
+	runCreatuerList(4);
 }
 
 void TheMathGame::runBulletList()

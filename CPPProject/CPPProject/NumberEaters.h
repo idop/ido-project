@@ -29,7 +29,7 @@ class NumberEaters :
 	bool needToCrossMoreThenHalfTheScreen(const int & num , const int & size)const{ return (abs(num) > size/ 2); };
 public:
 
-	NumberEaters(const Point & p, const Direction::value & d, Screen * s) : Creature(p, d, NUMBEREATERS_SIGN), CurrentScreen(s){};
+	NumberEaters(const Point & p, const Direction::value & d, Screen * s) : Creature(p, d, NUMBEREATERS_SIGN),targetPosition(p), CurrentScreen(s){};
 	virtual ~NumberEaters(){};
 	virtual Point getPointToMove() override;
 
