@@ -2,7 +2,7 @@
 // Creature.h
 // -------------
 // 
-// 
+// This class represents a group of classes, all of them are sort of creatures there are 3 types of creatures
 //
 // Author: Ido Perry and Alex Odesser
 // First version: 2015-05-29

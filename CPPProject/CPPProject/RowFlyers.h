@@ -1,8 +1,8 @@
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-// Creature.h
+// RowFlyers.h
 // -------------
 // 
-// 
+// This is the Row Flyers creature, he flies to the left or to the right, and his sing is !
 //
 // Author: Ido Perry and Alex Odesser
 // First version: 2015-05-29

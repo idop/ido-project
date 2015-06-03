@@ -24,24 +24,3 @@ void Player::SetToStart ( const Point & p , const Direction::value & d ) {
 	SetDirection ( d );
 	playerSolved = false;
 }
-
-
-/*
-void Player::Collesion () {
-
-	WrongSolution();
-
-	switch (GetPlayerChar())
-	{
-	case P1_DEFULT_CHAR:
-		SetDirection ( P1_DEFULT_DIRECTION );
-		Move ( P1_DEFULT_POSITION );
-		break;
-	case P2_DEFULT_CHAR:
-		SetDirection ( P2_DEFULT_DIRECTION );
-		Move ( P2_DEFULT_POSITION );
-		break;
-	default: // we should not get here
-		break;
-	}
-}*/

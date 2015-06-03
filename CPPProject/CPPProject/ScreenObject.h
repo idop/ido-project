@@ -33,7 +33,7 @@ public:
 	virtual unsigned int GetData ()const = 0; // get the numral value of the current screenobject( needed only for the solution posabilities) the classes who will inheret this class will implement this class	
 	virtual bool IsSolutionPossibility(){ return false; }; // used only to know if the screenobject is a solutionPossivility object
 
-	virtual void Clear()const
+	virtual void Clear()const //clears the object from the screen
 	{
 		gotoxy(GetPosition().GetX(), GetPosition().GetY());
 		cout << ' ';
@@ -45,21 +45,22 @@ public:
 		return position;
 	} // get the screen object current position;
 
-
+	// set a specific position for an item
 	void SetPosition ( const Point & p ) {
 		position = p;
 	}
 
+	//checks if the object is after collision
 	bool isMarkForDestruction()
 	{
 		return markForDestruction;
 	}
-
+	//marks the object if he was involved in a collision with another object.
 	virtual void destroy()
 	{
 		markForDestruction = true;
 	}
-
+	//restors the status if like the player object the object has several lifes.
 	void revive()
 	{
 		markForDestruction = false;

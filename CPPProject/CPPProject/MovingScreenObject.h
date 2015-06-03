@@ -39,17 +39,17 @@ public:
 	}; // get the numral value of the current screenobject( needed only for the solution posabilities) the classes who will inheret this class will implement this class
 
 
-	void SetDirection(const Direction::value& d)
+	void SetDirection(const Direction::value& d) //set a direction for each movingObject child class.
 	{
 		direction = d;
 	}
 
-	Direction::value GetDirection()const
+	Direction::value GetDirection()const //for each class that inheareted the movingObject class, you can get the current direction.
 	{
 		return direction;
 	}
 
-	virtual Point getPointToMove()
+	virtual Point getPointToMove() //This method sends the point that the current object is going to move to, while making sure he stays in the limits of the screen
 	{
 		return  GetPosition().GetPointToMoveFromDirection(direction);
 		

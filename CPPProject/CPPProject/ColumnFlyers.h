@@ -2,7 +2,7 @@
 // ColumnFlyers.h
 // -------------
 // 
-// 
+// This Class reporesents the column flyers creatures, they are identified with the sign $
 //
 // Author: Ido Perry and Alex Odesser
 // First version: 2015-05-29
