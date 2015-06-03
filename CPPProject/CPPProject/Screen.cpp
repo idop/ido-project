@@ -13,12 +13,12 @@
 #include "io_utils.h"
 #include <iostream>
 using namespace std;
-
+// // helper methood to find colsest solution posbility algorithem for numbereaters  this funciton will get an x value of the current rhombos scan and return a valid x point inside the screen
 int Screen::getValidXValue(int x) const
 {
 	int res;
 	
-	if (x > X_OFFSET && x < SCREEN_WIDTH)
+	if (x >= X_OFFSET && x < SCREEN_WIDTH)
 		res = x;
 	else if (x >= SCREEN_WIDTH)
 		res = ((x - SCREEN_WIDTH + X_OFFSET) % SCREEN_WIDTH);
@@ -28,11 +28,12 @@ int Screen::getValidXValue(int x) const
 	return res;
 }
 
+// // helper methood to find colsest solution posbility algorithem for numbereaters  this funciton will get an y value of the current rhombos scan and return a valid y point inside the screen
 int Screen::getValidYValue(int y) const
 {
 	int res;
 
-	if (y > Y_OFFSET && y < SCREEN_HIGHT)
+	if (y >= Y_OFFSET && y < SCREEN_HIGHT)
 		res = y;
 	else if (y >= SCREEN_HIGHT)
 		res = ((y - SCREEN_HIGHT + Y_OFFSET) % SCREEN_HIGHT);
@@ -169,10 +170,10 @@ Point Screen::findClosestSolutionPossibility(const Point currentPosition) const 
 
 	while (!found)
 	{
-		for (int i = 1; i < 50; ++i)
-		{					// limit the search TODO FIX THIS 
+		for (int i = 1; i < 50; ++i) // we need exaclty 50 diffrent Rhombus's (incresing in size by 1 every time) the scan the whole screen
+		{				
 
-			for (int t = 1; t > -2; t -= 2)
+			for (int t = 1; t > -2; t -= 2) // so we can scan both sides (x+t , x-t)
 			{
 				xToCheck = getValidXValue(x + t*i);
 				yToCheck = getValidYValue(y);
@@ -211,17 +212,17 @@ Point Screen::findClosestSolutionPossibility(const Point currentPosition) const 
 	}
 	return res;
 }
-
+// methood for the number eaters to find the closest solution posibility
 Point Screen::findClosestTarget(const Point& currentPosition, const Point& currentTargetPosition) const
 {
 	Point res;
 		
-	if (numberOfSolutionPossibilities == 0)
+	if (numberOfSolutionPossibilities == 0) // if there are no solution posibility dont move
 		res = currentPosition;
-	else if (currentPosition == currentTargetPosition || currentTargetDied(currentTargetPosition))
-		res = findClosestSolutionPossibility(currentPosition);
+	else if (currentPosition == currentTargetPosition || currentTargetDied(currentTargetPosition))// if the current target is gone ( killed or eaten) 
+		res = findClosestSolutionPossibility(currentPosition); // find the closest target
 	else 
-		res = currentPosition.getCloserPoint(currentTargetPosition,latestSolutionPosabilityPosition);
+		res = currentPosition.getCloserPoint(currentTargetPosition,latestSolutionPosabilityPosition); // current target is in place so just check if the last alloceted number is closest
 
 
 	return res;

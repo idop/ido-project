@@ -21,16 +21,16 @@ const int X_OFFSET = 0; //  x offset position for the dynemic part of the screen
 const int Y_OFFSET = 3; //  y offset position for the dynemic part of the screen
 
 class Screen {
-	int numberOfSolutionPossibilities;
-	ScreenObject * screen[SCREEN_WIDTH][SCREEN_HIGHT];
-	Point latestSolutionPosabilityPosition;
+	int numberOfSolutionPossibilities; // store the current number of allocated solution posabilities
+	ScreenObject * screen[SCREEN_WIDTH][SCREEN_HIGHT]; // stores all the screen objects in a matrix
+	Point latestSolutionPosabilityPosition; // stores the last allocated solution posability position
 
 	bool currentTargetDied ( const Point & currentTargetPosition ) const {
-		return (screen[currentTargetPosition.GetX()][currentTargetPosition.GetY()] == nullptr);
+		return (screen[currentTargetPosition.GetX()][currentTargetPosition.GetY()] == nullptr); // helper methood to find colsest solution posbility algorithem for numbereaters 
 	};
 
-	int getValidXValue ( int x ) const;
-	int getValidYValue ( int y ) const;
+	int getValidXValue ( int x ) const; // helper methood to find colsest solution posbility algorithem for numbereaters
+	int getValidYValue ( int y ) const; // helper methood to find colsest solution posbility algorithem for numbereaters
 
 public:
 	~Screen () {
@@ -49,8 +49,8 @@ public:
 	void CreateNewSolutionPosability ( const unsigned int & currentLevel ); // dynamicly creates a new solution posability and places it on the screen
 
 
-	Point findClosestSolutionPossibility ( const Point currentPosition ) const;
-	Point findClosestTarget ( const Point & currentPosition , const Point & currentTargetPosition ) const;
+	Point findClosestSolutionPossibility ( const Point currentPosition ) const;  // helper methood to find colsest solution posbility algorithem for numbereaters 
+	Point findClosestTarget ( const Point & currentPosition , const Point & currentTargetPosition ) const; // helper methood to find colsest solution posbility algorithem for numbereaters 
 };
 
 #endif
