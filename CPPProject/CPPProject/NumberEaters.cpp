@@ -18,15 +18,17 @@ void NumberEaters::setDirectionToTargetPosition()
 	int yDiffrence = this->GetPosition().getYDiffrence(targetPosition);
 
 	if (xDiffrence != 0)
-		if ((isPositive(xDiffrence) && needToCrossMoreThenHalfTheScreen(xDiffrence, SCREEN_WIDTH)) || (!isPositive(xDiffrence) && !needToCrossMoreThenHalfTheScreen(xDiffrence,SCREEN_WIDTH)))
+		if ((isPositive(xDiffrence) && needToCrossMoreThenHalfTheScreen(xDiffrence, SCREEN_WIDTH-X_OFFSET)) || 
+		    (!isPositive(xDiffrence) && !needToCrossMoreThenHalfTheScreen(xDiffrence,SCREEN_WIDTH-X_OFFSET)))
 			this->SetDirection(Direction::value::RIGHT);  // change direction to right
 		else
 			this->SetDirection(Direction::value::LEFT); // change direction to left
 	else //  only  ydiffrence is greater then 0
 	{
-		if ((isPositive(yDiffrence) && needToCrossMoreThenHalfTheScreen(yDiffrence, SCREEN_HIGHT)) || (!isPositive(yDiffrence) && needToCrossMoreThenHalfTheScreen(yDiffrence, SCREEN_HIGHT)))
+		if ((isPositive(yDiffrence) && needToCrossMoreThenHalfTheScreen(yDiffrence, SCREEN_HIGHT-Y_OFFSET)) || 
+			(!isPositive(yDiffrence) && !needToCrossMoreThenHalfTheScreen(yDiffrence, SCREEN_HIGHT-Y_OFFSET)))
 			this->SetDirection(Direction::value::DOWN); 
-
+		else
 			this->SetDirection(Direction::value::UP); 
 	}
 

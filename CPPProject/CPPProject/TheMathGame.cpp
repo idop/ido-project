@@ -87,7 +87,7 @@ void TheMathGame::doIteration ( const list<char> & keyHits ) {
 	// get keystrokes from keyhist list untill the end of the list or until both players got a valid keystroke
 	keyStrokeManager ( keyHits );
 	runBulletList();
-	runCreatuerList ( 6 );
+	runCreatuerList (6);
 	//for each player we echeck if he has lives to keep on playing , and manage his movment.
 	if (player1.GetNumberOfLives() > 0)
 	{
@@ -119,6 +119,11 @@ void TheMathGame::doIteration ( const list<char> & keyHits ) {
 
 	//initialazing the end turn checks
 	EndTurn();
+}
+
+void TheMathGame::doSubIteration() {
+	runBulletList();
+	runCreatuerList(6);
 }
 
 
@@ -160,10 +165,7 @@ void TheMathGame::EndTurn () {
 	PrintScores();
 }
 
-void TheMathGame::doSubIteration () {
-	runBulletList();
-	runCreatuerList ( 4 );
-}
+
 //runs a bullet in each run if the bullet is still live, it moves another step forward
 void TheMathGame::runBulletList () {
 	for (list<Bullet*>::const_iterator itr = bulletList.cbegin(), end = bulletList.cend(); itr != end; ++itr)
@@ -210,7 +212,9 @@ void TheMathGame::runCreatuerList ( unsigned int len ) {
 			{
 				currentScreen->ClearScreenObject ( obj );
 				if (tempCreature->isMarkForDestruction())
-					currentScreen->ClearScreenObject ( tempCreature );
+					currentScreen->ClearScreenObject(tempCreature);
+				else
+					clearAndMove(*tempCreature, toMove, nullptr);
 			}
 			else
 			{
@@ -219,6 +223,8 @@ void TheMathGame::runCreatuerList ( unsigned int len ) {
 					currentScreen->ClearScreenObject ( obj );
 				if (tempCreature->isMarkForDestruction())
 					currentScreen->ClearScreenObject ( tempCreature );
+				else
+					clearAndMove ( *tempCreature , toMove , nullptr );
 			}
 		}
 	}

@@ -37,7 +37,10 @@ public:
 	Point GetPointToMoveFromDirection(const Direction::value & direction);
 	int getXDiffrence(const Point & targetPoint)const { return (this->GetX() - targetPoint.GetX()); }; // returns the diffrence in x values of 2 points
 	int getYDiffrence(const Point & targetPoint)const { return (this->GetY() - targetPoint.GetY()); };// returns the diffrence in Y values of 2 points
-	Point getCloserPoint(const Point &p1, const Point & p2) const{ return (this->numberOfStepsTo(p1) >= this->numberOfStepsTo(p2) ? p1 : p2); }; // returns what point if closer to this p1 or p2
+	Point getCloserPoint(const Point &p1, const Point & p2) const
+	{
+		return (this->numberOfStepsTo(p1) < this->numberOfStepsTo(p2) ? p1 : p2);
+	}; // returns the point that is closer to this (p1 or p2)
 
 	bool operator==(const Point & p)const{ return ((this->GetX() == p.GetX()) && (this->GetY() == p.GetY())); };
 

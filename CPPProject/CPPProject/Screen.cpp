@@ -13,6 +13,13 @@
 #include "io_utils.h"
 #include <iostream>
 using namespace std;
+
+bool Screen::currentTargetDied(const Point& currentTargetPosition) const
+{
+	ScreenObject * obj = screen[currentTargetPosition.GetX()][currentTargetPosition.GetY()];
+	return (dynamic_cast<SolutionPosabilty*> (obj) == nullptr); // helper methood to find colsest solution posbility algorithem for numbereaters 
+}
+
 // // helper methood to find colsest solution posbility algorithem for numbereaters  this funciton will get an x value of the current rhombos scan and return a valid x point inside the screen
 int Screen::getValidXValue(int x) const
 {
@@ -190,15 +197,7 @@ Point Screen::findClosestSolutionPossibility(const Point currentPosition) const 
 				for (int j = 1; j <= i; ++j)
 				{
 					xToCheck = getValidXValue(x + (t*(i - j)));
-					yToCheck = getValidYValue(y + j);
-					tmpObject = screen[xToCheck][yToCheck];
-					if (tmpObject != nullptr && dynamic_cast<SolutionPosabilty*>(tmpObject) != nullptr)
-					{
-						res = Point(xToCheck, yToCheck);
-						found = true;
-						break;
-					}
-					yToCheck = getValidYValue(y - j);
+					yToCheck = getValidYValue(y + t*j);
 					tmpObject = screen[xToCheck][yToCheck];
 					if (tmpObject != nullptr && dynamic_cast<SolutionPosabilty*>(tmpObject) != nullptr)
 					{

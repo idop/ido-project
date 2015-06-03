@@ -25,9 +25,7 @@ class Screen {
 	ScreenObject * screen[SCREEN_WIDTH][SCREEN_HIGHT]; // stores all the screen objects in a matrix
 	Point latestSolutionPosabilityPosition; // stores the last allocated solution posability position
 
-	bool currentTargetDied ( const Point & currentTargetPosition ) const {
-		return (screen[currentTargetPosition.GetX()][currentTargetPosition.GetY()] == nullptr); // helper methood to find colsest solution posbility algorithem for numbereaters 
-	};
+	bool currentTargetDied(const Point& currentTargetPosition) const;;
 
 	int getValidXValue ( int x ) const; // helper methood to find colsest solution posbility algorithem for numbereaters
 	int getValidYValue ( int y ) const; // helper methood to find colsest solution posbility algorithem for numbereaters

@@ -6,7 +6,7 @@ int Point::numberOfXStpes(const Point & p) const
 	int res;
 	int diff =abs(this->getXDiffrence(p));
 	
-	if (needToCrossMoreThenHalfTheScreen(diff, RIGHT_LIMIT + 1))
+	if (!needToCrossMoreThenHalfTheScreen(diff, RIGHT_LIMIT + 1))
 		res = diff;
 	else
 		res = RIGHT_LIMIT + 1 - diff;
@@ -19,7 +19,7 @@ int Point::numberOfYSteps(const Point & p) const
 	int res;
 	int diff = abs(this->getYDiffrence(p));
 
-	if (needToCrossMoreThenHalfTheScreen(diff, LOWER_LIMIT + 1))
+	if (!needToCrossMoreThenHalfTheScreen(diff, LOWER_LIMIT + 1))
 		res = diff;
 	else
 		res = LOWER_LIMIT + 1 - diff;
